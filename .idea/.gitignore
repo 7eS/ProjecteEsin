@@ -7,6 +7,6 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 # Arxius de la carpeta esin
-/esin/
+/esin
 # Arxius de la carpeta lib_src
 /lib_src
