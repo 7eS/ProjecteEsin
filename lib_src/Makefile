@@ -1,4 +1,4 @@
-CC = g++
+CC = g++-7
 ESIN = .
 HPPS = $(ESIN)/incl/esin
 AR = ar
