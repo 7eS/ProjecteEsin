@@ -1,2 +1,4 @@
 // si porta = true,  llavors porta = OBERT, altrament tancat
 bool _portaN, _portaS, _portaE, _portaO;
+//
+int _quantesPO = 0;

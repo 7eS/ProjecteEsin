@@ -1,34 +1,125 @@
 #include "cambra.hpp"
 
 // Construeix una cambra amb les portes als llocs indicats.
-cambra::cambra(bool n, bool s,
-                bool e, bool o) throw(error){
-                    _portaN = n;
-                    _portaS = s;
-                    _portaE = e;
-                    _portaO = o;
-                }
+cambra::cambra(bool n, bool s, bool e, bool o) throw(error){
+                   
+    _portaN = n;
+    _portaS = s;
+    _portaE = e;
+    _portaO = o;
+
+    if(n == true) _quantesPO++;
+    if(s == true) _quantesPO++;
+    if(e == true) _quantesPO++;
+    if(o == true) _quantesPO++;
+}
 
 // Constructora per còpia, assignació i destructora.
-cambra::cambra(const cambra & c) throw(error){}
-cambra & cambra::operator=(const cambra & c) throw(error){}
+cambra::cambra(const cambra & c) throw(error){
+    _portaN = c._portaN;
+    _portaS = c._portaS;
+    _portaE = c._portaE;
+    _portaO = c._portaO;
+    _quantesPO = c._quantesPO;
+
+}
+
+cambra & cambra::operator=(const cambra & c) throw(error){
+    _portaN = c._portaN;
+    _portaS = c._portaS;
+    _portaE = c._portaE;
+    _portaO = c._portaO;
+    _quantesPO = c._quantesPO;
+}
+
 cambra::~cambra() throw(){}
 
 // Retorna si l'habitació té una porta oberta a la paret indicada.
-bool cambra::porta_oberta(paret p) const throw(){}
+bool cambra::porta_oberta(paret p) const throw(){
+
+    //retorna _portaX el qual es un boolea, si es true està oberta, altrament està tancada
+
+    if(p.NORD) return _portaN;
+    else if(p.SUD) return _portaS;
+    else if (p.EST) return _portaE;
+    else if(p.OEST) return _portaO;
+    else throw error (ParetInexistent); //ens pasen NODIR
+}
 
 // Obre una nova porta a la paret indicada. Si la porta ja està oberta no
 // fa res. Es produeix un error si la paret és NO_DIR.
-void cambra::obre_porta(paret p) throw(error){}
+void cambra::obre_porta(paret p) throw(error){
+
+    if(p.NO_DIR)throw error (ParetInexistent);
+    
+    else if(not porta_oberta(p)){
+
+        if(p.NORD){
+            _portaN = true;
+            _quantesPO++;
+        }
+        else if(p.SUD){
+            _portaS = true;
+            _quantesPO++;
+        }
+        else if(p.EST){
+            _portaE = true;
+            _quantesPO++;
+        }
+        else if(p.OEST){
+            _portaO = true;
+            _quantesPO++;
+        }
+    }
+}
 
 // Tanca la porta a la paret indicada. Si la porta ja estava tancada no
 // fa res. Es produeix un error si la paret és NO_DIR.
-void cambra::tanca_porta(paret p) throw(error){}
+void cambra::tanca_porta(paret p) throw(error){
+
+    if(p.NO_DIR)throw error (ParetInexistent);
+    
+    else if(porta_oberta(p)){
+
+        if(p.NORD){
+            _portaN = false;
+            _quantesPO--;
+        }
+        else if(p.SUD){
+            _portaS = false;
+            _quantesPO--;
+        }
+        else if(p.EST){
+            _portaE = false;
+            _quantesPO--;
+        }
+        else if(p.OEST){
+            _portaO = false;
+            _quantesPO--;
+        }
+    }
+}
 
 // Igualtat i desigualtat entre cambres. Dues cambres es consideren iguals
 // si tenen les mateixes portes obertes a les mateixes parets.
-bool cambra::operator==(const cambra & c) const throw(){}
-bool cambra::operator!=(const cambra & c) const throw(){}
+bool cambra::operator==(const cambra & c) const throw(){
+    bool iguals = true;
+
+    if(_quantesPO != c._quantesPO) iguals = false;
+    
+    else{
+        if(_portaN != c._portaN) iguals = false;
+        else if(_portaS != c._portaS) iguals = false;
+        else if(_portaE != c._portaE) iguals = false;
+        else if (_portaO != c._portaO) iguals = false;
+    }
+
+    return iguals; // totes les portes estan igual.
+}
+bool cambra::operator!=(const cambra & c) const throw(){
+
+    return not (*this==c);
+}
 
 // Operador "menor que" entre cambres. Una cambra és més petita que una
 // altra si té més portes tancades que l'altra. Tenint en compte que una
@@ -38,4 +129,21 @@ bool cambra::operator!=(const cambra & c) const throw(){}
 //   cambra c1, c2(true,true), c3(true, false, true);
 //   cout << (c1 < c2); // escriu 'true'
 //   cout << (c2 < c3); // escriu 'true'
-bool cambra::operator<(const cambra & c) const throw(){}
+bool cambra::operator<(const cambra & c) const throw(){
+   
+    bool mesPetita = false;
+
+    if(_quantesPO != 0 and c._quantesPO != 0){
+
+        if(_quantesPO < c._quantesPO) mesPetita = true;
+
+        else if(_quantesPO == c._quantesPO){   //tenen la mateix quantitat de portes obertes
+            if(not (_portaN == false and c._portaN == true)) mesPetita = true;
+            else if(_portaE == false and c._portaE == true) mesPetita = true;
+            else if(_portaS == false and c._portaS == true) mesPetita = true;
+            else if(_portaO == false and c._portaO == true) mesPetita = true;
+                
+        }
+    }
+    return mesPetita;
+}
