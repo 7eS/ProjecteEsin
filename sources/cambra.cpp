@@ -7,7 +7,7 @@ cambra::cambra(bool n, bool s, bool e, bool o) throw(error){
     _portaS = s;
     _portaE = e;
     _portaO = o;
-
+    //incializar _quantesPO a 0
     if(n == true) _quantesPO++;
     if(s == true) _quantesPO++;
     if(e == true) _quantesPO++;
@@ -116,8 +116,9 @@ bool cambra::operator==(const cambra & c) const throw(){
 
     return iguals; // totes les portes estan igual.
 }
-bool cambra::operator!=(const cambra & c) const throw(){
 
+
+bool cambra::operator!=(const cambra & c) const throw(){
     return not (*this==c);
 }
 
@@ -138,7 +139,7 @@ bool cambra::operator<(const cambra & c) const throw(){
         if(_quantesPO < c._quantesPO) mesPetita = true;
 
         else if(_quantesPO == c._quantesPO){   //tenen la mateix quantitat de portes obertes
-            if(not (_portaN == false and c._portaN == true)) mesPetita = true;
+            if(not (_portaN == true and c._portaN == false)) mesPetita = true;
             else if(_portaE == false and c._portaE == true) mesPetita = true;
             else if(_portaS == false and c._portaS == true) mesPetita = true;
             else if(_portaO == false and c._portaO == true) mesPetita = true;
