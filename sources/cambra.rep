@@ -1,4 +1,4 @@
 // si porta = true,  llavors porta = OBERT, altrament tancat
 bool _portaN, _portaS, _portaE, _portaO;
-//
+// conta el numero de portes que té oberta la cambra
 int _quantesPO;

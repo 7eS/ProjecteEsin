@@ -132,19 +132,26 @@ bool cambra::operator!=(const cambra & c) const throw(){
 //   cout << (c2 < c3); // escriu 'true'
 bool cambra::operator<(const cambra & c) const throw(){
    
-    bool mesPetita = false;
+    bool mesPetita = true;
 
-    if(_quantesPO != 0 and c._quantesPO != 0){
+    if(_quantesPO > c._quantesPO) mesPetita = false;
 
-        if(_quantesPO < c._quantesPO) mesPetita = true;
+    else if(_quantesPO == 0 and c._quantesPO == 0  or _quantesPO == 4 and c._quantesPO == 4) mesPetita = false; 
+    else if((_quantesPO > 0 and c._quantesPO > 0) and _quantesPO == c._quantesPO){ 
+        // Es podria optimitzar deixant només els 4 if d'abaix :)
+        // Per als casos on _quantesPO: 1-1, 2-2 i 3-3
+        
+        /*
+        false - false -> pi == c 
+        false - true -> pi < c
+        true - false -> pi > c
+        true - true  -> pi == c
+        */
 
-        else if(_quantesPO == c._quantesPO){   //tenen la mateix quantitat de portes obertes
-            if(not (_portaN == true and c._portaN == false)) mesPetita = true;
-            else if(_portaE == false and c._portaE == true) mesPetita = true;
-            else if(_portaS == false and c._portaS == true) mesPetita = true;
-            else if(_portaO == false and c._portaO == true) mesPetita = true;
-                
-        }
+        if(not (_portaN == false and c._portaN == true)) mesPetita = false;
+        else if(not (_portaE == false and c._portaE == true)) mesPetita = false;
+        else if(not (_portaS == false and c._portaS == true)) mesPetita = false;
+        else if(not (_portaO == false and c._portaO == true)) mesPetita = false;
     }
     return mesPetita;
 }
