@@ -1,0 +1,5 @@
+nat _nFil, _nCol;
+int _quantesCambres;
+
+cambra _c;
+posicio _pos;
