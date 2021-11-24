@@ -1,4 +1,7 @@
-// si porta = true,  llavors porta = OBERT, altrament tancat
+// RESPRESENTACIÓ DE LA CLASSE CAMBRA. 
+
+// Si porta = true,  llavors porta = OBERT. Altrament, tancat.
+
 bool _portaN, _portaS, _portaE, _portaO;
-// conta el numero de portes que té oberta la cambra
-int _quantesPO;
+
+int _quantesPO;   // Comptador del número de portes obertes d'una cambra. 
