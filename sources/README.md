@@ -10,4 +10,8 @@ Projecte de ESIN de Patricia Ortega Granados i Roger Robles Lozano
 
 23/11/2021: Classe Laberint: hem continuat amb la classe Laberint, tant el .rep com el .cpp. 
 
-24/11/2021: Classe Laberint
+24/11/2021: Classe Laberint. 
+
+26/11/2021: Testejar la Classe Cambra amb els jocs de prova públics. 
+
+01/12/2021: Tenir acabada la Classe Laberint, i testejada amb els jocs de prova. 
