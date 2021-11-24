@@ -1,5 +1,14 @@
 nat _nFil, _nCol;
 //int _quantesCambres;
 
+<<<<<<< HEAD
 cambra **_lab; // matriu de cambres
 //posicio _pos;
+=======
+cambra _c;
+posicio _pos;
+
+
+
+//comentari de prova patricia github. 
+>>>>>>> 5a75b870627f361a29dfea26c23e77ad5c1a774c
