@@ -4,12 +4,27 @@
 // Constructora d'un laberint buit sense excavar (sense cap porta oberta)
 // de la mida indicada. Totes les cambres del laberint no tenen cap porta.
 // Es produeix un error si el número de files o de columnes del laberint és 0.
-laberint::laberint(nat num_fil, nat num_col) throw(error){}
+laberint::laberint(nat num_fil, nat num_col) throw(error){
+    
+    if(num_fil == 0 or num_col == 0) throw error(FilsColsIncorrecte);
+    else{
+        _nFil = num_fil;
+        _nCol = num_col;
+        _lab[_nFil][_nCol];
+    }
+}
 
 // Constructora d'un laberint a partir d'un istream (canal d'entrada) is.
 // El format de l'istream seguirà l'exposat a l'apartat 2.3. Es presuposa que
 // el laberint és correcte.
-laberint::laberint(std::istream & is) throw(error){}
+laberint::laberint(std::istream & is) throw(error){
+    
+    // esta mal, pero compila. Toca rehacer bien esto
+    is >> _nFil;
+    is >> _nCol;
+    _lab[_nFil][_nCol];
+
+}
 
 // Constructora per còpia, assignació i destructora.
 laberint::laberint(const laberint & l) throw(error){}

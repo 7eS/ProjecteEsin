@@ -1,0 +1,14 @@
+
+20 cambra La paret no existeix.
+
+30 laberint El num de fils o cols es incorrecte.
+31 laberint La posicio no existeix.
+32 laberint No es pot obrir una porta a l'exterior.
+
+40 particio<T> L'element no pertany a la particio.
+41 particio<T> Particio plena.
+
+50 dedalus El laberint ja esta excavat.
+
+60 teseus El laberint no te solucio.
+61 teseus La cambra inicial o final no es valida.

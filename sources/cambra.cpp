@@ -136,9 +136,10 @@ bool cambra::operator<(const cambra & c) const throw(){
 
     if(_quantesPO > c._quantesPO) mesPetita = false;
 
-    else if(_quantesPO == 0 and c._quantesPO == 0  or _quantesPO == 4 and c._quantesPO == 4) mesPetita = false; 
-    else if((_quantesPO > 0 and c._quantesPO > 0) and _quantesPO == c._quantesPO){ 
+    else if((_quantesPO == 0 and c._quantesPO == 0)  or (_quantesPO == 4 and c._quantesPO == 4)) mesPetita = false; 
+    else if((_quantesPO > 0 and c._quantesPO > 0) and (_quantesPO == c._quantesPO)){ 
         // Es podria optimitzar deixant només els 4 if d'abaix :)
+        // El Jordi valorarà la senzillesa del codi
         // Per als casos on _quantesPO: 1-1, 2-2 i 3-3
         
         /*
