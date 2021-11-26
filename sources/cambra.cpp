@@ -32,6 +32,8 @@ cambra & cambra::operator=(const cambra & c) throw(error){
     _portaE = c._portaE;
     _portaO = c._portaO;
     _quantesPO = c._quantesPO;
+
+    return *this;
 }
 
 cambra::~cambra() throw(){}

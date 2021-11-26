@@ -10,10 +10,15 @@ laberint::laberint(nat num_fil, nat num_col) throw(error){
     if(num_fil == 0 or num_col == 0) throw error(FilsColsIncorrecte);
     else{
         _nFil = num_fil;        // és correcte. 
-        _nCol = num_col;        // és correcte. 
-        _lab[_nFil][_nCol];     // aixo esta malament. S'ha de demanar memoria amb un NEW tipus[mida]. I després haurem de fer delete[]. Treballem amb memoria dinamica.
+        _nCol = num_col;        // és correcte.
+
+        cambra ** _lab = new cambra*[_nFil];
+        for (int i=0; i < _nFil; i++) {
+            _lab[i] = new cambra[_nCol];        //Treballem amb memoria dinàmica. Demanem memoria amb el new. Posteriorment farem deletes. 
+        }
     }
 }
+
 
 // Constructora d'un laberint a partir d'un istream (canal d'entrada) is.
 // El format de l'istream seguirà l'exposat a l'apartat 2.3. Es presuposa que el laberint és correcte.

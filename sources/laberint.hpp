@@ -6,14 +6,14 @@
 #include <utility>
 #include <esin/error>
 #include <esin/util>
-#include "cambra.hpp"
+#include "cambra.hpp" 
 
 using util::nat;
 
 // El primer natural de la posicio indica la fila i el segon indica la columna.
 typedef std::pair<nat,nat> posicio;
 
-/* Un objecte d'aquesta classe representa un laberint ortogonal amb un cert
+/* Un objecte d'aquesta classe representa un laberint ortogonal amb un cert 
 nombre de files i de columnes. A cada posició de la "graella" hi ha una cambra
 que podem identificar per les coordenades de la seva posició, és a dir,
 l'índex de la seva fila i de la seva columna. Les cambres exteriors no poden
