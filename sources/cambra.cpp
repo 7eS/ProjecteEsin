@@ -36,7 +36,8 @@ cambra & cambra::operator=(const cambra & c) throw(error){
     return *this;
 }
 
-cambra::~cambra() throw(){}
+cambra::~cambra() throw(){} //Utilitzem memòria estàtica. 
+
 
 // Retorna si l'habitació té una porta oberta a la paret indicada.
 bool cambra::porta_oberta(paret p) const throw(){

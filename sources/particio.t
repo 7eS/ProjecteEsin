@@ -2,14 +2,16 @@
   particio::particio(nat n) throw(error){}
 
   // Constructora per còpia, assignació i destructora.
+
   particio::particio(const particio & p) throw(error){}
-  particio & particio::operator=(const particio & p) throw(error){}
+  par ticio & particio::operator=(const particio & p) throw(error){}
   particio::~particio() throw(){}
 
   // Afegeix un nou element a la particio. Aquest nou element formarà ell sol
   // un nou grup. En cas que l'element ja estigués present a la partició llavors
   // no es modifica la partició. Es produeix un error si la particio ja té el
   // número màxim d'elements abans d'afegir aquest nou.
+
   void particio::afegir(const T &x) throw(error){}
 
   // Uneix els dos grups als quals pertanyen aquests dos elements. Si tots dos
