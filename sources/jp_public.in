@@ -1,0 +1,18 @@
+##!==================================================================
+##! JOC DE PROVES PUBLIC
+##!==================================================================
+##!
+##! Memoria general
+set_memory 100000 1000000000
+##!
+##!
+load jp_public_cambra.in
+##!
+load jp_public_laberint.in
+##!
+load jp_public_particio.in
+##!
+load jp_public_dedalus.in
+##!
+load jp_public_teseus.in
+exit

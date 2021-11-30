@@ -1,0 +1,22 @@
+TO DO:
+	### Clases ###
+
+	* Acabar clase laberint
+
+	* Fer tots els cpp (encara que estiguin buits), per a poder compilar els jocs de prova.
+
+	
+	### Altres ###
+
+	* Fer el Makefile per a compilar més ràpidament.
+		Seguint l'exemple d'algun Makefile del jutge ampliar-ho amb les nostres clases. Exemple:
+
+		driver_maze.exe: driver_maze.o check.o cambra.ø laberint.o particio.t teseus.o dedalus.o
+
+		g++ -o driver_maze.exe i tots el .o -lesin
+
+	* Fer proves amb els jocs de prova públics per a la clase cambra.
+
+	
+
+

@@ -26,14 +26,14 @@ laberint::laberint(nat num_fil, nat num_col) throw(error){
 
 laberint::laberint(std::istream & is) throw(error){
     
-    // esta mal, pero compila. Toca rehacer bien esto
+/*    // esta mal, pero compila. Toca rehacer bien esto
     is >> _nFil;
     is >> _nCol;
     for (int i = 0; i<_nFil; i++) {     //REVISAR AQUESTA FUNCIÓ. segurament els jocs de prova no sortin bé. Fer servir sentinella(?)
         for (int j = 0; j<_nCol; j++) {
             is>>*(*(_lab+i)+j);
         }
-    }
+    } */
 }
              
 
@@ -65,11 +65,11 @@ laberint::laberint(const laberint & l) throw(error){
 //Assignació. 
 laberint & laberint::operator=(const laberint & l) throw(error){
     
-    if (*this != l._lab) {
+    /*if (*this != l._lab) {
         _nFil = l._nFil;
         _nCol = l._nCol;
     }
-    return *this; 
+    return *this; */
 }
 
 //Destructora. 
@@ -123,10 +123,10 @@ void laberint::obre_porta(paret p, const posicio & pos) throw(error) {
         int j = pos.second;
         _lab[i][j].obre_porta(p);
 
-        if (p.NORD) _lab[i][j+1].obre_porta(_portaS);    // and p == p.NORD.
-        else if (p.SUD) _lab[i][j-1].obre_porta(_portaN);
-        else if (p.OEST) _lab[i-1][j].obre_porta(_portaE);
-        else if (p.EST) _lab[i+1][j].obre_porta(_portaO);
+        if (p.NORD) _lab[i][j+1].obre_porta(p.SUD);    // and p == p.NORD.
+        else if (p.SUD) _lab[i][j-1].obre_porta(p.NORD);
+        else if (p.OEST) _lab[i-1][j].obre_porta(p.EST);
+        else if (p.EST) _lab[i+1][j].obre_porta(p.OEST);
     }
 }
 
@@ -144,10 +144,10 @@ void laberint::tanca_porta(paret p, const posicio & pos) throw(error){
         int j = pos.second;
         _lab[i][j].tanca_porta(p);
 
-        if (p.NORD) _lab[i][j+1].tanca_porta(_portaS);       // and p == p.NORD.
-        else if (p.SUD) _lab[i][j-1].tanca_porta(_portaN);
-        else if (p.OEST) _lab[i-1][j].tanca_porta(_portaE);
-        else if (p.EST) _lab[i+1][j].tanca_porta(_portaO);
+        if (p.NORD) _lab[i][j+1].tanca_porta(p.SUD);       // and p == p.NORD.
+        else if (p.SUD) _lab[i][j-1].tanca_porta(p.SUD);
+        else if (p.OEST) _lab[i-1][j].tanca_porta(p.EST);
+        else if (p.EST) _lab[i+1][j].tanca_porta(p.OEST);
     }
 }
 
@@ -155,12 +155,12 @@ void laberint::tanca_porta(paret p, const posicio & pos) throw(error){
 
 void laberint::print(std::ostream & os) const throw() {
 
-    for (int i = 0; i<_nFil; i++) { 
+   /* for (int i = 0; i<_nFil; i++) { 
         for (int j = 0; j<_nCol; j++) {
             os<<*(*(_lab+i)+j);
         }
         os<<"\n";
-    }
+    } */
 }
 
 bool laberint::portaExterior(paret p, posicio pos) {
