@@ -26,12 +26,12 @@ laberint::laberint(nat num_fil, nat num_col) throw(error){
 
 laberint::laberint(std::istream & is) throw(error){
     
-/*    // esta mal, pero compila. Toca rehacer bien esto
-    is >> _nFil;
+    // esta mal, pero compila. Toca rehacer bien esto
+   /* is >> _nFil;
     is >> _nCol;
     for (int i = 0; i<_nFil; i++) {     //REVISAR AQUESTA FUNCIÓ. segurament els jocs de prova no sortin bé. Fer servir sentinella(?)
         for (int j = 0; j<_nCol; j++) {
-            is>>*(*(_lab+i)+j);
+            is >> _lab[i][j];
         }
     } */
 }

@@ -9,7 +9,8 @@ cambra::cambra(bool n, bool s, bool e, bool o) throw(error){
     _portaS = s;
     _portaE = e;
     _portaO = o;
-    //incializar _quantesPO a 0
+    //incializar 
+    _quantesPO = 0;
     if(n == true) _quantesPO++;
     if(s == true) _quantesPO++;
     if(e == true) _quantesPO++;
