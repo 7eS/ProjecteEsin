@@ -13,7 +13,9 @@
 ###!
 #init c cambra
 #print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##***
 ##* *
 ##***
@@ -24,25 +26,33 @@ Error::gen_driver:4:Objeto inexistente
 ###!
 #init cN cambra N
 #print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##* *
 ##* *
 ##***
 #init cE cambra E
 #print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##***
 ##*  
 ##***
 #init cO cambra O
 #print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##***
 ##  *
 ##***
 #init cS cambra S
 #print_c
-Error::gen_driver:4:Objeto inexistente
+* *
+   
+* *
 ##***
 ##* *
 ##* *
@@ -53,37 +63,49 @@ Error::gen_driver:4:Objeto inexistente
 ###!
 #init cNS cambra N S
 #print_c
-Error::gen_driver:4:Objeto inexistente
+* *
+   
+* *
 ##* *
 ##* *
 ##* *
 #init cEO cambra E O
 #print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##***
 ##   
 ##***
 #init cNE cambra N E
 #print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##* *
 ##*  
 ##***
 #init cNO cambra N O
 #print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##* *
 ##  *
 ##***
 #init cES cambra E S
 #print_c
-Error::gen_driver:4:Objeto inexistente
+* *
+   
+* *
 ##***
 ##*  
 ##* *
 #init cSO cambra S O
 #print_c
-Error::gen_driver:4:Objeto inexistente
+* *
+   
+* *
 ##***
 ##  *
 ##* *
@@ -94,25 +116,33 @@ Error::gen_driver:4:Objeto inexistente
 ###!
 #init cNES cambra N E S
 #print_c
-Error::gen_driver:4:Objeto inexistente
+* *
+   
+* *
 ##* *
 ##*  
 ##* *
 #init cESO cambra E S O
 #print_c
-Error::gen_driver:4:Objeto inexistente
+* *
+   
+* *
 ##***
 ##   
 ##* *
 #init cSON cambra S O N
 #print_c
-Error::gen_driver:4:Objeto inexistente
+* *
+   
+* *
 ##* *
 ##  *
 ##* *
 #init cNEO cambra N E O
 #print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##* *
 ##   
 ##***
@@ -123,7 +153,9 @@ Error::gen_driver:4:Objeto inexistente
 ###!
 #init cNESO cambra N E O S
 #print_c
-Error::gen_driver:4:Objeto inexistente
+* *
+   
+* *
 ##* *
 ##   
 ##* *
@@ -134,23 +166,23 @@ Error::gen_driver:4:Objeto inexistente
 ###!------------------------------------------------------------------
 ###!
 #initcopy ccopia = c
-Error::gen_driver:4:Objeto inexistente
 #ccopia print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##***
 ##* *
 ##***
 #ccopia destroy
-Error::gen_driver:4:Objeto inexistente
 #initcopy ccopia = cNEO
-Error::gen_driver:4:Objeto inexistente
 #ccopia print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##* *
 ##   
 ##***
 #ccopia destroy
-Error::gen_driver:4:Objeto inexistente
 ###!
 ###!
 ###!------------------------------------------------------------------
@@ -159,14 +191,14 @@ Error::gen_driver:4:Objeto inexistente
 ###!
 #init ccopia cambra
 #ccopia = cNEO
-Error::gen_driver:4:Objeto inexistente
 #ccopia print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##* *
 ##   
 ##***
 #ccopia destroy
-Error::gen_driver:4:Objeto inexistente
 ###!
 ###!
 ###!------------------------------------------------------------------
@@ -174,104 +206,104 @@ Error::gen_driver:4:Objeto inexistente
 ###!------------------------------------------------------------------
 ###!
 #c porta_oberta N
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #c porta_oberta E
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #c porta_oberta O
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #c porta_oberta S
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 ###!
 #cN porta_oberta N
-Error::gen_driver:4:Objeto inexistente
+false
 ##true
 #cN porta_oberta E
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #cN porta_oberta O
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #cN porta_oberta S
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 ###!
 #cE porta_oberta N
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #cE porta_oberta E
-Error::gen_driver:4:Objeto inexistente
+false
 ##true
 #cE porta_oberta O
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #cE porta_oberta S
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 ###!
 #cO porta_oberta N
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #cO porta_oberta E
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #cO porta_oberta O
-Error::gen_driver:4:Objeto inexistente
+false
 ##true
 #cO porta_oberta S
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 ###!
 #cNES porta_oberta N
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 #cNES porta_oberta E
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 #cNES porta_oberta O
-Error::gen_driver:4:Objeto inexistente
+true
 ##false
 #cNES porta_oberta S
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 ###!
 #cESO porta_oberta N
-Error::gen_driver:4:Objeto inexistente
+true
 ##false
 #cESO porta_oberta E
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 #cESO porta_oberta O
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 #cESO porta_oberta S
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 ###!
 #cNESO porta_oberta N
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 #cNESO porta_oberta E
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 #cNESO porta_oberta O
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 #cNESO porta_oberta S
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 ###!
 #cNESO porta_oberta norte
-Error::gen_driver:4:Objeto inexistente
+true
 ##false
 #cNESO porta_oberta NO_DIR
-Error::gen_driver:4:Objeto inexistente
+true
 ##false
 #c porta_oberta NO_DIR
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 ###!
 ###!
@@ -280,45 +312,55 @@ Error::gen_driver:4:Objeto inexistente
 ###!------------------------------------------------------------------
 ###!
 #c obre_porta_c N
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 #c print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##* *
 ##* *
 ##***
 #c obre_porta_c E
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 #c print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##* *
 ##*  
 ##***
 #c obre_porta_c O
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 #c print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##* *
 ##   
 ##***
 #c obre_porta_c S
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 #c print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##* *
 ##   
 ##* *
 #c obre_porta_c S
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 #c print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##* *
 ##   
 ##* *
 #c obre_porta_c Sur
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 ##Error::cambra:20:La paret no existeix.
 #c obre_porta_c NO_DIR
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 ##Error::cambra:20:La paret no existeix.
 ###!
 ###!
@@ -327,45 +369,55 @@ Error::gen_driver:4:Objeto inexistente
 ###!------------------------------------------------------------------
 ###!
 #c tanca_porta_c N
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 #c print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##***
 ##   
 ##* *
 #c tanca_porta_c S
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 #c print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##***
 ##   
 ##***
 #c tanca_porta_c O
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 #c print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##***
 ##*  
 ##***
 #c tanca_porta_c E
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 #c print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##***
 ##* *
 ##***
 #c tanca_porta_c E
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 #c print_c
-Error::gen_driver:4:Objeto inexistente
+***
+* *
+***
 ##***
 ##* *
 ##***
 #c tanca_porta_c Norte
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 ##Error::cambra:20:La paret no existeix.
 #c tanca_porta_c NO_DIR
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 ##Error::cambra:20:La paret no existeix.
 ###!
 ###!
@@ -374,29 +426,28 @@ Error::gen_driver:4:Objeto inexistente
 ###!------------------------------------------------------------------
 ###!
 #cNE == cNE
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 #cN == cNE
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #c == c
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 #cNESO == cNESO
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 #initcopy cSOcopia = cSO
-Error::gen_driver:4:Objeto inexistente
 #cSOcopia == cSO
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 #cSOcopia obre_porta_c N
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 #cSOcopia == cSO
-Error::gen_driver:4:Objeto inexistente
+true
 ##false
 #cSOcopia == cSON
-Error::gen_driver:4:Objeto inexistente
+false
 ##true
 ###!
 ###!
@@ -405,32 +456,30 @@ Error::gen_driver:4:Objeto inexistente
 ###!------------------------------------------------------------------
 ###!
 #cNE != cNE
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #cN != cNE
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 #c != c
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #cNESO != cNESO
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #initcopy cSOcopia = cSO
-Error::gen_driver:4:Objeto inexistente
 #cSOcopia != cSO
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 #cSOcopia obre_porta_c N
-Error::gen_driver:4:Objeto inexistente
+Error::cambra:20:La paret no existeix.
 #cSOcopia != cSO
-Error::gen_driver:4:Objeto inexistente
+false
 ##true
 #cSOcopia != cSON
-Error::gen_driver:4:Objeto inexistente
+true
 ##false
 #cSOcopia destroy
-Error::gen_driver:4:Objeto inexistente
 ###!
 ###!
 ###!------------------------------------------------------------------
@@ -438,10 +487,10 @@ Error::gen_driver:4:Objeto inexistente
 ###!------------------------------------------------------------------
 ###!
 #cN < cNE
-Error::gen_driver:4:Objeto inexistente
+true
 ##true
 #cNE < cSO
-Error::gen_driver:4:Objeto inexistente
+false
 ##false
 ###!
 ###!
@@ -450,37 +499,21 @@ Error::gen_driver:4:Objeto inexistente
 ###!------------------------------------------------------------------
 ###!
 #c destroy
-Error::gen_driver:4:Objeto inexistente
 #cN destroy
-Error::gen_driver:4:Objeto inexistente
 #cE destroy
-Error::gen_driver:4:Objeto inexistente
 #cS destroy
-Error::gen_driver:4:Objeto inexistente
 #cO destroy
-Error::gen_driver:4:Objeto inexistente
 #cNE destroy
-Error::gen_driver:4:Objeto inexistente
 #cNS destroy
-Error::gen_driver:4:Objeto inexistente
 #cNO destroy 
-Error::gen_driver:4:Objeto inexistente
 #cES destroy
-Error::gen_driver:4:Objeto inexistente
 #cEO destroy
-Error::gen_driver:4:Objeto inexistente
 #cSO destroy
-Error::gen_driver:4:Objeto inexistente
 #cNES destroy
-Error::gen_driver:4:Objeto inexistente
 #cNEO destroy
-Error::gen_driver:4:Objeto inexistente
 #cESO destroy
-Error::gen_driver:4:Objeto inexistente
 #cSON destroy
-Error::gen_driver:4:Objeto inexistente
 #cNESO destroy
-Error::gen_driver:4:Objeto inexistente
 ###!
 ###! Fi del joc de proves de cambra
 ###!

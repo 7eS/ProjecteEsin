@@ -41,38 +41,41 @@ cambra::~cambra() throw(){} //Utilitzem memòria estàtica.
 
 
 // Retorna si l'habitació té una porta oberta a la paret indicada.
-bool cambra::porta_oberta(paret p) const throw(){
+bool cambra::porta_oberta(paret p) const throw(){						//AQUESTA FUNCIO ESTABA MALAMENT. ARA ESTÀ ARREGLADA.
 
+    //Mirar si la paret es ==NORD, sud, etc. 
+    
+      
+    if (p == paret::NORD) return _portaN; 		//FUNCIO ARREGLADA BY PATRICIA, 1 DE DECEMBRE. 
+    else if (p == paret::SUD) return _portaS;
+    else if (p == paret::EST) return _portaE;
+    else if (p == paret::OEST) return _portaO; 		//enum de la classe paret. fa falta possar paret:: perque es a la classe paret a on esta definit. 
+    else throw error (ParetInexistent); 			//ens pasen NODIR
+    
     //retorna _portaX el qual es un boolea, si es true està oberta, altrament està tancada.
-
-    if(p.NORD) return _portaN;
-    else if(p.SUD) return _portaS;
-    else if (p.EST) return _portaE;
-    else if(p.OEST) return _portaO;
-    else throw error (ParetInexistent); //ens pasen NODIR
 }
 
 // Obre una nova porta a la paret indicada. Si la porta ja està oberta no fa res. Es produeix un error si la paret és NO_DIR.
 
-void cambra::obre_porta(paret p) throw(error){
+void cambra::obre_porta(paret p) throw(error){						//AQUESTA FUNCIO ESTABA MALAMENT. ARA ESTÀ ARREGLADA.
 
-    if(p.NO_DIR)throw error (ParetInexistent);
+    if(p == paret::NO_DIR)throw error (ParetInexistent);
     
     else if(not porta_oberta(p)){
 
-        if(p.NORD){
+        if(p == paret::NORD){			//FUNCIO ARREGLADA BY PATRICIA ,1 DE DECEMBRE. 
             _portaN = true;
             _quantesPO++;
         }
-        else if(p.SUD){
+        else if(p == paret::SUD){
             _portaS = true;
             _quantesPO++;
         }
-        else if(p.EST){
+        else if(p == paret::EST){
             _portaE = true;
             _quantesPO++;
         }
-        else if(p.OEST){
+        else if(p == paret::OEST){
             _portaO = true;
             _quantesPO++;
         }
@@ -81,25 +84,25 @@ void cambra::obre_porta(paret p) throw(error){
 
 // Tanca la porta a la paret indicada. Si la porta ja estava tancada no fa res. Es produeix un error si la paret és NO_DIR.
 
-void cambra::tanca_porta(paret p) throw(error){
+void cambra::tanca_porta(paret p) throw(error){				//AQUESTA FUNCIO ESTABA MALAMENT. ARA ESTÀ ARREGLADA.
 
-    if(p.NO_DIR)throw error (ParetInexistent);
+    if(p == paret::NO_DIR)throw error (ParetInexistent);
     
     else if(porta_oberta(p)){
 
-        if(p.NORD){
+        if(p == paret::NORD){				//FUNCIO ARREGLADA BY PATRICIA ,1 DE DECEMBRE. 
             _portaN = false;
             _quantesPO--;
         }
-        else if(p.SUD){
+        else if(p == paret::SUD){
             _portaS = false;
             _quantesPO--;
         }
-        else if(p.EST){
+        else if(p == paret::EST){
             _portaE = false;
             _quantesPO--;
         }
-        else if(p.OEST){
+        else if(p == paret::OEST){
             _portaO = false;
             _quantesPO--;
         }
@@ -161,3 +164,4 @@ bool cambra::operator<(const cambra & c) const throw(){
     }
     return mesPetita;
 }
+
