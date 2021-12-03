@@ -123,10 +123,10 @@ void laberint::obre_porta(paret p, const posicio & pos) throw(error) {
         int j = pos.second;
         _lab[i][j].obre_porta(p);
 
-        if (p.NORD) _lab[i][j+1].obre_porta(p.SUD);    // and p == p.NORD.
-        else if (p.SUD) _lab[i][j-1].obre_porta(p.NORD);
-        else if (p.OEST) _lab[i-1][j].obre_porta(p.EST);
-        else if (p.EST) _lab[i+1][j].obre_porta(p.OEST);
+        if (p == paret::NORD) _lab[i][j+1].obre_porta(p.SUD);    // and p == p.NORD.
+        else if (p == paret::SUD) _lab[i][j-1].obre_porta(p.NORD);
+        else if (p == paret::OEST) _lab[i-1][j].obre_porta(p.EST);
+        else if (p == paret::EST) _lab[i+1][j].obre_porta(p.OEST);
     }
 }
 
@@ -144,10 +144,10 @@ void laberint::tanca_porta(paret p, const posicio & pos) throw(error){
         int j = pos.second;
         _lab[i][j].tanca_porta(p);
 
-        if (p.NORD) _lab[i][j+1].tanca_porta(p.SUD);       // and p == p.NORD.
-        else if (p.SUD) _lab[i][j-1].tanca_porta(p.SUD);
-        else if (p.OEST) _lab[i-1][j].tanca_porta(p.EST);
-        else if (p.EST) _lab[i+1][j].tanca_porta(p.OEST);
+        if (p == paret::NORD) _lab[i][j+1].tanca_porta(paret::SUD);       // and p == p.NORD.
+        else if (p == paret::SUD) _lab[i][j-1].tanca_porta(paret::NORD);
+        else if (p == paret::OEST) _lab[i-1][j].tanca_porta(paret::EST);
+        else if (p == paret::EST) _lab[i+1][j].tanca_porta(paret::OEST);
     }
 }
 
@@ -155,22 +155,23 @@ void laberint::tanca_porta(paret p, const posicio & pos) throw(error){
 
 void laberint::print(std::ostream & os) const throw() {
 
-   /* for (int i = 0; i<_nFil; i++) { 
+    for (int i = 0; i<_nFil; i++) { 
         for (int j = 0; j<_nCol; j++) {
-            os<<*(*(_lab+i)+j);
+            //os<<*(*(_lab+i)+j);
+            os<<_lab[i][j];
         }
         os<<"\n";
-    } */
+    } 
 }
 
 bool laberint::portaExterior(paret p, posicio pos) {
 // Pre: p és una paret d'una cambra del laberint i pos es una posicio existent del laberint.
 // Post: Retorna true si p és una porta exterior, altrament false. 
 
-    if (pos.first == 0 and p.NORD) return true;             // and p == p.NORD.               
-    else if (pos.first == _nFil and p.SUD) return true;    
-    else if (pos.second == 0 and p.OEST) return true;      
-    else if (pos.second == _nCol and p.EST) return true;  
+    if (pos.first == 0 and p == paret::NORD) return true;             // and p == p.NORD.               
+    else if (pos.first == _nFil and p == paret::SUD) return true;    
+    else if (pos.second == 0 and p == paret::OEST) return true;      
+    else if (pos.second == _nCol and p == paret::EST) return true;  
 
     return false; 
 }

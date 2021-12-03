@@ -26,7 +26,7 @@
 ###!
 #init cN cambra N
 #print_c
-***
+* *
 * *
 ***
 ##* *
@@ -35,7 +35,7 @@
 #init cE cambra E
 #print_c
 ***
-* *
+*  
 ***
 ##***
 ##*  
@@ -43,15 +43,15 @@
 #init cO cambra O
 #print_c
 ***
-* *
+  *
 ***
 ##***
 ##  *
 ##***
 #init cS cambra S
 #print_c
+***
 * *
-   
 * *
 ##***
 ##* *
@@ -64,7 +64,7 @@
 #init cNS cambra N S
 #print_c
 * *
-   
+* *
 * *
 ##* *
 ##* *
@@ -72,39 +72,39 @@
 #init cEO cambra E O
 #print_c
 ***
-* *
+   
 ***
 ##***
 ##   
 ##***
 #init cNE cambra N E
 #print_c
-***
 * *
+*  
 ***
 ##* *
 ##*  
 ##***
 #init cNO cambra N O
 #print_c
-***
 * *
+  *
 ***
 ##* *
 ##  *
 ##***
 #init cES cambra E S
 #print_c
-* *
-   
+***
+*  
 * *
 ##***
 ##*  
 ##* *
 #init cSO cambra S O
 #print_c
-* *
-   
+***
+  *
 * *
 ##***
 ##  *
@@ -117,14 +117,14 @@
 #init cNES cambra N E S
 #print_c
 * *
-   
+*  
 * *
 ##* *
 ##*  
 ##* *
 #init cESO cambra E S O
 #print_c
-* *
+***
    
 * *
 ##***
@@ -133,15 +133,15 @@
 #init cSON cambra S O N
 #print_c
 * *
-   
+  *
 * *
 ##* *
 ##  *
 ##* *
 #init cNEO cambra N E O
 #print_c
-***
 * *
+   
 ***
 ##* *
 ##   
@@ -176,8 +176,8 @@
 #ccopia destroy
 #initcopy ccopia = cNEO
 #ccopia print_c
-***
 * *
+   
 ***
 ##* *
 ##   
@@ -192,8 +192,8 @@
 #init ccopia cambra
 #ccopia = cNEO
 #ccopia print_c
-***
 * *
+   
 ***
 ##* *
 ##   
@@ -219,7 +219,7 @@ false
 ##false
 ###!
 #cN porta_oberta N
-false
+true
 ##true
 #cN porta_oberta E
 false
@@ -235,7 +235,7 @@ false
 false
 ##false
 #cE porta_oberta E
-false
+true
 ##true
 #cE porta_oberta O
 false
@@ -251,7 +251,7 @@ false
 false
 ##false
 #cO porta_oberta O
-false
+true
 ##true
 #cO porta_oberta S
 false
@@ -264,14 +264,14 @@ true
 true
 ##true
 #cNES porta_oberta O
-true
+false
 ##false
 #cNES porta_oberta S
 true
 ##true
 ###!
 #cESO porta_oberta N
-true
+false
 ##false
 #cESO porta_oberta E
 true
@@ -297,10 +297,10 @@ true
 ##true
 ###!
 #cNESO porta_oberta norte
-true
+false
 ##false
 #cNESO porta_oberta NO_DIR
-true
+false
 ##false
 #c porta_oberta NO_DIR
 false
@@ -312,47 +312,42 @@ false
 ###!------------------------------------------------------------------
 ###!
 #c obre_porta_c N
-Error::cambra:20:La paret no existeix.
 #c print_c
-***
+* *
 * *
 ***
 ##* *
 ##* *
 ##***
 #c obre_porta_c E
-Error::cambra:20:La paret no existeix.
 #c print_c
-***
 * *
+*  
 ***
 ##* *
 ##*  
 ##***
 #c obre_porta_c O
-Error::cambra:20:La paret no existeix.
 #c print_c
-***
 * *
+   
 ***
 ##* *
 ##   
 ##***
 #c obre_porta_c S
-Error::cambra:20:La paret no existeix.
 #c print_c
-***
 * *
-***
+   
+* *
 ##* *
 ##   
 ##* *
 #c obre_porta_c S
-Error::cambra:20:La paret no existeix.
 #c print_c
-***
 * *
-***
+   
+* *
 ##* *
 ##   
 ##* *
@@ -369,34 +364,30 @@ Error::cambra:20:La paret no existeix.
 ###!------------------------------------------------------------------
 ###!
 #c tanca_porta_c N
-Error::cambra:20:La paret no existeix.
 #c print_c
 ***
+   
 * *
-***
 ##***
 ##   
 ##* *
 #c tanca_porta_c S
-Error::cambra:20:La paret no existeix.
 #c print_c
 ***
-* *
+   
 ***
 ##***
 ##   
 ##***
 #c tanca_porta_c O
-Error::cambra:20:La paret no existeix.
 #c print_c
 ***
-* *
+*  
 ***
 ##***
 ##*  
 ##***
 #c tanca_porta_c E
-Error::cambra:20:La paret no existeix.
 #c print_c
 ***
 * *
@@ -405,7 +396,6 @@ Error::cambra:20:La paret no existeix.
 ##* *
 ##***
 #c tanca_porta_c E
-Error::cambra:20:La paret no existeix.
 #c print_c
 ***
 * *
@@ -442,12 +432,11 @@ true
 true
 ##true
 #cSOcopia obre_porta_c N
-Error::cambra:20:La paret no existeix.
 #cSOcopia == cSO
-true
+false
 ##false
 #cSOcopia == cSON
-false
+true
 ##true
 ###!
 ###!
@@ -472,12 +461,11 @@ false
 false
 ##false
 #cSOcopia obre_porta_c N
-Error::cambra:20:La paret no existeix.
 #cSOcopia != cSO
-false
+true
 ##true
 #cSOcopia != cSON
-true
+false
 ##false
 #cSOcopia destroy
 ###!

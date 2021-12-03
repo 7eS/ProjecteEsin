@@ -3,7 +3,7 @@
 // // IMPLEMENTACIÓ DE LA CLASSE CAMBRA. 
 
 // Construeix una cambra amb les portes als llocs indicats.
-cambra::cambra(bool n, bool s, bool e, bool o) throw(error){
+cambra::cambra(bool n, bool s, bool e, bool o) throw(error){		//correcte. 
                    
     _portaN = n;
     _portaS = s;
@@ -45,12 +45,14 @@ bool cambra::porta_oberta(paret p) const throw(){						//AQUESTA FUNCIO ESTABA M
 
     //Mirar si la paret es ==NORD, sud, etc. 
     
+    bool oberta = false;
       
     if (p == paret::NORD) return _portaN; 		//FUNCIO ARREGLADA BY PATRICIA, 1 DE DECEMBRE. 
     else if (p == paret::SUD) return _portaS;
     else if (p == paret::EST) return _portaE;
     else if (p == paret::OEST) return _portaO; 		//enum de la classe paret. fa falta possar paret:: perque es a la classe paret a on esta definit. 
-    else throw error (ParetInexistent); 			//ens pasen NODIR
+    //else throw error (ParetInexistent); 			//ens pasen NODIR. No hem de posar error ja que a la capçalera no hi ha res al parentesi. 
+    else return oberta;
     
     //retorna _portaX el qual es un boolea, si es true està oberta, altrament està tancada.
 }
