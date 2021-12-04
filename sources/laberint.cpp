@@ -155,13 +155,13 @@ void laberint::tanca_porta(paret p, const posicio & pos) throw(error){
 
 void laberint::print(std::ostream & os) const throw() {
 
-    for (int i = 0; i<_nFil; i++) { 
+/*    for (int i = 0; i<_nFil; i++) { 
         for (int j = 0; j<_nCol; j++) {
             //os<<*(*(_lab+i)+j);
             os<<_lab[i][j];
         }
         os<<"\n";
-    } 
+    }  */
 }
 
 bool laberint::portaExterior(paret p, posicio pos) {
