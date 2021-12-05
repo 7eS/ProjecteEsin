@@ -159,9 +159,10 @@ void laberint::print(std::ostream & os) const throw() {
     for (int i = 0; i<_nFil; i++) { 
         for (int j = 0; j<_nCol; j++) {
             //os<<*(*(_lab+i)+j);
+            // Pot ser una solucio
             if(not _lab[i][j].porta_oberta(paret::NORD)) os<<'***';
             else os<<'* *';
-            
+
         }
         os<<'\n';
     }  
