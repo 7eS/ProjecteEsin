@@ -26,13 +26,16 @@ laberint::laberint(nat num_fil, nat num_col) throw(error){
 
 laberint::laberint(std::istream & is) throw(error){
     
-/*    // esta mal, pero compila. Toca rehacer bien esto
+   /* // esta mal, pero compila. Toca rehacer bien esto
     is >> _nFil;
     is >> _nCol;
 
-    for (int i = 0; i<_nFil; i++) {     //REVISAR AQUESTA FUNCIÓ. segurament els jocs de prova no sortin bé. Fer servir sentinella(?)
-        for (int j = 0; j<_nCol; j++) {
-            is >> _lab[i][j];
+    char elem;
+    while(is>>elem){
+        for (int i = 0; i<_nFil; i++) {     //REVISAR AQUESTA FUNCIÓ. segurament els jocs de prova no sortin bé. Fer servir sentinella(?)
+            for (int j = 0; j<_nCol; j++) {
+                _lab[i][j] = elem;
+            }
         }
     } */
 }
@@ -43,24 +46,24 @@ laberint::laberint(std::istream & is) throw(error){
 //Constructora per còpia. 
 laberint::laberint(const laberint & l) throw(error){
 
-    _nFil = l._nFil;
+  /*  _nFil = l._nFil;
     _nCol = l._nCol; 
     
     //opcio 1. Modificariem també l(?)
     //cambra ** _lab = l._lab;        // Copiem les direccions de l al p.i. 
     
     //opcio 2
-   /* cambra ** _lab = new cambra*[_nFil];
+    cambra ** _lab = new cambra*[_nFil];
         for (int i=0; i < _nFil; i++) {
             _lab[i] = new cambra[_nCol];
             _lab[i] = l._lab[i];  
-    }*/
+    }
     //opcio 3
     for (int i = 0; i<_nFil; i++) {     //REVISAR AQUESTA FUNCIÓ. segurament els jocs de prova no sortin bé. Fer servir sentinella(?)
         for (int j = 0; j<_nCol; j++) {
             _lab[i][j] = l._lab[i][j];
         }
-    }
+    } */
 }
 
 //Assignació. 
@@ -162,7 +165,6 @@ void laberint::print(std::ostream & os) const throw() {
             // Pot ser una solucio
             if(not _lab[i][j].porta_oberta(paret::NORD)) os<<'***';
             else os<<'* *';
-
         }
         os<<'\n';
     }  
