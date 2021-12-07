@@ -1,6 +1,9 @@
 {
     "files.associations": {
-        "*.rep": "cpp"
+        "*.rep": "cpp",
+        "util": "cpp",
+        "gen_driver": "cpp",
+        "iosfwd": "cpp"
     },
     "git.ignoreLimitWarning": true
 }
