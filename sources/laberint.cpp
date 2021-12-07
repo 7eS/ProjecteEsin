@@ -24,8 +24,52 @@ laberint::laberint(nat num_fil, nat num_col) throw(error){
 // Constructora d'un laberint a partir d'un istream (canal d'entrada) is.
 // El format de l'istream seguirà l'exposat a l'apartat 2.3. Es presuposa que el laberint és correcte.
 
-laberint::laberint(std::istream & is) throw(error){
+laberint::laberint(std::istream & is) throw(error) {
     
+    string linia;
+    bool primLinia = true; //la primera linia correspon al numero de fils i cols. 
+    int contLinia = 0;
+    util::vector<string> infoLaberint;
+    
+    posicio p;
+    bool nord = false;
+
+    while (getline(is,linia)) {
+        if (primLinia) {
+            util::split(linia,infoLaberint); //split elimina els espais
+            _nFil = util::toint(infoLaberint[0]); //transformem en int. 
+            _nCol = util::toint(infoLaberint[1]);
+            primLinia = false;
+        }
+        else{
+            for (int i = 1; i <= _nFil; i++) {
+                // comprovem si estem mirant una linea corresponent a les portes verticals o horitzontals
+                if (contLinia%2 != 0) nord = true; 
+                else nord = false; 
+                
+                if (nord){
+                    for (int j = 2; j <= _nCol; j+=2){ //incrementem de dos en dos.  
+                        //cambra c
+                        p.first = i;
+                        p.second = j; 
+                        // creo que mejorable, las paredes por defecto ya estan cerradas. Entonces solo
+                        // habria que tener en cuenta los espacios para abrirla.
+                        if (linia[j-1] == ' ') obre_porta(paret::NORD, p); //funcio obre_porta de laberint.
+                        //else obre_porta(paret::NORD,p);
+                    }
+                }else{ //tractem les parets est i oest
+                    for (int j = 3; j <= _nCol; j+=2){ 
+                        p.first = i;
+                        p.second = j; 
+                        if (linia[j-1] == ' ') obre_porta(paret::OEST,p); //funcio obre_porta de laberint.
+                    }
+                }
+            }
+            contLinia++;
+        }
+    }
+
+
    /* // esta mal, pero compila. Toca rehacer bien esto
     is >> _nFil;
     is >> _nCol;
@@ -117,6 +161,7 @@ cambra laberint::operator()(const posicio & pos) const throw(error){
 // Es produeix un error si la posició no existeix o no es pot obrir una porta en la direcció indicada perquè dóna a l'exterior.
 
 void laberint::obre_porta(paret p, const posicio & pos) throw(error) {
+    
     if (pos.first >= _nFil or pos.second >= _nCol) {             // Al començar des de 0 li hem de restar 1, per això es >=.
         throw error (PosicioInexistent);
     }
