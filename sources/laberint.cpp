@@ -13,9 +13,10 @@ laberint::laberint(nat num_fil, nat num_col) throw(error){
         _nFil = num_fil;        // és correcte. 
         _nCol = num_col;        // és correcte.
 
-        cambra ** _lab = new cambra*[_nFil];
-        for (int i=0; i < _nFil; i++) {
-            _lab[i] = new cambra[_nCol];        // Treballem amb memòria dinàmica. Demanem memòria amb el new. Posteriorment farem deletes. 
+        _lab = new cambra*[_nFil];
+        for (int i=1; i <= _nFil; i++) {
+            _lab[i] = new cambra[_nCol];        // Treballem amb memòria dinàmica. Demanem memòria amb el new. Posteriorment farem deletes.    
+
         }
     }
 }
@@ -25,7 +26,8 @@ laberint::laberint(nat num_fil, nat num_col) throw(error){
 // El format de l'istream seguirà l'exposat a l'apartat 2.3. Es presuposa que el laberint és correcte.
 
 laberint::laberint(std::istream & is) throw(error) {
-    
+     
+     
     string linia;
     bool primLinia = true; //la primera linia correspon al numero de fils i cols. 
     int contLinia = 0;
@@ -33,6 +35,8 @@ laberint::laberint(std::istream & is) throw(error) {
     
     posicio p;
     bool nord = false;
+
+
 
     while (getline(is,linia)) {
         if (primLinia) {
@@ -42,46 +46,30 @@ laberint::laberint(std::istream & is) throw(error) {
             primLinia = false;
         }
         else{
-            for (int i = 1; i <= _nFil; i++) {
-                // comprovem si estem mirant una linea corresponent a les portes verticals o horitzontals
-                if (contLinia%2 != 0) nord = true; 
-                else nord = false; 
-                
-                if (nord){
-                    for (int j = 2; j <= _nCol; j+=2){ //incrementem de dos en dos.  
-                        //cambra c
-                        p.first = i;
-                        p.second = j; 
-                        // creo que mejorable, las paredes por defecto ya estan cerradas. Entonces solo
-                        // habria que tener en cuenta los espacios para abrirla.
-                        if (linia[j-1] == ' ') obre_porta(paret::NORD, p); //funcio obre_porta de laberint.
-                        //else obre_porta(paret::NORD,p);
-                    }
-                }else{ //tractem les parets est i oest
-                    for (int j = 3; j <= _nCol; j+=2){ 
-                        p.first = i;
-                        p.second = j; 
-                        if (linia[j-1] == ' ') obre_porta(paret::OEST,p); //funcio obre_porta de laberint.
-                    }
+            // comprovem si estem mirant una linea corresponent a les portes verticals o horitzontals
+            if (contLinia%2 != 0) nord = true; 
+            else nord = false; 
+            
+            if (nord){
+                for (int j = 2; j <= _nCol; j+=2){ //incrementem de dos en dos.  
+                    //cambra c
+                    p.first = contLinia;
+                    p.second = j; 
+                    // creo que mejorable, las paredes por defecto ya estan cerradas. Entonces solo
+                    // habria que tener en cuenta los espacios para abrirla.
+                    if (linia[j-1] == ' ') obre_porta(paret::NORD, p); //funcio obre_porta de laberint.
+                    //else obre_porta(paret::NORD,p);
+                }
+            }else{ //tractem les parets est i oest
+                for (int j = 3; j <= _nCol; j+=2){ 
+                    p.first = contLinia;
+                    p.second = j; 
+                    if (linia[j-1] == ' ') obre_porta(paret::OEST,p); //funcio obre_porta de laberint.
                 }
             }
             contLinia++;
         }
     }
-
-
-   /* // esta mal, pero compila. Toca rehacer bien esto
-    is >> _nFil;
-    is >> _nCol;
-
-    char elem;
-    while(is>>elem){
-        for (int i = 0; i<_nFil; i++) {     //REVISAR AQUESTA FUNCIÓ. segurament els jocs de prova no sortin bé. Fer servir sentinella(?)
-            for (int j = 0; j<_nCol; j++) {
-                _lab[i][j] = elem;
-            }
-        }
-    } */
 }
              
 
@@ -123,9 +111,9 @@ laberint & laberint::operator=(const laberint & l) throw(error){
 //Destructora. 
 laberint::~laberint() throw(){
     
-    for(int i = 0; i<_nFil; i++) delete[] _lab[i]; //Eliminem les cel·les de la matriu dinàmica. 
+    for(int i = 1; i<=_nFil; i++) delete[] _lab[i]; //Eliminem les cel·les de la matriu dinàmica. 
 
-    delete [] _lab;         // Eliminem el punter. 
+    delete[] _lab;         // Eliminem el punter. 
 }
 
 // Retornen el número de files i columnes que té el laberint, respectivament.
@@ -204,24 +192,57 @@ void laberint::tanca_porta(paret p, const posicio & pos) throw(error){
 
 void laberint::print(std::ostream & os) const throw() {
 
-    for (int i = 0; i<_nFil; i++) { 
-        for (int j = 0; j<_nCol; j++) {
-            //os<<*(*(_lab+i)+j);
-            // Pot ser una solucio
-            if(not _lab[i][j].porta_oberta(paret::NORD)) os<<'***';
-            else os<<'* *';
+    os<<_nFil<< " "<<_nCol<<std::endl; 
+    for(nat i = 1; i<=_nFil; i++){
+
+        os<<"*";
+        for (nat j = 1; j<=_nCol; j++) { //Pintem parets verticals menys la última del sud
+
+            //os<<"prova: "<<_lab[i][j].porta_oberta(paret::NORD)<<std::endl;
+
+            if (_lab[i][j].porta_oberta(paret::NORD)){
+                 os<<" ";
+                 //os<<"nord estic oberta";
+                 }
+            else os<<"*";
+
+        os<<"*";
         }
-        os<<'\n';
-    }  
+
+        os<<std::endl;
+
+        for (nat j = 1; j <=_nCol; j++){ //Pintem partes horitzontals
+        
+            if (_lab[i][j].porta_oberta(paret::OEST)){
+                 os<<" ";
+                //os<<"oest estic oberta";
+            } 
+            else os<<"*";
+        os<<" ";
+
+        }
+        os<<"*";
+        os<<std::endl;    
+    
+        if(i == _nFil){
+            os<<"*";
+            for (nat j = 1; j <=_nCol; j++){ //Pintem  la darrera paret sud
+                os<<"*";
+            os<<"*";
+            }
+            os<<std::endl; 
+        }
+    }
+
 }
 
 bool laberint::portaExterior(paret p, posicio pos) {
 // Pre: p és una paret d'una cambra del laberint i pos es una posicio existent del laberint.
 // Post: Retorna true si p és una porta exterior, altrament false. 
 
-    if (pos.first == 0 and p == paret::NORD) return true;             // and p == p.NORD.               
+    if (pos.first == 1 and p == paret::NORD) return true;             // and p == p.NORD.               
     else if (pos.first == _nFil and p == paret::SUD) return true;    
-    else if (pos.second == 0 and p == paret::OEST) return true;      
+    else if (pos.second == 1 and p == paret::OEST) return true;      
     else if (pos.second == _nCol and p == paret::EST) return true;  
 
     return false; 
