@@ -37,6 +37,7 @@ laberint::laberint(std::istream & is) throw(error) {
     bool nord = false;
 
     while (getline(is,linia)) {
+
         if (primLinia) {
             util::split(linia,infoLaberint); //split elimina els espais
             _nFil = util::toint(infoLaberint[0]); //transformem en int. 
@@ -45,29 +46,33 @@ laberint::laberint(std::istream & is) throw(error) {
             primLinia = false;
         }
         else{
+
             // comprovem si estem mirant una linea corresponent a les portes verticals o horitzontals
             if (contLinia%2 != 0) nord = true; 
             else nord = false; 
             
             if (nord){
-                for (int j = 2; j <= _nCol; j+=2){ //incrementem de dos en dos.  
+                std::cout<<"nord: "<<nord<<std::endl;
+
+                for (int j = 0; j < _nCol; j++){ //incrementem de dos en dos.  
                     //cambra c
-                    p.first = contLinia;
+                    p.first = contLinia-1;
                     p.second = j; 
                     // creo que mejorable, las paredes por defecto ya estan cerradas. Entonces solo
                     // habria que tener en cuenta los espacios para abrirla.
-                    if (linia[j-1] == ' ') obre_porta(paret::NORD, p); //funcio obre_porta de laberint.
+                    if (linia[j] == ' ') obre_porta(paret::NORD, p); //funcio obre_porta de laberint.
                     //else obre_porta(paret::NORD,p);
                 }
             }else{ //tractem les parets est i oest
+            std::cout<<"nord: "<<nord<<std::endl;
                 for (int j = 3; j <= _nCol; j+=2){ 
                     p.first = contLinia;
                     p.second = j; 
                     if (linia[j-1] == ' ') obre_porta(paret::OEST,p); //funcio obre_porta de laberint.
                 }
             }
-            contLinia++;
         }
+        contLinia++;
     }
 }
              
