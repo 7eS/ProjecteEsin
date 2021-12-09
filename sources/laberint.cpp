@@ -14,7 +14,7 @@ laberint::laberint(nat num_fil, nat num_col) throw(error){
         _nCol = num_col;        // és correcte.
 
         _lab = new cambra*[_nFil];
-        for (int i=1; i <= _nFil; i++) {
+        for (int i=0; i < _nFil; i++) {
             _lab[i] = new cambra[_nCol];        // Treballem amb memòria dinàmica. Demanem memòria amb el new. Posteriorment farem deletes.    
 
         }
@@ -36,13 +36,12 @@ laberint::laberint(std::istream & is) throw(error) {
     posicio p;
     bool nord = false;
 
-
-
     while (getline(is,linia)) {
         if (primLinia) {
             util::split(linia,infoLaberint); //split elimina els espais
             _nFil = util::toint(infoLaberint[0]); //transformem en int. 
             _nCol = util::toint(infoLaberint[1]);
+            //std::cout<<"fil: "<<_nFil<<" col: "<<_nCol<<std::endl;
             primLinia = false;
         }
         else{
@@ -78,7 +77,7 @@ laberint::laberint(std::istream & is) throw(error) {
 //Constructora per còpia. 
 laberint::laberint(const laberint & l) throw(error){
 
-  /*  _nFil = l._nFil;
+ /*   _nFil = l._nFil;
     _nCol = l._nCol; 
     
     //opcio 1. Modificariem també l(?)
@@ -111,7 +110,7 @@ laberint & laberint::operator=(const laberint & l) throw(error){
 //Destructora. 
 laberint::~laberint() throw(){
     
-    for(int i = 1; i<=_nFil; i++) delete[] _lab[i]; //Eliminem les cel·les de la matriu dinàmica. 
+    for(int i = 0; i<_nFil; i++) delete[] _lab[i]; //Eliminem les cel·les de la matriu dinàmica. 
 
     delete[] _lab;         // Eliminem el punter. 
 }
@@ -193,15 +192,13 @@ void laberint::tanca_porta(paret p, const posicio & pos) throw(error){
 void laberint::print(std::ostream & os) const throw() {
 
     os<<_nFil<< " "<<_nCol<<std::endl; 
-    for(nat i = 1; i<=_nFil; i++){
+    for(nat i = 0; i<_nFil; i++){
 
         os<<"*";
-        for (nat j = 1; j<=_nCol; j++) { //Pintem parets verticals menys la última del sud
-
-            //os<<"prova: "<<_lab[i][j].porta_oberta(paret::NORD)<<std::endl;
+        for (nat j = 0; j<_nCol; j++) { //Pintem parets verticals menys la última del sud
 
             if (_lab[i][j].porta_oberta(paret::NORD)){
-                 os<<" ";
+                os<<" ";
                  //os<<"nord estic oberta";
                  }
             else os<<"*";
@@ -211,7 +208,7 @@ void laberint::print(std::ostream & os) const throw() {
 
         os<<std::endl;
 
-        for (nat j = 1; j <=_nCol; j++){ //Pintem partes horitzontals
+        for (nat j = 0; j <_nCol; j++){ //Pintem partes horitzontals
         
             if (_lab[i][j].porta_oberta(paret::OEST)){
                  os<<" ";
@@ -224,9 +221,9 @@ void laberint::print(std::ostream & os) const throw() {
         os<<"*";
         os<<std::endl;    
     
-        if(i == _nFil){
+        if(i == _nFil-1){
             os<<"*";
-            for (nat j = 1; j <=_nCol; j++){ //Pintem  la darrera paret sud
+            for (nat j = 0; j <_nCol; j++){ //Pintem  la darrera paret sud
                 os<<"*";
             os<<"*";
             }
@@ -240,9 +237,9 @@ bool laberint::portaExterior(paret p, posicio pos) {
 // Pre: p és una paret d'una cambra del laberint i pos es una posicio existent del laberint.
 // Post: Retorna true si p és una porta exterior, altrament false. 
 
-    if (pos.first == 1 and p == paret::NORD) return true;             // and p == p.NORD.               
+    if (pos.first == 0 and p == paret::NORD) return true;             // and p == p.NORD.               
     else if (pos.first == _nFil and p == paret::SUD) return true;    
-    else if (pos.second == 1 and p == paret::OEST) return true;      
+    else if (pos.second == 0 and p == paret::OEST) return true;      
     else if (pos.second == _nCol and p == paret::EST) return true;  
 
     return false; 
