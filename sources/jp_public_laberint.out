@@ -41,15 +41,15 @@
 #init lab5x2 laberint 5 2
 #print
 5 2
-*** *
+*****
 * * *
-*** *
+*****
 * * *
-*** *
+*****
 * * *
-*** *
+*****
 * * *
-*** *
+*****
 * * *
 *****
 ##5 2
@@ -68,7 +68,7 @@
 #print
 2 5
 ***********
-* * * *   *
+* * * * * *
 ***********
 * * * * * *
 ***********
@@ -106,3 +106,1180 @@ Error::laberint:30:El num de fils o cols es incorrecte.
 ##100
 #lab1x1 destroy
 #lab3x3 destroy
+#lab5x2 destroy
+#lab2x5 destroy
+#lab_gran destroy 
+###!
+###!
+###!------------------------------------------------------------------
+###2 Laberint: Constructora amb fitxers
+###!------------------------------------------------------------------
+###!
+###!------------------------------------------------------------------
+###2.1 Laberint sense cicles
+###!------------------------------------------------------------------
+###!
+#init lab_unic laberint ./laberint_3x3.txt
+fila: 3cols: 3
+linies: 3 liniaActual: 0
+columnes: 3 colActual: 0
+jlin: 1
+contLinia: 1
+j: 1
+linies: 3 liniaActual: 0
+columnes: 3 colActual: 1
+jlin: 3
+contLinia: 1
+j: 2
+jlin: 1
+contLinia: 2
+j: 1
+Error::laberint:32:No es pot obrir una porta a l'exterior.
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##*   * *
+##*** * *
+##* * * *
+##* * ***
+##* *   *
+##*******
+###!
+###!------------------------------------------------------------------
+###2.2 Laberint amb cicles
+###!------------------------------------------------------------------
+###!
+#init lab_cicle laberint ./laberint_3x3_cicles.txt
+fila: 3cols: 3
+linies: 3 liniaActual: 0
+columnes: 3 colActual: 0
+jlin: 1
+contLinia: 1
+j: 1
+linies: 3 liniaActual: 0
+columnes: 3 colActual: 1
+jlin: 3
+contLinia: 1
+j: 2
+jlin: 1
+contLinia: 2
+j: 1
+Error::laberint:32:No es pot obrir una porta a l'exterior.
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##*     *
+##*** * *
+##*   * *
+##* * * *
+##* *   *
+##*******
+###!
+###!------------------------------------------------------------------
+###2.3 Laberint sense portes
+###!------------------------------------------------------------------
+###!
+#init lab_sense_portes laberint ./laberint_3x3_senseportes.txt
+fila: 3cols: 3
+linies: 3 liniaActual: 0
+columnes: 3 colActual: 0
+jlin: 1
+contLinia: 1
+j: 1
+linies: 3 liniaActual: 0
+columnes: 3 colActual: 1
+jlin: 3
+contLinia: 1
+j: 2
+jlin: 1
+contLinia: 2
+j: 1
+Error::laberint:32:No es pot obrir una porta a l'exterior.
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##* * * *
+##*******
+##* * * *
+##*******
+##* * * *
+##*******
+###!
+###!------------------------------------------------------------------
+###2.4 Laberint gran
+###!------------------------------------------------------------------
+###!
+#init lab_gran laberint ./laberint_100x100.txt
+fila: 100cols: 100
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 0
+jlin: 1
+contLinia: 1
+j: 1
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 1
+jlin: 3
+contLinia: 1
+j: 2
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 2
+jlin: 5
+contLinia: 1
+j: 3
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 3
+jlin: 7
+contLinia: 1
+j: 4
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 4
+jlin: 9
+contLinia: 1
+j: 5
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 5
+jlin: 11
+contLinia: 1
+j: 6
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 6
+jlin: 13
+contLinia: 1
+j: 7
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 7
+jlin: 15
+contLinia: 1
+j: 8
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 8
+jlin: 17
+contLinia: 1
+j: 9
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 9
+jlin: 19
+contLinia: 1
+j: 10
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 10
+jlin: 21
+contLinia: 1
+j: 11
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 11
+jlin: 23
+contLinia: 1
+j: 12
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 12
+jlin: 25
+contLinia: 1
+j: 13
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 13
+jlin: 27
+contLinia: 1
+j: 14
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 14
+jlin: 29
+contLinia: 1
+j: 15
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 15
+jlin: 31
+contLinia: 1
+j: 16
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 16
+jlin: 33
+contLinia: 1
+j: 17
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 17
+jlin: 35
+contLinia: 1
+j: 18
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 18
+jlin: 37
+contLinia: 1
+j: 19
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 19
+jlin: 39
+contLinia: 1
+j: 20
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 20
+jlin: 41
+contLinia: 1
+j: 21
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 21
+jlin: 43
+contLinia: 1
+j: 22
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 22
+jlin: 45
+contLinia: 1
+j: 23
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 23
+jlin: 47
+contLinia: 1
+j: 24
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 24
+jlin: 49
+contLinia: 1
+j: 25
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 25
+jlin: 51
+contLinia: 1
+j: 26
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 26
+jlin: 53
+contLinia: 1
+j: 27
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 27
+jlin: 55
+contLinia: 1
+j: 28
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 28
+jlin: 57
+contLinia: 1
+j: 29
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 29
+jlin: 59
+contLinia: 1
+j: 30
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 30
+jlin: 61
+contLinia: 1
+j: 31
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 31
+jlin: 63
+contLinia: 1
+j: 32
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 32
+jlin: 65
+contLinia: 1
+j: 33
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 33
+jlin: 67
+contLinia: 1
+j: 34
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 34
+jlin: 69
+contLinia: 1
+j: 35
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 35
+jlin: 71
+contLinia: 1
+j: 36
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 36
+jlin: 73
+contLinia: 1
+j: 37
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 37
+jlin: 75
+contLinia: 1
+j: 38
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 38
+jlin: 77
+contLinia: 1
+j: 39
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 39
+jlin: 79
+contLinia: 1
+j: 40
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 40
+jlin: 81
+contLinia: 1
+j: 41
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 41
+jlin: 83
+contLinia: 1
+j: 42
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 42
+jlin: 85
+contLinia: 1
+j: 43
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 43
+jlin: 87
+contLinia: 1
+j: 44
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 44
+jlin: 89
+contLinia: 1
+j: 45
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 45
+jlin: 91
+contLinia: 1
+j: 46
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 46
+jlin: 93
+contLinia: 1
+j: 47
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 47
+jlin: 95
+contLinia: 1
+j: 48
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 48
+jlin: 97
+contLinia: 1
+j: 49
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 49
+jlin: 99
+contLinia: 1
+j: 50
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 50
+jlin: 101
+contLinia: 1
+j: 51
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 51
+jlin: 103
+contLinia: 1
+j: 52
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 52
+jlin: 105
+contLinia: 1
+j: 53
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 53
+jlin: 107
+contLinia: 1
+j: 54
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 54
+jlin: 109
+contLinia: 1
+j: 55
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 55
+jlin: 111
+contLinia: 1
+j: 56
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 56
+jlin: 113
+contLinia: 1
+j: 57
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 57
+jlin: 115
+contLinia: 1
+j: 58
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 58
+jlin: 117
+contLinia: 1
+j: 59
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 59
+jlin: 119
+contLinia: 1
+j: 60
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 60
+jlin: 121
+contLinia: 1
+j: 61
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 61
+jlin: 123
+contLinia: 1
+j: 62
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 62
+jlin: 125
+contLinia: 1
+j: 63
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 63
+jlin: 127
+contLinia: 1
+j: 64
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 64
+jlin: 129
+contLinia: 1
+j: 65
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 65
+jlin: 131
+contLinia: 1
+j: 66
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 66
+jlin: 133
+contLinia: 1
+j: 67
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 67
+jlin: 135
+contLinia: 1
+j: 68
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 68
+jlin: 137
+contLinia: 1
+j: 69
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 69
+jlin: 139
+contLinia: 1
+j: 70
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 70
+jlin: 141
+contLinia: 1
+j: 71
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 71
+jlin: 143
+contLinia: 1
+j: 72
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 72
+jlin: 145
+contLinia: 1
+j: 73
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 73
+jlin: 147
+contLinia: 1
+j: 74
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 74
+jlin: 149
+contLinia: 1
+j: 75
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 75
+jlin: 151
+contLinia: 1
+j: 76
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 76
+jlin: 153
+contLinia: 1
+j: 77
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 77
+jlin: 155
+contLinia: 1
+j: 78
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 78
+jlin: 157
+contLinia: 1
+j: 79
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 79
+jlin: 159
+contLinia: 1
+j: 80
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 80
+jlin: 161
+contLinia: 1
+j: 81
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 81
+jlin: 163
+contLinia: 1
+j: 82
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 82
+jlin: 165
+contLinia: 1
+j: 83
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 83
+jlin: 167
+contLinia: 1
+j: 84
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 84
+jlin: 169
+contLinia: 1
+j: 85
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 85
+jlin: 171
+contLinia: 1
+j: 86
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 86
+jlin: 173
+contLinia: 1
+j: 87
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 87
+jlin: 175
+contLinia: 1
+j: 88
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 88
+jlin: 177
+contLinia: 1
+j: 89
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 89
+jlin: 179
+contLinia: 1
+j: 90
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 90
+jlin: 181
+contLinia: 1
+j: 91
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 91
+jlin: 183
+contLinia: 1
+j: 92
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 92
+jlin: 185
+contLinia: 1
+j: 93
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 93
+jlin: 187
+contLinia: 1
+j: 94
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 94
+jlin: 189
+contLinia: 1
+j: 95
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 95
+jlin: 191
+contLinia: 1
+j: 96
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 96
+jlin: 193
+contLinia: 1
+j: 97
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 97
+jlin: 195
+contLinia: 1
+j: 98
+linies: 100 liniaActual: 0
+columnes: 100 colActual: 98
+jlin: 197
+contLinia: 1
+j: 99
+jlin: 1
+contLinia: 2
+j: 1
+Error::laberint:32:No es pot obrir una porta a l'exterior.
+#num_files
+Error::gen_driver:4:Objeto inexistente
+##100
+#num_columnes
+Error::gen_driver:4:Objeto inexistente
+##100
+###!
+###!
+###!------------------------------------------------------------------
+###3 Laberint: Constructora per copia, assignacio i destructora
+###!------------------------------------------------------------------
+###!
+###!------------------------------------------------------------------
+###3.1 Constructora per copia
+###!------------------------------------------------------------------
+###!
+#initcopy copia = lab_unic
+Error::gen_driver:4:Objeto inexistente
+#copia print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##*   * *
+##*** * *
+##* * * *
+##* * ***
+##* *   *
+##*******
+#copia destroy
+Error::gen_driver:4:Objeto inexistente
+#initcopy copia = lab_cicle
+Error::gen_driver:4:Objeto inexistente
+#copia print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##*     *
+##*** * *
+##*   * *
+##* * * *
+##* *   *
+##*******
+#copia destroy
+Error::gen_driver:4:Objeto inexistente
+#initcopy copia = lab_sense_portes
+Error::gen_driver:4:Objeto inexistente
+#copia print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##* * * *
+##*******
+##* * * *
+##*******
+##* * * *
+##*******
+#copia destroy
+Error::gen_driver:4:Objeto inexistente
+#initcopy copia = lab_gran
+Error::gen_driver:4:Objeto inexistente
+#copia num_files
+Error::gen_driver:4:Objeto inexistente
+##100
+#copia num_columnes
+Error::gen_driver:4:Objeto inexistente
+##100
+#copia destroy
+Error::gen_driver:4:Objeto inexistente
+###!
+###!------------------------------------------------------------------
+###3.2 Copia
+###!------------------------------------------------------------------
+###!
+#init copia laberint 1 1
+#copia = lab_unic
+Error::gen_driver:3:Tipo argumentos incorrecto
+#copia print
+1 1
+***
+* *
+***
+##3 3
+##*******
+##*   * *
+##*** * *
+##* * * *
+##* * ***
+##* *   *
+##*******
+#copia = lab_cicle
+Error::gen_driver:3:Tipo argumentos incorrecto
+#copia print
+1 1
+***
+* *
+***
+##3 3
+##*******
+##*     *
+##*** * *
+##*   * *
+##* * * *
+##* *   *
+##*******
+#copia = lab_gran
+Error::gen_driver:3:Tipo argumentos incorrecto
+#copia num_files
+1
+##100
+#copia num_columnes
+1
+##100
+#copia = lab_sense_portes
+Error::gen_driver:3:Tipo argumentos incorrecto
+#copia print
+1 1
+***
+* *
+***
+##3 3
+##*******
+##* * * *
+##*******
+##* * * *
+##*******
+##* * * *
+##*******
+###!
+###!------------------------------------------------------------------
+###3.3 Destructora
+###!------------------------------------------------------------------
+###!
+#copia destroy
+#lab_unic destroy
+Error::gen_driver:4:Objeto inexistente
+#lab_cicle destroy
+Error::gen_driver:4:Objeto inexistente
+#lab_sense_portes destroy
+Error::gen_driver:4:Objeto inexistente
+#lab_gran destroy
+Error::gen_driver:4:Objeto inexistente
+###!
+###!
+###!------------------------------------------------------------------
+###4 Laberint: consultores de files i columnes
+###!------------------------------------------------------------------
+###!
+#init lab1 laberint ./laberint_7x15.txt
+fila: 7cols: 15
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 0
+jlin: 1
+contLinia: 1
+j: 1
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 1
+jlin: 3
+contLinia: 1
+j: 2
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 2
+jlin: 5
+contLinia: 1
+j: 3
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 3
+jlin: 7
+contLinia: 1
+j: 4
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 4
+jlin: 9
+contLinia: 1
+j: 5
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 5
+jlin: 11
+contLinia: 1
+j: 6
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 6
+jlin: 13
+contLinia: 1
+j: 7
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 7
+jlin: 15
+contLinia: 1
+j: 8
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 8
+jlin: 17
+contLinia: 1
+j: 9
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 9
+jlin: 19
+contLinia: 1
+j: 10
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 10
+jlin: 21
+contLinia: 1
+j: 11
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 11
+jlin: 23
+contLinia: 1
+j: 12
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 12
+jlin: 25
+contLinia: 1
+j: 13
+linies: 7 liniaActual: 0
+columnes: 15 colActual: 13
+jlin: 27
+contLinia: 1
+j: 14
+jlin: 1
+contLinia: 2
+j: 1
+Error::laberint:32:No es pot obrir una porta a l'exterior.
+#init lab2 laberint ./laberint_12x3.txt
+fila: 12cols: 3
+linies: 12 liniaActual: 0
+columnes: 3 colActual: 0
+jlin: 1
+contLinia: 1
+j: 1
+linies: 12 liniaActual: 0
+columnes: 3 colActual: 1
+jlin: 3
+contLinia: 1
+j: 2
+jlin: 1
+contLinia: 2
+j: 1
+Error::laberint:32:No es pot obrir una porta a l'exterior.
+#init lab3 laberint 1 1
+#init lab4 laberint 20 2
+#init lab5 laberint ./laberint_3x3_senseportes.txt
+fila: 3cols: 3
+linies: 3 liniaActual: 0
+columnes: 3 colActual: 0
+jlin: 1
+contLinia: 1
+j: 1
+linies: 3 liniaActual: 0
+columnes: 3 colActual: 1
+jlin: 3
+contLinia: 1
+j: 2
+jlin: 1
+contLinia: 2
+j: 1
+Error::laberint:32:No es pot obrir una porta a l'exterior.
+###!
+###!
+#lab1 num_columnes 
+Error::gen_driver:4:Objeto inexistente
+##15
+#lab1 num_files
+Error::gen_driver:4:Objeto inexistente
+##7
+#lab2 num_columnes
+Error::gen_driver:4:Objeto inexistente
+##3
+#lab2 num_files
+Error::gen_driver:4:Objeto inexistente
+##12
+#lab3 num_columnes
+1
+##1
+#lab3 num_files
+1
+##1
+#lab4 num_columnes
+2
+##2
+#lab4 num_files
+20
+##20
+#lab5 num_columnes
+Error::gen_driver:4:Objeto inexistente
+##3
+#lab5 num_files
+Error::gen_driver:4:Objeto inexistente
+##3
+###!
+###!
+###!------------------------------------------------------------------
+###5 Laberint: obre_porta
+###!------------------------------------------------------------------
+###!
+###!------------------------------------------------------------------
+###5.1 Obertura erronia
+###!------------------------------------------------------------------
+###!
+#lab1 obre_porta_l Norte 2 2
+Error::gen_driver:4:Objeto inexistente
+##Error::cambra:20:La paret no existeix.
+#lab1 obre_porta_l N 0 0
+Error::gen_driver:4:Objeto inexistente
+##Error::laberint:31:La posicio no existeix.
+#lab1 obre_porta_l S 7 16
+Error::gen_driver:4:Objeto inexistente
+##Error::laberint:31:La posicio no existeix.
+#lab1 obre_porta_l S 8 15
+Error::gen_driver:4:Objeto inexistente
+##Error::laberint:31:La posicio no existeix.
+#lab3 obre_porta_l E 1 2
+Error::laberint:31:La posicio no existeix.
+##Error::laberint:31:La posicio no existeix.
+###!
+#lab1 obre_porta_l N 1 1
+Error::gen_driver:4:Objeto inexistente
+##Error::laberint:32:No es pot obrir una porta a l'exterior.
+#lab1 obre_porta_l N 1 8
+Error::gen_driver:4:Objeto inexistente
+##Error::laberint:32:No es pot obrir una porta a l'exterior.
+#lab1 obre_porta_l S 7 14
+Error::gen_driver:4:Objeto inexistente
+##Error::laberint:32:No es pot obrir una porta a l'exterior.
+#lab1 obre_porta_l O 3 1
+Error::gen_driver:4:Objeto inexistente
+##Error::laberint:32:No es pot obrir una porta a l'exterior.
+#lab1 obre_porta_l E 2 15
+Error::gen_driver:4:Objeto inexistente
+##Error::laberint:32:No es pot obrir una porta a l'exterior.
+###!
+#lab3 obre_porta_l N 1 1
+Error::laberint:31:La posicio no existeix.
+##Error::laberint:32:No es pot obrir una porta a l'exterior.
+#lab3 obre_porta_l S 1 1
+Error::laberint:31:La posicio no existeix.
+##Error::laberint:32:No es pot obrir una porta a l'exterior.
+#lab3 obre_porta_l E 1 1
+Error::laberint:31:La posicio no existeix.
+##Error::laberint:32:No es pot obrir una porta a l'exterior.
+#lab3 obre_porta_l O 1 1
+Error::laberint:31:La posicio no existeix.
+##Error::laberint:32:No es pot obrir una porta a l'exterior.
+###!
+###!------------------------------------------------------------------
+###5.2 Obertura correcta
+###!------------------------------------------------------------------
+###!
+###! les seguents operacions es realitzen amb lab5 (3x3)
+#sel_curr_obj lab5
+#obre_porta_l S 1 1
+Error::gen_driver:4:Objeto inexistente
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##* * * *
+##* *****
+##* * * *
+##*******
+##* * * *
+##*******
+#obre_porta_l S 1 1
+Error::gen_driver:4:Objeto inexistente
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##* * * *
+##* *****
+##* * * *
+##*******
+##* * * *
+##*******
+#obre_porta_l N 2 1
+Error::gen_driver:4:Objeto inexistente
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##* * * *
+##* *****
+##* * * *
+##*******
+##* * * *
+##*******
+#obre_porta_l O 2 2
+Error::gen_driver:4:Objeto inexistente
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##* * * *
+##* *****
+##*   * *
+##*******
+##* * * *
+##*******
+#obre_porta_l O 3 3
+Error::gen_driver:4:Objeto inexistente
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##* * * *
+##* *****
+##*   * *
+##*******
+##* *   *
+##*******
+#obre_porta_l E 3 1
+Error::gen_driver:4:Objeto inexistente
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##* * * *
+##* *****
+##*   * *
+##*******
+##*     *
+##*******
+###!
+###!
+###!------------------------------------------------------------------
+###6 Laberint: operator() 
+###!------------------------------------------------------------------
+###!
+###!------------------------------------------------------------------
+###6.1 Consultes correctes
+###!------------------------------------------------------------------
+###!
+#obt_cambra 1 1
+Error::gen_driver:4:Objeto inexistente
+##***
+##* *
+##* *
+#obt_cambra 3 3
+Error::gen_driver:4:Objeto inexistente
+##***
+##  *
+##***
+#obt_cambra 2 1
+Error::gen_driver:4:Objeto inexistente
+##* *
+##*  
+##***
+#obt_cambra 1 2
+Error::gen_driver:4:Objeto inexistente
+##***
+##* *
+##***
+#obt_cambra 2 2
+Error::gen_driver:4:Objeto inexistente
+##***
+##  *
+##***
+###!
+###!------------------------------------------------------------------
+###6.2 Consultes incorrectes
+###!------------------------------------------------------------------
+###!
+#lab3 obt_cambra 4 1
+Error::laberint:31:La posicio no existeix.
+##Error::laberint:31:La posicio no existeix.
+#lab5 obt_cambra 0 2
+Error::gen_driver:4:Objeto inexistente
+##Error::laberint:31:La posicio no existeix.
+###!
+###!
+###!------------------------------------------------------------------
+###7 Laberint:tanca_porta
+###!------------------------------------------------------------------
+###!
+###!------------------------------------------------------------------
+###7.1 Tancaments correctes
+###!------------------------------------------------------------------
+###!
+#sel_curr_obj lab5
+#tanca_porta_l N 1 1
+Error::gen_driver:4:Objeto inexistente
+#obt_cambra 1 1
+Error::gen_driver:4:Objeto inexistente
+##***
+##* *
+##* *
+#tanca_porta_l S 1 1
+Error::gen_driver:4:Objeto inexistente
+#obt_cambra 1 1
+Error::gen_driver:4:Objeto inexistente
+##***
+##* *
+##***
+#obt_cambra 2 1
+Error::gen_driver:4:Objeto inexistente
+##***
+##*  
+##***
+#tanca_porta_l O 3 3
+Error::gen_driver:4:Objeto inexistente
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##* * * *
+##*******
+##*   * *
+##*******
+##*   * *
+##*******
+#tanca_porta_l E 3 3
+Error::gen_driver:4:Objeto inexistente
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##* * * *
+##*******
+##*   * *
+##*******
+##*   * *
+##*******
+#tanca_porta_l E 2 1
+Error::gen_driver:4:Objeto inexistente
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##* * * *
+##*******
+##* * * *
+##*******
+##*   * *
+##*******
+#tanca_porta_l S 2 2
+Error::gen_driver:4:Objeto inexistente
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##* * * *
+##*******
+##* * * *
+##*******
+##*   * *
+##*******
+#tanca_porta_l S 3 2
+Error::gen_driver:4:Objeto inexistente
+#print
+Error::gen_driver:4:Objeto inexistente
+##3 3
+##*******
+##* * * *
+##*******
+##* * * *
+##*******
+##*   * *
+##*******
+###!
+#lab1 destroy
+Error::gen_driver:4:Objeto inexistente
+#lab2 destroy
+Error::gen_driver:4:Objeto inexistente
+#lab3 destroy
+#lab4 destroy
+#lab5 destroy
+Error::gen_driver:4:Objeto inexistente
+###!
+###! Fi del joc de proves de laberint
+###! 
