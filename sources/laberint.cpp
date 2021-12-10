@@ -54,8 +54,8 @@ laberint::laberint(std::istream & is) throw(error) {
             if (nord){
                 std::cout<<"nord: "<<nord<<std::endl;
 
-                for (int j = 0; j < _nCol; j++){ //incrementem de dos en dos.  
-                    //cambra c
+                for (int j = 1; j < _nCol; j+=2){  
+                    
                     p.first = contLinia-1;
                     p.second = j; 
                     // creo que mejorable, las paredes por defecto ya estan cerradas. Entonces solo
@@ -65,10 +65,10 @@ laberint::laberint(std::istream & is) throw(error) {
                 }
             }else{ //tractem les parets est i oest
             std::cout<<"nord: "<<nord<<std::endl;
-                for (int j = 3; j <= _nCol; j+=2){ 
-                    p.first = contLinia;
+                for (int j = 1; j <= _nCol; j+=2){ 
+                    p.first = contLinia-1;
                     p.second = j; 
-                    if (linia[j-1] == ' ') obre_porta(paret::OEST,p); //funcio obre_porta de laberint.
+                    if (linia[j] == ' ') obre_porta(paret::OEST,p); //funcio obre_porta de laberint.
                 }
             }
         }
@@ -141,8 +141,8 @@ cambra laberint::operator()(const posicio & pos) const throw(error){
         throw error (PosicioInexistent);
     } 
     else {
-        int i = pos.first;
-        int j = pos.second;
+        int i = pos.first-1;
+        int j = pos.second-1;
 
         return _lab[i][j];
     }
@@ -160,8 +160,8 @@ void laberint::obre_porta(paret p, const posicio & pos) throw(error) {
     else if (portaExterior(p, pos)) throw error (PortaExterior);                       // comprovar si la paret està al perímetre del laberint. 
 
     else{
-        int i = pos.first;
-        int j = pos.second;
+        int i = pos.first-1;
+        int j = pos.second-1;
         _lab[i][j].obre_porta(p);
 
         if (p == paret::NORD) _lab[i][j+1].obre_porta(p.SUD);    // and p == p.NORD.
@@ -181,8 +181,8 @@ void laberint::tanca_porta(paret p, const posicio & pos) throw(error){
     }
     
     else{
-        int i = pos.first;
-        int j = pos.second;
+        int i = pos.first-1;
+        int j = pos.second-1;
         _lab[i][j].tanca_porta(p);
 
         if (p == paret::NORD) _lab[i][j+1].tanca_porta(paret::SUD);       // and p == p.NORD.
@@ -242,10 +242,11 @@ bool laberint::portaExterior(paret p, posicio pos) {
 // Pre: p és una paret d'una cambra del laberint i pos es una posicio existent del laberint.
 // Post: Retorna true si p és una porta exterior, altrament false. 
 
-    if (pos.first == 0 and p == paret::NORD) return true;             // and p == p.NORD.               
-    else if (pos.first == _nFil and p == paret::SUD) return true;    
-    else if (pos.second == 0 and p == paret::OEST) return true;      
-    else if (pos.second == _nCol and p == paret::EST) return true;  
+    // pos.first/second -1 es provisional, cal veure q tal funciona més endavant
+    if (pos.first-1 == 0 and p == paret::NORD) return true;             // and p == p.NORD.               
+    else if (pos.first-1 == _nFil and p == paret::SUD) return true;    
+    else if (pos.second-1 == 0 and p == paret::OEST) return true;      
+    else if (pos.second-1 == _nCol and p == paret::EST) return true;  
 
     return false; 
 }
