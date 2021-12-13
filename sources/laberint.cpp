@@ -28,10 +28,8 @@ laberint::laberint(nat num_fil, nat num_col) throw(error) {
 
 laberint::laberint(std::istream &is) throw(error) {
     string linia;
-    bool primLinia =
-        true;  // la primera linia correspon al numero de fils i cols.
+    bool primLinia = true;  // la primera linia correspon al numero de fils i cols.
     int contLinia = 0;
-    int altura = 0;
     util::vector<string> infoLaberint;
 
     posicio p;
@@ -47,18 +45,16 @@ laberint::laberint(std::istream &is) throw(error) {
             _lab = new cambra *[_nFil];
 
             for (int i = 0; i < _nFil; i++) {
-                _lab[i] =
-                    new cambra[_nCol];  // Treballem amb memòria dstinàmica.
+                _lab[i] = new cambra[_nCol];  // Treballem amb memòria dstinàmica.
                                         // Demanem memòria amb el new.
                                         // Posteriorment farem deletes.
             }
         }
-        if (not primLinia and
-            contLinia < _nFil * 2)  // Obtenim les linies del laberint
+        if (not primLinia and contLinia-1 < _nFil*2)  // Obtenim les linies del laberint.
         {
             // comprovem si estem mirant una linea corresponent a les portes
             // verticals o horitzontals
-            if (contLinia % 2 == 0)
+            if (contLinia % 2 != 0)
                 nord = true;
             else
                 nord = false;
@@ -67,21 +63,20 @@ laberint::laberint(std::istream &is) throw(error) {
                 int jlin;
 
                 if (nord) {
-                    jlin = j * 2 +
-                           1;  // obtenim la pos de la porta quan mirem el nord.
+                    jlin = j * 2 + 1;   // obtenim la pos de la porta quan mirem el nord.
                 } else {
-                    jlin = j * 2;  // obtenim la pos de la porta quan mirem
-                                   // oest.
+                    jlin = j * 2;       // obtenim la pos de la porta quan mirem oest.
                 }
 
                 // La funcio obre porta ja s'encarrega de restar una unitat a la
                 // coordenada
-                int i = contLinia / 2;
+                int i = (contLinia-1)/2;
                 p.first = i + 1;
                 p.second = j + 1;  // la primera cambra és la pos 1,1.
                 // if(contLinia < 5)
 
                 if (linia[jlin] == ' ') {
+                    //std::cout<<"contLinia: "<<contLinia<<std::endl;
                     if (nord) {
                         obre_porta(paret::NORD, p);  // funcio obre_porta de laberint.
                         // no pasa el obre porta
@@ -90,10 +85,10 @@ laberint::laberint(std::istream &is) throw(error) {
                     }
                 }
             }
-            if (primLinia) primLinia = false;
-            altura++;
         }
         contLinia++;
+        if (primLinia) primLinia = false;
+
     }
 }
 
@@ -110,7 +105,6 @@ laberint::laberint(const laberint &l) throw(error) {
     for (int i = 0; i < _nFil; i++) {
         _lab[i] = new cambra[_nCol];
     }
-
     for (int i = 0; i < _nFil; i++) { 
         for (int j = 0; j < _nCol; j++) {
             _lab[i][j] = l._lab[i][j];
@@ -126,21 +120,18 @@ laberint &laberint::operator=(const laberint &l) throw(error) {
             for (int i = 0; i < _nFil; i++)
                 delete[] _lab[i];  // Eliminem les cel·les de la matriu
                                    // dinàmica.
-
+            
             delete[] _lab;  // Eliminem el punter.
-
             _nFil = l._nFil;
             _nCol = l._nCol;
-
+            
             _lab = new cambra *[_nFil];
 
             for (int i = 0; i < _nFil; i++) {
                 _lab[i] = new cambra[_nCol];
             }
         }
-        for (int i = 0; i < _nFil;
-             i++) {  // REVISAR AQUESTA FUNCIÓ. segurament els jocs de prova no
-                     // sortin bé. Fer servir sentinella(?)
+        for (int i = 0; i < _nFil; i++) { 
             for (int j = 0; j < _nCol; j++) {
                 _lab[i][j] = l._lab[i][j];
             }
@@ -158,9 +149,13 @@ laberint::~laberint() throw() {
 }
 
 // Retornen el número de files i columnes que té el laberint, respectivament.
-nat laberint::num_files() const throw() { return _nFil; }
+nat laberint::num_files() const throw() { 
+    return _nFil; 
+    }
 
-nat laberint::num_columnes() const throw() { return _nCol; }
+nat laberint::num_columnes() const throw() { 
+    return _nCol;
+    }
 
 // Retorna la cambra situada a la posició especificada per pos.
 // Aquest mètode permet utilitzar el laberint d'aquesta manera:
@@ -170,10 +165,9 @@ nat laberint::num_columnes() const throw() { return _nCol; }
 // Es produeix un error si la posició donada no existeix al laberint.
 
 cambra laberint::operator()(const posicio &pos) const throw(error) {
-    if (pos.first > _nFil or pos.second > _nCol or pos.first < 1 or
-        pos.second <
-            1) {  // Al començar des de 0 li hem de restar 1, per això es >=.
+    if (pos.first > _nFil or pos.second > _nCol or pos.first < 1 or pos.second < 1) {  // Al començar des de 0 li hem de restar 1, per això es >=.
         throw error(PosicioInexistent);
+
     } else {
         int i = pos.first - 1;
         int j = pos.second - 1;
@@ -188,13 +182,11 @@ cambra laberint::operator()(const posicio &pos) const throw(error) {
 // la direcció indicada perquè dóna a l'exterior.
 
 void laberint::obre_porta(paret p, const posicio &pos) throw(error) {
-    if (pos.first > _nFil or pos.second > _nCol or pos.first < 1 or
-        pos.second <
-            1) {  // Al començar des de 0 li hem de restar 1, per això es >=.
-
+    if (pos.first > _nFil or pos.second > _nCol or pos.first < 1 or pos.second < 1) {  // Al començar des de 0 li hem de restar 1, per això es >=.
         throw error(PosicioInexistent);
+
     } else if (portaExterior(p, pos)) {
-        throw error(PortaExterior);  // comprovar si la paret està al perímetre
+        throw error(PortaExterior);  // comprova si la paret està al perímetre
                                      // del laberint.
     } else {
         int i = pos.first - 1;
@@ -217,9 +209,7 @@ void laberint::obre_porta(paret p, const posicio &pos) throw(error) {
 // Es produeix un error si la posició no existeix.
 
 void laberint::tanca_porta(paret p, const posicio &pos) throw(error) {
-    if (pos.first > _nFil or pos.second > _nCol or pos.first < 1 or
-        pos.second <
-            1) {  // Al començar des de 0 li hem de restar 1, per això es >=.
+    if (pos.first > _nFil or pos.second > _nCol or pos.first < 1 or pos.second < 1) {  // Al començar des de 0 li hem de restar 1, per això es >=.
         throw error(PosicioInexistent);
     } else {
         int i = pos.first - 1;
@@ -246,8 +236,7 @@ void laberint::print(std::ostream &os) const throw() {
     os << _nFil << " " << _nCol << std::endl;
     for (nat i = 0; i < _nFil; i++) {
         os << "*";
-        for (nat j = 0; j < _nCol;
-             j++) {  // Pintem parets verticals menys la última del sud
+        for (nat j = 0; j < _nCol; j++) {  // Pintem parets verticals menys la última del sud
 
             if (_lab[i][j].porta_oberta(paret::NORD)) {
                 os << " ";
