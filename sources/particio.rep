@@ -1,1 +1,19 @@
 //REPRESENTACIÓ DE LA CLASSE PARTICIÓ. 
+
+// Primera idea de la partició.
+struct node{
+    T _clau;
+    node *_fesq;
+    node *_fdret;
+    node *_repre;
+    int _quants;   //Nodes que té per sota, també podem fer per nivells.
+}
+
+node *_arrel;   //Farà de punter arrel
+nat _lim;      // Comptador dels elements que té la partició. 
+
+
+int find_repre(const T & x); 
+//Pre: x és un element que pertany a un grup de la partició. 
+//Post: retorna l'element representant del grup al qual pertany x.  
+
