@@ -4,33 +4,21 @@
   template <typename T>
   particio<T>::particio(nat n) throw(error) {
       
-
-      // falta crear el arbol a null
-      
-      _Part = new nat[n]; //demanem espai per n elements de tipus nat. 
-      //num = n;
-      // Pregunta Jordi, s'inicialitza a 0 o a n? Per què?
-      _cont = 0; 
-      for (nat i=0; i<n; i++) {
-        _Part[i] = i; //Cada element és el seu propi representant. 
+    //Creem el node arrel de l'avl. 
+    _arrel->_fesq;
+    _arrel->_fdret;
+    _arrel->_repre = _arrel;
+    _arrel->_quants = 1;
+    // Num nodes màxim que pot tenir
+    _lim = n;
       }
   }
 
   // Constructora per còpia, assignació i destructora.
   template <typename T>
   particio<T>::particio(const particio & p) throw(error) {
-
-    n = p._num; 
-
-    _Part = new nat *[n];
-
-    for (int i = 0; i < n; i++) {
-        _Part[i] = new nat[n];
-    }
-
-    for (int i = 0; i < _nFil; i++) { 
-            _Part[i] = p._Part[i];
-        }
+    //Mirar apunts
+    
     }
     
   
@@ -41,12 +29,8 @@
   
   template <typename T>
   particio<T>::~particio() throw() {
-
-    for (int i = 0; i < n; i++)
-        delete[] _Part[i];        // Eliminem les caselles del vector. 
-        
-    delete[] _Part;               // Eliminem el punter.
-}
+    
+  }
   
 
   // Afegeix un nou element a la particio. Aquest nou element formarà ell sol
@@ -92,22 +76,19 @@
   template <typename T>
   nat particio<T>::num_elements() const throw() {
 
-      return _cont; 
+      return _arrel->_quants;
   }
 
   // Retorna el número màxim d'elements que pot tenir la particio.
   template <typename T>
   nat particio<T>::num_maxim() const throw() {
 
-      return _Part.size();
+      return _lim;
   }
 
   int find_repre(const T & x) {
 //Pre: x és un element que pertany a un grup de la partició. 
 //Post: retorna l'element representant del grup al qual pertany x.  
-
-
-
 
   }
 

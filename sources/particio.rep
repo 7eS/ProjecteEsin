@@ -5,8 +5,9 @@ struct node{
     T _clau;
     node *_fesq;
     node *_fdret;
-    node *_repre;
-    int _quants;   //Nodes que té per sota, també podem fer per nivells.
+    node *_repre; // Aquest pot estar lligat al pare o més endavant als avis.
+    int _quants; //Nodes que té per sota, també podem fer per nivells.
+    //int _qGrup;  // Quants nodes té el grup, 
 }
 
 node *_arrel;   //Farà de punter arrel

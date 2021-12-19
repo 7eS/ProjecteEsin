@@ -6,6 +6,7 @@
 // mida indicada. Totes les cambres del laberint no tenen cap porta. Es produeix
 // un error si el número de files o de columnes del laberint és 0.
 
+//Cost O(num_fil*num_col) ?
 laberint::laberint(nat num_fil, nat num_col) throw(error) {
     if (num_fil == 0 or num_col == 0)
         throw error(FilsColsIncorrecte);
@@ -26,6 +27,7 @@ laberint::laberint(nat num_fil, nat num_col) throw(error) {
 // El format de l'istream seguirà l'exposat a l'apartat 2.3. Es presuposa que el
 // laberint és correcte.
 
+//Cost O(num_fil*num_col) ?
 laberint::laberint(std::istream &is) throw(error) {
     string linia;
     bool primLinia = true;  // la primera linia correspon al numero de fils i cols.
@@ -95,6 +97,7 @@ laberint::laberint(std::istream &is) throw(error) {
 // Constructora per còpia, assignació i destructora.
 
 // Constructora per còpia.
+//Cost O(num_fil*num_col) ?
 laberint::laberint(const laberint &l) throw(error) {
     
     _nFil = l._nFil;
@@ -113,8 +116,14 @@ laberint::laberint(const laberint &l) throw(error) {
 }
 
 // Assignació.
+//Cost O(num_fil*num_col) ?
 laberint &laberint::operator=(const laberint &l) throw(error) {
     if (this != &l) {
+        /*
+        Es poden reduit linies. Fer abans copia que destructora, per evitar problemes de memoria.
+        Fer servir truc Jordi de crear un aux, copiarho tot amb constructor copia i despres pasar 
+        els atributs al implicit. ens estalviem linies.
+        */
         if (_nFil != l._nFil and _nCol != l._nCol) {
             // Si són de mides diferents els destruim.
             for (int i = 0; i < _nFil; i++)
