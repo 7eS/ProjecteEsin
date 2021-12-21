@@ -5,31 +5,33 @@ struct node{
     T _clau;
     node *_fesq;
     node *_fdret;
-    node *_repre; // Aquest pot estar lligat al pare o més endavant als avis.
-    nat _quantsFills; //Nodes que té per sota, també podem fer per nivells.
+    node *_repre;       // Aquest pot estar lligat al pare o més endavant als avis.
+    nat _numElemConjunt; // Indica el numero d'elementes que té un conjunt
 };
 
-node *_arrel;   //Farà de punter arrel
-nat _lim;      // Comptador dels elements que té la partició. 
+node *_arrel;           // Farà de punter arrel.
+nat _lim;               // Comptador dels elements que pot tenir com a maxim la partició. 
 nat _quantsGrups;
+nat _quantsElements;   // Total elements de la partició
 
 
-T find_repre(const T &x); 
+T find_repre(const node *p)const; 
 //Pre: x és un element que pertany a un grup de la partició. 
 //Post: retorna l'element representant del grup al qual pertany x.  
-
 
 node* afegir(node *p, const T &x) throw(error);
 //Pre: x és l'element a afegir a la partició, pn és el punter de node que recorre la partició.
 //Post: Si l'element x no es trobava a la particó llavors s'afegeix. Altrament, no fa res.
 
 static node* copia_nodes(node *m);
-//Pre: Cert
-//Post: Retorna una particio amb els nodes copiats de m
+//Pre: Cert.
+//Post: Retorna una particio amb els nodes copiats de m.
 
 static node* esborra_nodes(node *pd);
-//Pre: Cert
-//Post: Elimina tots els nodes de la partició
+//Pre: Cert.
+//Post: Elimina tots els nodes de la partició.
 
-node* hi_es(node *p, const T &x);
+node* hi_es(const T &x)const throw(error);
+//Pre: x és l'element a cercar a la partició, p és el punter de node que recorre la partició. 
+//Post: Retorna true si l'element x es troba a la partició, altrament false. 
 
