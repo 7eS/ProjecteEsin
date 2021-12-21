@@ -120,7 +120,7 @@ laberint::laberint(const laberint &l) throw(error) {
 laberint &laberint::operator=(const laberint &l) throw(error) {
     if (this != &l) {
         /*
-        Es poden reduit linies. Fer abans copia que destructora, per evitar problemes de memoria.
+        Es poden reduir linies. Fer abans copia que destructora, per evitar problemes de memoria.
         Fer servir truc Jordi de crear un aux, copiarho tot amb constructor copia i despres pasar 
         els atributs al implicit. ens estalviem linies.
         */
