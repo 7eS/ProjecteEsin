@@ -61,23 +61,23 @@ bool cambra::porta_oberta(paret p) const throw(){						//AQUESTA FUNCIO ESTABA M
 
 void cambra::obre_porta(paret p) throw(error){						//AQUESTA FUNCIO ESTABA MALAMENT. ARA ESTÀ ARREGLADA.
 
-    if(p == paret::NO_DIR)throw error (ParetInexistent);
+    if (p == paret::NO_DIR)throw error (ParetInexistent);
     
-    else if(not porta_oberta(p)){
+    else if (not porta_oberta(p)) {
 
-        if(p == paret::NORD){			//FUNCIO ARREGLADA BY PATRICIA ,1 DE DECEMBRE. 
+        if (p == paret::NORD) {			//FUNCIO ARREGLADA BY PATRICIA ,1 DE DECEMBRE. 
             _portaN = true;
             _quantesPO++;
         }
-        else if(p == paret::SUD){
+        else if (p == paret::SUD) {
             _portaS = true;
             _quantesPO++;
         }
-        else if(p == paret::EST){
+        else if (p == paret::EST) {
             _portaE = true;
             _quantesPO++;
         }
-        else if(p == paret::OEST){
+        else if (p == paret::OEST) {
             _portaO = true;
             _quantesPO++;
         }
@@ -86,25 +86,25 @@ void cambra::obre_porta(paret p) throw(error){						//AQUESTA FUNCIO ESTABA MALA
 
 // Tanca la porta a la paret indicada. Si la porta ja estava tancada no fa res. Es produeix un error si la paret és NO_DIR.
 
-void cambra::tanca_porta(paret p) throw(error){				//AQUESTA FUNCIO ESTABA MALAMENT. ARA ESTÀ ARREGLADA.
+void cambra::tanca_porta(paret p) throw(error) {				//AQUESTA FUNCIO ESTABA MALAMENT. ARA ESTÀ ARREGLADA.
 
-    if(p == paret::NO_DIR)throw error (ParetInexistent);
+    if (p == paret::NO_DIR) throw error (ParetInexistent);
     
-    else if(porta_oberta(p)){
+    else if (porta_oberta(p)) {
 
-        if(p == paret::NORD){				//FUNCIO ARREGLADA BY PATRICIA ,1 DE DECEMBRE. 
+        if (p == paret::NORD) {				//FUNCIO ARREGLADA BY PATRICIA ,1 DE DECEMBRE. 
             _portaN = false;
             _quantesPO--;
         }
-        else if(p == paret::SUD){
+        else if (p == paret::SUD) {
             _portaS = false;
             _quantesPO--;
         }
-        else if(p == paret::EST){
+        else if (p == paret::EST) {
             _portaE = false;
             _quantesPO--;
         }
-        else if(p == paret::OEST){
+        else if (p == paret::OEST) {
             _portaO = false;
             _quantesPO--;
         }
@@ -113,15 +113,15 @@ void cambra::tanca_porta(paret p) throw(error){				//AQUESTA FUNCIO ESTABA MALAM
 
 // Igualtat i desigualtat entre cambres. Dues cambres es consideren iguals si tenen les mateixes portes obertes a les mateixes parets.
 
-bool cambra::operator==(const cambra & c) const throw(){
+bool cambra::operator==(const cambra & c) const throw() {
     bool iguals = true;
 
-    if(_quantesPO != c._quantesPO) iguals = false;
+    if (_quantesPO != c._quantesPO) iguals = false;
     
-    else{
-        if(_portaN != c._portaN) iguals = false;
-        else if(_portaS != c._portaS) iguals = false;
-        else if(_portaE != c._portaE) iguals = false;
+    else {
+        if (_portaN != c._portaN) iguals = false;
+        else if (_portaS != c._portaS) iguals = false;
+        else if (_portaE != c._portaE) iguals = false;
         else if (_portaO != c._portaO) iguals = false;
     }
 
@@ -129,28 +129,27 @@ bool cambra::operator==(const cambra & c) const throw(){
 }
 
 
-bool cambra::operator!=(const cambra & c) const throw(){
+bool cambra::operator!=(const cambra & c) const throw() {
     return not (*this==c);
 }
 
 // Operador "menor que" entre cambres. Una cambra és més petita que una altra si té més portes tancades que l'altra. Tenint en compte que una
 // porta tancada és més petita que una porta oberta, en cas que tinguin el mateix número de portes tancades, per decidir qui és més petit es miraran
 // les portes en aquest ordre NORD, EST, SUD i OEST. Per exemple:
-//   cambra c1, c2(true,true), c3(true, false, true);
+//   cambra c1, c2(true,true), c3(true, false, true); //nord, sud, est, oest.
 //   cout << (c1 < c2); // escriu 'true'
 //   cout << (c2 < c3); // escriu 'true'
 
-bool cambra::operator<(const cambra & c) const throw(){
+bool cambra::operator<(const cambra & c) const throw() {
    
-    bool mesPetita = true;
+    //bool mesGran = false;
 
-    if(_quantesPO > c._quantesPO) mesPetita = false;
+    if(_quantesPO < c._quantesPO) return true;
+    else if(_quantesPO > c._quantesPO) return false;
 
-    else if((_quantesPO == 0 and c._quantesPO == 0)  or (_quantesPO == 4 and c._quantesPO == 4)) mesPetita = false; 
-    else if((_quantesPO > 0 and c._quantesPO > 0) and (_quantesPO == c._quantesPO)){ 
-        // Es podria optimitzar deixant només els 4 if d'abaix :)
-        // El Jordi valorarà la senzillesa del codi
-        // Per als casos on _quantesPO: 1-1, 2-2 i 3-3
+    else if((_quantesPO == 0 and c._quantesPO == 0)  or (_quantesPO == 4 and c._quantesPO == 4)) return false; 
+    else if((_quantesPO > 0 and c._quantesPO > 0) and (_quantesPO == c._quantesPO)) { 
+        // Per als casos on _quantesPO: 1-1, 2-2 i 3-3 (_quantesPO == 1 and c._quantesPO == 1 etc etc)
         
         /*
         false - false -> pi == c 
@@ -158,12 +157,26 @@ bool cambra::operator<(const cambra & c) const throw(){
         true - false -> pi > c
         true - true  -> pi == c
         */
+    
+        if (not _portaN and c._portaN) return true;     
 
-        if(not (_portaN == false and c._portaN == true)) mesPetita = false;
-        else if(not (_portaE == false and c._portaE == true)) mesPetita = false;
-        else if(not (_portaS == false and c._portaS == true)) mesPetita = false;
-        else if(not (_portaO == false and c._portaO == true)) mesPetita = false;
+        else if(_portaN and not c._portaN) return false; 
+        
+        else if ( _portaE and not c._portaE) return true;   
+
+        else if (not _portaE and c._portaE) return false;
+        
+        else if (_portaS and not c._portaS) return true;    
+
+        else if (not _portaS and c._portaS) return false;
+        
+        else if ( _portaO and not c._portaO) return true;   
+        
+        else if (not _portaO and c._portaO) return false;
+
+        else return false;
+             
     }
-    return mesPetita;
+    return false;
 }
 

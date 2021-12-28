@@ -62,6 +62,22 @@
   template <typename T>
   void particio<T>::unir(const T & x, const T & y) throw(error) {
 
+    node *repreX = hi_es(x), *repreY = hi_es(y);
+
+    if(repreX == NULL or repreY == NULL) throw error(ElemInexistent);
+
+    else if(repreX != repreY){
+      if (repreX->_numElemConjunt > repreY->_numElemConjunt){
+          repreY->_repre = repreX->_repre;
+          repreX->_numElemConjunt+=repreY->_numElemConjunt;  
+
+      } else {
+        repreX->_repre = repreY->_repre;
+        repreY->_numElemConjunt+=repreX->_numElemConjunt;
+        
+      }
+      _quantsGrups--;
+    }
   }
 
   // Retorna si els elements x i y pertanyen al mateix grup.
@@ -78,7 +94,7 @@
     T repreX = find_repre(posX);
     T repreY = find_repre(posY);
 
-    std::cout<<"repreX: "<<repreX<<" "<<"repreY: "<<repreY<<std::endl;
+    //std::cout<<"repreX: "<<repreX<<" "<<"repreY: "<<repreY<<std::endl;
 
     if(repreX == repreY) return true;
     else return false;
@@ -113,7 +129,7 @@ T particio<T>::find_repre(const node *p)const {
   while (p->_clau != p->_repre->_clau) {
 
     p = p->_repre;
-        std::cout<<"p->_clau: "<<p->_clau<<" "<<"repre->_clau: "<<p->_repre->_clau<<std::endl;
+        //std::cout<<"p->_clau: "<<p->_clau<<" "<<"repre->_clau: "<<p->_repre->_clau<<std::endl;
 
   }
 

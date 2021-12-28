@@ -35,3 +35,4 @@ node* hi_es(const T &x)const throw(error);
 //Pre: x és l'element a cercar a la partició, p és el punter de node que recorre la partició. 
 //Post: Retorna true si l'element x es troba a la partició, altrament false. 
 
+
