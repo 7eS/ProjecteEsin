@@ -4,7 +4,13 @@
   template <typename T>
   particio<T>::particio(nat n) throw(error) {
     // Num nodes màxim que pot tenir
-    _arrel = NULL;
+    _arrel = new node;
+    _arrel -> _fesq = NULL;
+    _arrel -> _fdret = NULL;
+    _arrel -> _repre = _arrel;
+    _arrel -> _numElemConjunt = 0;
+
+    //_arrel = NULL;
     _quantsGrups = 0;
     _lim = n;
     _quantsElements = 0;
@@ -14,10 +20,17 @@
   template <typename T>
   particio<T>::particio(const particio & p) throw(error) {
     //Mirar apunts
+    _arrel = new node;
+    _arrel = copia_nodes(p._arrel);
     _quantsGrups = p._quantsGrups;
     _lim = p._lim;
     _quantsElements = p._quantsElements;
-    _arrel = copia_nodes(p._arrel);
+    //fer print de la copia
+    std::cout<<"arrel: "<<_arrel->_clau<<std::endl;
+
+
+    print(_arrel);
+    //std::cout<<"arrel: "<<_arrel<<std::endl;
     }
     
   
@@ -26,12 +39,14 @@
     
     if (this != &p) {
       particio pAux(p);
+
       pAux._arrel = copia_nodes(p._arrel);
+
       esborra_nodes(_arrel);
-      _arrel = pAux._arrel;
       _lim = pAux._lim;
-      _quantsGrups = pAux._quantsGrups; 
+      _quantsGrups = pAux._quantsGrups;
       _quantsElements = pAux._quantsElements;
+      _arrel = pAux._arrel;
     }
 
     return (*this);
@@ -52,6 +67,7 @@
   void particio<T>::afegir(const T &x) throw(error) {
 
     afegir(_arrel, x);
+    print(_arrel);
 
   }
 
@@ -62,18 +78,24 @@
   template <typename T>
   void particio<T>::unir(const T & x, const T & y) throw(error) {
 
-    node *repreX = hi_es(x), *repreY = hi_es(y);
+    node *px = hi_es(x), *py = hi_es(y);
+    //std::cout<<"repreX: "<<px<<" "<<"repreY: "<<py<<std::endl;
 
-    if(repreX == NULL or repreY == NULL) throw error(ElemInexistent);
+    if(px == NULL or py == NULL) throw error(ElemInexistent);
+    //std::cout<<"prueba "<<std::endl;
 
-    else if(repreX != repreY){
-      if (repreX->_numElemConjunt > repreY->_numElemConjunt){
-          repreY->_repre = repreX->_repre;
-          repreX->_numElemConjunt+=repreY->_numElemConjunt;  
+    node *pRepreX = find_repre(px);
+    node *pRepreY = find_repre(py);
+    //std::cout<<"prueba2"<<std::endl;
+
+    if(pRepreX != pRepreY){
+      if (pRepreX->_numElemConjunt > pRepreY->_numElemConjunt){
+          pRepreY->_repre = pRepreX->_repre;
+          pRepreX->_numElemConjunt+=pRepreY->_numElemConjunt;  
 
       } else {
-        repreX->_repre = repreY->_repre;
-        repreY->_numElemConjunt+=repreX->_numElemConjunt;
+        pRepreX->_repre = pRepreY->_repre;
+        pRepreY->_numElemConjunt+=pRepreX->_numElemConjunt;
         
       }
       _quantsGrups--;
@@ -86,17 +108,23 @@
   bool particio<T>::mateix_grup(const T & x, const T & y) const throw(error) {
 
     node *posX = hi_es(x), *posY = hi_es(y);
+    //std::cout<<"posX: "<<posX<<" "<<"posY: "<<posY<<std::endl;
+
     //if(not hi_es(x) or not hi_es(y)) throw error(ElemInexistent);
     if(posX == NULL or posY == NULL) throw error(ElemInexistent);
 
     //std::cout<<"repre: "<<x._repre->_clau<<std::endl;
 
-    T repreX = find_repre(posX);
-    T repreY = find_repre(posY);
+    //T repreX = find_repre(posX);
+    //T repreY = find_repre(posY);
+    
+    node *pRepreX = find_repre(posX);
+    node *pRepreY = find_repre(posY);
 
-    //std::cout<<"repreX: "<<repreX<<" "<<"repreY: "<<repreY<<std::endl;
+    //std::cout<<"repreX: "<<pRepreX->_clau<<" "<<"repreY: "<<pRepreY->_clau<<std::endl;
 
-    if(repreX == repreY) return true;
+
+    if(pRepreX->_clau == pRepreY->_clau) return true;
     else return false;
 
   }
@@ -122,7 +150,7 @@ nat particio<T>::num_maxim() const throw() {
   }
 
 template <typename T>
-T particio<T>::find_repre(const node *p)const {
+typename particio<T>::node* particio<T>::find_repre(const node *p)const {
 //Pre: x és un element que pertany a un grup de la partició. 
 //Post: retorna l'element representant del grup al qual pertany x.
   
@@ -133,42 +161,58 @@ T particio<T>::find_repre(const node *p)const {
 
   }
 
-  return p->_repre->_clau;
+  return p->_repre;
 }
 
   template <typename T>
   typename particio<T>::node* particio<T>::afegir(node *p, const T &x) throw(error) {
 
-    //Comprovem si encara queda espai a la partició.
-    if (_quantsGrups >= _lim) throw error(ParticioPlena);
-
-    else {
-      //afegim l'element x a la partició
-
-      if (p == NULL) {
-        node *p = new node;
-        p->_clau = x;
-        p->_fdret = NULL;
-        p->_fesq = NULL;
-        p->_numElemConjunt = 1;
-        p->_repre = p;
-
-        if (_arrel == NULL) _arrel = p;
-        
-        _quantsGrups++;
-        _quantsElements++;
-        return p;
-      }
-
-      else {
-        if (p->_clau < x) p->_fesq = afegir(p->_fesq, x);
+      if(p != NULL){
+          if (p->_clau < x) p->_fesq = afegir(p->_fesq, x);
+            
+          else if (p->_clau > x) p->_fdret = afegir(p->_fdret, x);
           
-        else if (p->_clau > x) p->_fdret = afegir(p->_fdret, x);
-        
-        // Si l'element ja es troba no fem res. Pot ser cal afegir l'else
-        else p->_clau = x;
+          // Si l'element ja es troba no fem res. Pot ser cal afegir l'else
+          else{
+            return p;
+            //p->_clau = x;
+          }
       }
-    }
+      else {
+        //Comprovem si encara queda espai a la partició.
+          if (_quantsGrups >= _lim) throw error(ParticioPlena);
+
+            
+            p = new node;
+            p->_clau = x;
+            p->_fdret = NULL;
+            p->_fesq = NULL;
+            p->_numElemConjunt = 1;
+            p->_repre = p;
+
+            if (_quantsGrups == 0) _arrel = p;
+
+              _quantsGrups++;
+              _quantsElements++;
+
+              p->_numElemConjunt = 1+maxim(pes(p->_fesq), pes(p->_fdret));
+
+              int equil = obteEquilibri(p);
+
+              if (equil > 1 and x < p->_fesq->_clau) return rotaDreta(p);
+
+              if (equil < -1 and x > p->_fdret->_clau) return rotaEsquerra(p);
+
+              if (equil > 1 and x > p->_fesq->_clau) {
+                p->_fesq = rotaEsquerra(p->_fesq);
+                return rotaDreta(p);
+              }
+
+              if (equil < -1 and x < p->_fdret->_clau) {
+                p->_fdret  =rotaDreta(p->_fdret);
+                return rotaEsquerra(p);
+              }
+            }
     return p;
   }
 
@@ -184,10 +228,12 @@ T particio<T>::find_repre(const node *p)const {
     try 
     {
       p->_clau = m->_clau;
-      p->_fesq = m->_fesq;
-      p->_fdret = m->_fdret;
+      p->_fesq = copia_nodes (m->_fesq);
+      p->_fdret = copia_nodes(m->_fdret);
+      //Probablement l'error estigui a l'hora de copiar p->_repre
       p->_repre = m->_repre;
       p->_numElemConjunt = m->_numElemConjunt;
+      
     }
     catch(...)
     {
@@ -200,7 +246,7 @@ T particio<T>::find_repre(const node *p)const {
 
 
   template <typename T>
-  typename particio<T>::node* particio<T>::esborra_nodes(node *m){
+  void particio<T>::esborra_nodes(node *m){
   //Pre: Cert
   //Post: Elimina tots els nodes de la partició
     
@@ -218,21 +264,100 @@ T particio<T>::find_repre(const node *p)const {
     
   bool trobat = false;
   node *p = _arrel;
-  
-  while (p!=NULL and not trobat) {
+  //std::cout<<"quantsGrups: "<<_quantsGrups<<" lim: "<<_lim<<std::endl;
+  if(_quantsGrups > 0){
+    //std::cout<<"entro"<<std::endl;
+    while (p!=NULL and not trobat) {
 
-    if (p->_clau < x) p = p->_fesq;
-    
-    else if (p->_clau > x) p = p->_fdret;
-    
-    else{
-      trobat = true;
+      if (p->_clau < x) p = p->_fesq;
+      
+      else if (p->_clau > x) p = p->_fdret;
+      
+      else{
+        trobat = true;
+      }
     }
   }
+  
+  //std::cout<<"salgo p: "<<p<<std::endl;
   if(trobat) return p;
   else return NULL;
-  //return trobat;
+}
+
+template <typename T>
+void  particio<T>::print(node *p){
+
+  if(p != NULL){
+    std::cout<<p->_clau<<" ";
+    print(p->_fesq);
+    print(p->_fdret);
+  }
+
+}
+
+/*  template <typename T>
+  typename particio<T>::node* particio<T>::node( const T &clau, node *esq,
+  node *dret, nat numElem): _clau(clau), _fesq(esq), _fdret(dret), _repre(&this), 
+  _numElemConjunt(numElem); */
+
+template <typename T>
+int particio<T>::pes(node *p) {
+    if (p == NULL) return 0;
+    return p->_numElemConjunt;
+}
+ 
+// A utility function to get maximum of two integers
+template <typename T>
+nat particio<T>::maxim(nat a, nat b) {
+  if( a > b) return a;
+  else return b;
+
 }
 
 
+template <typename T>
+typename particio<T>::node* particio<T>::rotaDreta(node *pesq) {
 
+    node *prot = pesq->_fesq;
+    node *praux = prot->_fdret;
+ 
+    // Fem la rotació. 
+    prot->_fdret = pesq;
+    pesq->_fesq = praux;
+ 
+    // Actualitzem les alçades. 
+    pesq->_numElemConjunt = maxim(pes(pesq->_fesq), pes(pesq->_fdret)) + 1;
+    prot->_numElemConjunt = maxim(pes(prot->_fesq), pes(prot->_fdret)) + 1;
+ 
+    // Retorna la nova arrel. 
+    return prot;
+}
+ 
+template <typename T>
+typename particio<T>::node* particio<T>::rotaEsquerra(node *pdreta) {
+
+    node *prot = pdreta->_fdret;
+    node *paux = prot->_fesq;
+ 
+    // Fem la rotació. 
+    prot->_fesq = pdreta;
+    pdreta->_fdret = paux;
+ 
+    // Actualitzem les alçades. 
+    pdreta->_numElemConjunt = maxim(pes(pdreta->_fesq),   
+                    pes(pdreta->_fdret)) + 1;
+    prot->_numElemConjunt = maxim(pes(prot->_fesq),
+                    pes(prot->_fdret)) + 1;
+ 
+    // Retorna la nova arrel. 
+    return prot;
+}
+ 
+// Get Balance factor of node N
+template <typename T>
+int particio<T>::obteEquilibri(node *p) {
+
+    if (p == NULL)
+        return 0;
+    return pes(p->_fesq) - pes(p->_fdret);
+}

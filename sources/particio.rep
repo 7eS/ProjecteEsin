@@ -7,6 +7,7 @@ struct node{
     node *_fdret;
     node *_repre;       // Aquest pot estar lligat al pare o més endavant als avis.
     nat _numElemConjunt; // Indica el numero d'elementes que té un conjunt
+    //node( const T &clau, node *esq = NULL, node *dret = NULL, nat numElem = 1);
 };
 
 node *_arrel;           // Farà de punter arrel.
@@ -15,7 +16,7 @@ nat _quantsGrups;
 nat _quantsElements;   // Total elements de la partició
 
 
-T find_repre(const node *p)const; 
+node* find_repre(const node *p)const; 
 //Pre: x és un element que pertany a un grup de la partició. 
 //Post: retorna l'element representant del grup al qual pertany x.  
 
@@ -27,7 +28,7 @@ static node* copia_nodes(node *m);
 //Pre: Cert.
 //Post: Retorna una particio amb els nodes copiats de m.
 
-static node* esborra_nodes(node *pd);
+static void esborra_nodes(node *pd);
 //Pre: Cert.
 //Post: Elimina tots els nodes de la partició.
 
@@ -35,4 +36,25 @@ node* hi_es(const T &x)const throw(error);
 //Pre: x és l'element a cercar a la partició, p és el punter de node que recorre la partició. 
 //Post: Retorna true si l'element x es troba a la partició, altrament false. 
 
+// Por eliminar
+void print(node *p);
 
+node* rotaDreta(node *pdreta);
+//Pre:  p és un punter node ___
+//Post: Gira a la dreta el subarbre arrelat amb pdreta. Retorna el nou node arrel després d'haver fet la rotació. 
+
+node* rotaEsquerra(node *pesq);
+//Pre: x és un node ___
+//Post: Gira a l'esquerra el subarbre arrelat amb pesq. Retorna el nou node arrel després d'haver fet la rotació. 
+
+int obteEquilibri(node *p);
+//Pre: N és un node ___
+//Post: retorna el factor de balanç del node N. 
+
+int pes(node *p);
+//Pre: 
+//Post: 
+
+nat maxim(nat a, nat b);
+//Pre:
+//Post: 
