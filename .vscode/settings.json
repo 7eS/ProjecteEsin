@@ -49,7 +49,10 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "*.t": "cpp"
+        "*.t": "cpp",
+        "error": "cpp",
+        "ctime": "cpp",
+        "iomanip": "cpp"
     },
     "git.ignoreLimitWarning": true
 }

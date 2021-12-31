@@ -7,4 +7,5 @@
   // Es produeix un error si el laberint ja està excavat.
   void dedalus::construir(laberint & M) throw(error){
 
+    std::cout << M.num_columnes()<<std::endl;
   }

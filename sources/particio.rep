@@ -7,7 +7,7 @@ struct node{
     node *_fdret;
     node *_repre;       // Aquest pot estar lligat al pare o més endavant als avis.
     nat _numElemConjunt; // Indica el numero d'elementes que té un conjunt
-    //node( const T &clau, node *esq = NULL, node *dret = NULL, nat numElem = 1);
+    nat _altura;
 };
 
 node *_arrel;           // Farà de punter arrel.
@@ -37,7 +37,7 @@ node* hi_es(const T &x)const throw(error);
 //Post: Retorna true si l'element x es troba a la partició, altrament false. 
 
 // Por eliminar
-void print(node *p);
+void print(node *p, int prof);
 
 node* rotaDreta(node *pdreta);
 //Pre:  p és un punter node ___
@@ -51,10 +51,15 @@ int obteEquilibri(node *p);
 //Pre: N és un node ___
 //Post: retorna el factor de balanç del node N. 
 
-int pes(node *p);
-//Pre: 
-//Post: 
+nat altura(node *p);
+//Pre: p es un node del conjunt
+//Post: retorna l'altura del node p
 
 nat maxim(nat a, nat b);
-//Pre:
-//Post: 
+//Pre: rep dos naturals
+//Post: retorna el maxim d'ambdos naturals
+
+static node* nouNode( const T &clau);
+
+void copia_repres(node *p, node *p2);
+

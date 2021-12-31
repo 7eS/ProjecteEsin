@@ -1,0 +1,11 @@
+init p9 particio<int> 9
+p9 afegir 1
+p9 afegir 2
+p9 afegir 3
+p9 afegir 4
+p9 afegir 5
+p9 afegir 6
+p9 afegir 7
+p9 afegir 8
+p9 afegir 9
+p9 afegir 10
