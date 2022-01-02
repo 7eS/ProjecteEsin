@@ -3,17 +3,12 @@
 
 #include "particio.hpp"
 
-using namespace std;
+
 // Construeix una particio amb n elements com a màxim.
 template <typename T>
 particio<T>::particio(nat n) throw(error) {
     // Num nodes màxim que pot tenir
-    /* _arrel -> _fesq = NULL;
-     _arrel -> _fdret = NULL;
-     _arrel -> _repre = _arrel;
-     _arrel -> _numElemConjunt = 0;
-     _arrel -> _altura = 1; */
-
+ 
     _arrel = NULL;
     _quantsGrups = 0;
     _lim = n;
@@ -23,29 +18,14 @@ particio<T>::particio(nat n) throw(error) {
 // Constructora per còpia, assignació i destructora.
 template <typename T>
 particio<T>::particio(const particio &p) throw(error) {
-    //cout<< "impresion dentro de asignacion "<< endl;
+
     _quantsGrups = p._quantsGrups;
     _lim = p._lim;
     _quantsElements = p._quantsElements;
 
-    //std::cout<<"lim3 "<<_lim<<std::endl;
-    //std::cout<<"quants grups3 "<<_quantsGrups<<std::endl;
-    //std::cout<<"quants elems3 "<<_quantsElements<<std::endl;
     _arrel = copia_nodes(p._arrel);
-     //std::cout<<"lim4 "<<_lim<<std::endl;
 
-//  std::cout<<"clau arrel "<<p._arrel->_clau<<std::endl;
-    //std::cout<<"post copia nodes "<<std::endl;
     copia_repres(_arrel,p._arrel);
-
-    //std::cout<<"post copia repres "<<std::endl;
-
-    // fer print de la copia
-    //std::cout << "arrel: " << _arrel->_clau << std::endl;
-
-    //print(_arrel, 0);
-    // std::cout<<"arrel: "<<_arrel<<std::endl;
-    //print(p._arrel,0);
 }
 
 template <typename T>
@@ -54,7 +34,6 @@ particio<T> &particio<T>::operator=(const particio &p) throw(error) {
 
         particio pAux(p);
 
-        //node* aux = _arrel;
         esborra_nodes(_arrel);
 
         _lim = pAux._lim;
@@ -63,9 +42,7 @@ particio<T> &particio<T>::operator=(const particio &p) throw(error) {
         _arrel = pAux._arrel;
 
         pAux._arrel = NULL;
-       /* std::cout<<"lim2 "<<_lim<<std::endl;
-        std::cout<<"quants grups2 "<<_quantsGrups<<std::endl;
-        std::cout<<"quants elems2 "<<_quantsElements<<std::endl; */
+       
     }
     return (*this);
 }
@@ -96,14 +73,11 @@ void particio<T>::afegir(const T &x) throw(error) {
 template <typename T>
 void particio<T>::unir(const T &x, const T &y) throw(error) {
     node *px = hi_es(x), *py = hi_es(y);
-     //std::cout<<"repreX: "<<px<<" "<<"repreY: "<<py<<std::endl;
-
+     
     if (px == NULL or py == NULL) throw error(ElemInexistent);
-    // std::cout<<"prueba "<<std::endl;
-
+    
     node *pRepreX = find_repre(px);
     node *pRepreY = find_repre(py);
-    // std::cout<<"prueba2"<<std::endl;
 
     if (pRepreX != pRepreY) {
         if (pRepreX->_numElemConjunt > pRepreY->_numElemConjunt) {
@@ -116,8 +90,6 @@ void particio<T>::unir(const T &x, const T &y) throw(error) {
         }
         _quantsGrups--;
     }
-        print(_arrel, 0);
-
 }
 
 // Retorna si els elements x i y pertanyen al mateix grup.
@@ -125,21 +97,13 @@ void particio<T>::unir(const T &x, const T &y) throw(error) {
 template <typename T>
 bool particio<T>::mateix_grup(const T &x, const T &y) const throw(error) {
     node *posX = hi_es(x), *posY = hi_es(y);
-    // std::cout<<"posX: "<<posX<<" "<<"posY: "<<posY<<std::endl;
 
-    // if(not hi_es(x) or not hi_es(y)) throw error(ElemInexistent);
+
+
     if (posX == NULL or posY == NULL) throw error(ElemInexistent);
-
-    // std::cout<<"repre: "<<x._repre->_clau<<std::endl;
-
-    // T repreX = find_repre(posX);
-    // T repreY = find_repre(posY);
 
     node *pRepreX = find_repre(posX);
     node *pRepreY = find_repre(posY);
-
-    // std::cout<<"repreX: "<<pRepreX->_clau<<" "<<"repreY:
-    // "<<pRepreY->_clau<<std::endl;
 
     if (pRepreX->_clau == pRepreY->_clau)
         return true;
@@ -172,8 +136,7 @@ typename particio<T>::node *particio<T>::find_repre(const node *p) const {
 
     while (p->_clau != p->_repre->_clau) {
         p = p->_repre;
-        // std::cout<<"p->_clau: "<<p->_clau<<" "<<"repre->_clau:
-        // "<<p->_repre->_clau<<std::endl;
+        
     }
     return p->_repre;
 }
@@ -237,7 +200,6 @@ typename particio<T>::node *particio<T>::copia_nodes(node *m) {
 
             p->_fesq = copia_nodes(m->_fesq);
             p->_fdret = copia_nodes(m->_fdret);
-            // Probablement l'error estigui a l'hora de copiar p->_repre
 
         } catch (...) {
             delete p;
@@ -262,27 +224,9 @@ void particio<T>::esborra_nodes(node *m) {
 template <typename T>
 typename particio<T>::node *particio<T>::hi_es(const T &x) const throw(error) {
     // Pre: x és l'element a cercar a la partició, p és el punter de node que
-    // recorre la partició. Post: Retorna true si l'element x es troba a la
-    // partició, altrament false.
+    // recorre la partició. 
+    //Post: Retorna true si l'element x es troba a la partició, altrament false.
 
-
-/*    if(a != NULL){
-
-        if(a->_clau == x) return a;
-        else if(a->_clau < x) hi_es(x);
-        else hi_es(x);
-    }
-    return a;
-
-*/
-    //if( p == NULL) std::cout<<"soy nulo"<<std::endl;
-    //else  std::cout<<"nose donde apunto"<<std::endl;
-    //std::cout<<"p: "<<p->_clau<<std::endl;
-
-    // std::cout<<"quantsGrups: "<<_quantsGrups<<" lim: "<<_lim<<std::endl;
-    //std::cout<<"hi es"<<std::endl;
-
-    // El fallo se refleja aqui, de alguna forma no detecta la clau de p.
     node *p = _arrel;
     bool trobat = false;
         while (p != NULL and not trobat) {
@@ -293,24 +237,13 @@ typename particio<T>::node *particio<T>::hi_es(const T &x) const throw(error) {
                 p = p->_fdret;
 
             else {
-                //std::cout<<"x: "<<x<<std::endl;
-                //std::cout<<"clau: "<<p->_clau<<std::endl;
+                
                 trobat = true;
-            }
-                //std::cout<<"x2: "<<x<<std::endl;
-                //std::cout<<"clau2: "<<p->_clau<<std::endl; 
-        //std::cout<<"hola4"<<std::endl;
-        //std::cout<<"es arrel: "<< (p ==_arrel) <<std::endl;
+            } 
         }
-    // std::cout<<"salgo p: "<<p<<std::endl;
-    if (trobat){
-        //std::cout<<"trobat"<<std::endl;
-        return p;
-    }
-    else{
-        //std::cout<<" no trobat"<<std::endl;
-        return NULL;
-    }
+
+    if (trobat) return p;
+    else return NULL;
 }
 
 template <typename T>
@@ -324,7 +257,6 @@ void particio<T>::print(node *p, int prof) {
         cout << " elemConjunts: " << p->_numElemConjunt;
         cout << " repre: " << find_repre(p)->_clau;
         cout << " _quantsGrups: " <<_quantsGrups<<endl;
-
 
         print(p->_fesq, prof + 1);
     }
@@ -361,6 +293,7 @@ nat particio<T>::maxim(nat a, nat b) {
 
 template <typename T>
 typename particio<T>::node *particio<T>::rotaDreta(node *pesq) {
+
     node *prot = pesq->_fesq;
     node *praux = prot->_fdret;
 
@@ -378,6 +311,7 @@ typename particio<T>::node *particio<T>::rotaDreta(node *pesq) {
 
 template <typename T>
 typename particio<T>::node *particio<T>::rotaEsquerra(node *pdreta) {
+
     node *prot = pdreta->_fdret;
     node *paux = prot->_fesq;
 
@@ -396,6 +330,7 @@ typename particio<T>::node *particio<T>::rotaEsquerra(node *pdreta) {
 // Obté el factor equilibri del node p
 template <typename T>
 int particio<T>::obteEquilibri(node *p) {
+
     if (p == NULL) return 0;
     return altura(p->_fesq) - altura(p->_fdret);
 }
@@ -404,20 +339,15 @@ int particio<T>::obteEquilibri(node *p) {
 template <typename T>
 void particio<T>::copia_repres(node *n,node *m) {
 
- if (m != NULL) {
+    if (m != NULL) {
 
-    node *repren = (hi_es(m->_repre->_clau));
-    //std::cout<<"repren"<<repren<<std::endl;
-    //std::cout<<"hola3"<<std::endl;
+        node *repren = (hi_es(m->_repre->_clau));
 
-    n->_repre = repren;
+        n->_repre = repren;
 
-    copia_repres(n->_fesq, m->_fesq);
-    copia_repres(n->_fdret, m->_fdret);
+        copia_repres(n->_fesq, m->_fesq);
+        copia_repres(n->_fdret, m->_fdret);
 
+        }
     }
-}
-
-
-
 

@@ -283,8 +283,8 @@ void laberint::print(std::ostream &os) const throw() {
 
 bool laberint::portaExterior(paret p, posicio pos) {
     // Pre: p és una paret d'una cambra del laberint i pos es una posicio
-    // existent del laberint. Post: Retorna true si p és una porta exterior,
-    // altrament false.
+    // existent del laberint. 
+    //Post: Retorna true si p és una porta exterior, altrament false.
 
     // pos.first/second -1 es provisional, cal veure q tal funciona més endavant
     if (pos.first - 1 == 0 and p == paret::NORD)
