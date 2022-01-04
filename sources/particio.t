@@ -253,10 +253,10 @@ void particio<T>::print(node *p, int prof) {
 
         std::cout << std::setw(5 * (prof + 1));
         std::cout <<" clau: " << p->_clau;
-        cout << " altura: " << p->_altura;
-        cout << " elemConjunts: " << p->_numElemConjunt;
-        cout << " repre: " << find_repre(p)->_clau;
-        cout << " _quantsGrups: " <<_quantsGrups<<endl;
+        std::cout << " altura: " << p->_altura;
+        std::cout << " elemConjunts: " << p->_numElemConjunt;
+        std::cout << " repre: " << find_repre(p)->_clau;
+        std::cout << " _quantsGrups: " <<_quantsGrups<<std::endl;
 
         print(p->_fesq, prof + 1);
     }

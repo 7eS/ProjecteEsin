@@ -3,7 +3,7 @@
 // // IMPLEMENTACIÓ DE LA CLASSE CAMBRA. 
 
 // Construeix una cambra amb les portes als llocs indicats.
-cambra::cambra(bool n, bool s, bool e, bool o) throw(error){		//correcte. 
+cambra::cambra(bool n, bool s, bool e, bool o) throw(error){	
                    
     _portaN = n;
     _portaS = s;
@@ -37,17 +37,17 @@ cambra & cambra::operator=(const cambra & c) throw(error){
     return *this;
 }
 
-cambra::~cambra() throw(){} //Utilitzem memòria estàtica. 
+cambra::~cambra() throw(){}     //Utilitzem memòria estàtica. 
 
 
 // Retorna si l'habitació té una porta oberta a la paret indicada.
-bool cambra::porta_oberta(paret p) const throw(){						//AQUESTA FUNCIO ESTABA MALAMENT. ARA ESTÀ ARREGLADA.
+bool cambra::porta_oberta(paret p) const throw(){						
 
     //Mirar si la paret es ==NORD, sud, etc. 
     
     bool oberta = false;
       
-    if (p == paret::NORD) return _portaN; 		//FUNCIO ARREGLADA BY PATRICIA, 1 DE DECEMBRE. 
+    if (p == paret::NORD) return _portaN; 		
     else if (p == paret::SUD) return _portaS;
     else if (p == paret::EST) return _portaE;
     else if (p == paret::OEST) return _portaO; 		//enum de la classe paret. fa falta possar paret:: perque es a la classe paret a on esta definit. 
@@ -59,13 +59,13 @@ bool cambra::porta_oberta(paret p) const throw(){						//AQUESTA FUNCIO ESTABA M
 
 // Obre una nova porta a la paret indicada. Si la porta ja està oberta no fa res. Es produeix un error si la paret és NO_DIR.
 
-void cambra::obre_porta(paret p) throw(error){						//AQUESTA FUNCIO ESTABA MALAMENT. ARA ESTÀ ARREGLADA.
+void cambra::obre_porta(paret p) throw(error){						
 
     if (p == paret::NO_DIR)throw error (ParetInexistent);
     
     else if (not porta_oberta(p)) {
 
-        if (p == paret::NORD) {			//FUNCIO ARREGLADA BY PATRICIA ,1 DE DECEMBRE. 
+        if (p == paret::NORD) {			
             _portaN = true;
             _quantesPO++;
         }
@@ -86,13 +86,13 @@ void cambra::obre_porta(paret p) throw(error){						//AQUESTA FUNCIO ESTABA MALA
 
 // Tanca la porta a la paret indicada. Si la porta ja estava tancada no fa res. Es produeix un error si la paret és NO_DIR.
 
-void cambra::tanca_porta(paret p) throw(error) {				//AQUESTA FUNCIO ESTABA MALAMENT. ARA ESTÀ ARREGLADA.
+void cambra::tanca_porta(paret p) throw(error) {
 
     if (p == paret::NO_DIR) throw error (ParetInexistent);
     
     else if (porta_oberta(p)) {
 
-        if (p == paret::NORD) {				//FUNCIO ARREGLADA BY PATRICIA ,1 DE DECEMBRE. 
+        if (p == paret::NORD) {
             _portaN = false;
             _quantesPO--;
         }

@@ -286,7 +286,7 @@ bool laberint::portaExterior(paret p, posicio pos) {
     // existent del laberint. 
     //Post: Retorna true si p és una porta exterior, altrament false.
 
-    // pos.first/second -1 es provisional, cal veure q tal funciona més endavant
+
     if (pos.first - 1 == 0 and p == paret::NORD)
         return true;
     else if (pos.first == _nFil and p == paret::SUD)

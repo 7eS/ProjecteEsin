@@ -1,0 +1,8 @@
+init l3x11 laberint 3 11
+
+l3x11 construir
+#dedalus::construir OK
+l3x11 comprova_perfecte
+#true
+##!
+l3x11 destroy
