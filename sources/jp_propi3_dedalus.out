@@ -1,0 +1,452 @@
+#init l5x5 laberint 5 5
+#l5x5 construir
+cambres del vector:
+[1, 1 -- 1, 2 -- 1, 3 -- 1, 4 -- 1, 5 -- 2, 1 -- 2, 2 -- 2, 3 -- 2, 4 -- 2, 5 -- 3, 1 -- 3, 2 -- 3, 3 -- 3, 4 -- 3, 5 -- 4, 1 -- 4, 2 -- 4, 3 -- 4, 4 -- 4, 5 -- 5, 1 -- 5, 2 -- 5, 3 -- 5, 4 -- 5, 5 -- ]
+cont: 0
+ran cambra: 9
+cambra escollida: 2, 5
+ran paret: 1
+ran paret: 1
+ran cambra: 14
+cambra escollida: 3, 5
+ran paret: 1
+ran paret: 1
+ran cambra: 21
+cambra escollida: 5, 2
+ran paret: 0
+ran paret: 0
+cambra valida ok
+cambres que queden:
+[1, 2 - 1, 3 - 1, 4 - 1, 5 - 2, 1 - 2, 2 - 2, 3 - 2, 4 - 2, 5 - 3, 1 - 3, 2 - 3, 3 - 3, 4 - 3, 5 - 4, 1 - 4, 2 - 4, 3 - 4, 4 - 4, 5 - 5, 1 - 1, 1 - 5, 3 - 5, 4 - 5, 5 - ]
+pos: 5, 2
+par: 0
+pos2: 4, 2
+psize: 25
+afegida
+psize: 24
+
+cont: 1
+ran cambra: 17
+cambra escollida: 4, 3
+ran paret: 1
+ran paret: 1
+cambra valida ok
+cambres que queden:
+[1, 3 - 1, 4 - 1, 5 - 2, 1 - 2, 2 - 2, 3 - 2, 4 - 2, 5 - 3, 1 - 3, 2 - 3, 3 - 3, 4 - 3, 5 - 4, 1 - 4, 2 - 1, 2 - 4, 4 - 4, 5 - 5, 1 - 1, 1 - 5, 3 - 5, 4 - 5, 5 - ]
+pos: 4, 3
+par: 1
+pos2: 4, 4
+psize: 24
+afegida
+psize: 23
+
+cont: 2
+ran cambra: 4
+cambra escollida: 1, 5
+ran paret: 0
+ran paret: 0
+ran cambra: 11
+cambra escollida: 3, 2
+ran paret: 1
+ran paret: 1
+cambra valida ok
+cambres que queden:
+[1, 4 - 1, 5 - 2, 1 - 2, 2 - 2, 3 - 2, 4 - 2, 5 - 3, 1 - 1, 3 - 3, 3 - 3, 4 - 3, 5 - 4, 1 - 4, 2 - 1, 2 - 4, 4 - 4, 5 - 5, 1 - 1, 1 - 5, 3 - 5, 4 - 5, 5 - ]
+pos: 3, 2
+par: 1
+pos2: 3, 3
+psize: 23
+afegida
+psize: 22
+
+cont: 3
+ran cambra: 6
+cambra escollida: 2, 2
+ran paret: 1
+ran paret: 1
+cambra valida ok
+cambres que queden:
+[1, 5 - 2, 1 - 1, 4 - 2, 3 - 2, 4 - 2, 5 - 3, 1 - 1, 3 - 3, 3 - 3, 4 - 3, 5 - 4, 1 - 4, 2 - 1, 2 - 4, 4 - 4, 5 - 5, 1 - 1, 1 - 5, 3 - 5, 4 - 5, 5 - ]
+pos: 2, 2
+par: 1
+pos2: 2, 3
+psize: 22
+afegida
+psize: 21
+
+cont: 4
+ran cambra: 22
+cambra escollida: 5, 3
+ran paret: 1
+ran paret: 1
+cambra valida ok
+cambres que queden:
+[2, 1 - 1, 4 - 2, 3 - 2, 4 - 2, 5 - 3, 1 - 1, 3 - 3, 3 - 3, 4 - 3, 5 - 4, 1 - 4, 2 - 1, 2 - 4, 4 - 4, 5 - 5, 1 - 1, 1 - 1, 5 - 5, 4 - 5, 5 - ]
+pos: 5, 3
+par: 1
+pos2: 5, 4
+psize: 21
+afegida
+psize: 20
+
+cont: 5
+ran cambra: 17
+cambra escollida: 1, 2
+ran paret: 0
+ran paret: 0
+ran cambra: 7
+cambra escollida: 2, 3
+ran paret: 3
+ran paret: 3
+ran cambra: 16
+cambra escollida: 4, 2
+ran paret: 1
+ran paret: 1
+cambra valida ok
+cambres que queden:
+[1, 4 - 2, 3 - 2, 4 - 2, 5 - 3, 1 - 1, 3 - 3, 3 - 3, 4 - 3, 5 - 4, 1 - 2, 1 - 1, 2 - 4, 4 - 4, 5 - 5, 1 - 1, 1 - 1, 5 - 5, 4 - 5, 5 - ]
+pos: 4, 2
+par: 1
+pos2: 4, 3
+psize: 20
+afegida
+psize: 19
+
+cont: 6
+ran cambra: 16
+cambra escollida: 2, 1
+ran paret: 1
+ran paret: 1
+cambra valida ok
+cambres que queden:
+[2, 3 - 2, 4 - 2, 5 - 3, 1 - 1, 3 - 3, 3 - 3, 4 - 3, 5 - 4, 1 - 1, 4 - 1, 2 - 4, 4 - 4, 5 - 5, 1 - 1, 1 - 1, 5 - 5, 4 - 5, 5 - ]
+pos: 2, 1
+par: 1
+pos2: 2, 2
+psize: 19
+afegida
+psize: 18
+
+cont: 7
+ran cambra: 15
+cambra escollida: 4, 1
+ran paret: 1
+ran paret: 1
+cambra valida ok
+cambres que queden:
+[2, 4 - 2, 5 - 3, 1 - 1, 3 - 3, 3 - 3, 4 - 3, 5 - 2, 3 - 1, 4 - 1, 2 - 4, 4 - 4, 5 - 5, 1 - 1, 1 - 1, 5 - 5, 4 - 5, 5 - ]
+pos: 4, 1
+par: 1
+pos2: 4, 2
+psize: 18
+afegida
+psize: 17
+
+cont: 8
+ran cambra: 11
+cambra escollida: 1, 3
+ran paret: 0
+ran paret: 0
+ran cambra: 24
+cambra escollida: 5, 5
+ran paret: 3
+ran paret: 3
+cambra valida ok
+cambres que queden:
+[2, 5 - 3, 1 - 1, 3 - 3, 3 - 3, 4 - 3, 5 - 2, 3 - 1, 4 - 1, 2 - 4, 4 - 4, 5 - 5, 1 - 1, 1 - 1, 5 - 5, 4 - 2, 4 - ]
+pos: 5, 5
+par: 3
+pos2: 5, 4
+psize: 17
+afegida
+psize: 16
+
+cont: 9
+ran cambra: 15
+cambra escollida: 2, 3
+ran paret: 0
+ran paret: 0
+cambra valida ok
+cambres que queden:
+[3, 1 - 1, 3 - 3, 3 - 3, 4 - 3, 5 - 2, 5 - 1, 4 - 1, 2 - 4, 4 - 4, 5 - 5, 1 - 1, 1 - 1, 5 - 5, 4 - 2, 4 - ]
+pos: 2, 3
+par: 0
+pos2: 1, 3
+psize: 16
+afegida
+psize: 15
+
+cont: 10
+ran cambra: 22
+cambra escollida: 1, 5
+ran paret: 3
+ran paret: 3
+cambra valida ok
+cambres que queden:
+[1, 3 - 3, 3 - 3, 4 - 3, 5 - 2, 5 - 1, 4 - 1, 2 - 4, 4 - 4, 5 - 5, 1 - 1, 1 - 3, 1 - 5, 4 - 2, 4 - ]
+pos: 1, 5
+par: 3
+pos2: 1, 4
+psize: 15
+afegida
+psize: 14
+
+cont: 11
+ran cambra: 14
+cambra escollida: 3, 5
+ran paret: 3
+ran paret: 3
+cambra valida ok
+cambres que queden:
+[3, 3 - 3, 4 - 1, 3 - 2, 5 - 1, 4 - 1, 2 - 4, 4 - 4, 5 - 5, 1 - 1, 1 - 3, 1 - 5, 4 - 2, 4 - ]
+pos: 3, 5
+par: 3
+pos2: 3, 4
+psize: 14
+afegida
+psize: 13
+
+cont: 12
+ran cambra: 22
+cambra escollida: 3, 1
+ran paret: 0
+ran paret: 0
+cambra valida ok
+cambres que queden:
+[3, 4 - 1, 3 - 2, 5 - 1, 4 - 1, 2 - 4, 4 - 4, 5 - 5, 1 - 1, 1 - 3, 3 - 5, 4 - 2, 4 - ]
+pos: 3, 1
+par: 0
+pos2: 2, 1
+psize: 13
+afegida
+psize: 12
+
+cont: 13
+ran cambra: 18
+cambra escollida: 4, 4
+ran paret: 1
+ran paret: 1
+cambra valida ok
+cambres que queden:
+[1, 3 - 2, 5 - 1, 4 - 1, 2 - 3, 4 - 4, 5 - 5, 1 - 1, 1 - 3, 3 - 5, 4 - 2, 4 - ]
+pos: 4, 4
+par: 1
+pos2: 4, 5
+psize: 12
+afegida
+psize: 11
+
+cont: 14
+ran cambra: 21
+cambra escollida: 1, 1
+ran paret: 1
+ran paret: 1
+cambra valida ok
+cambres que queden:
+[2, 5 - 1, 4 - 1, 2 - 3, 4 - 4, 5 - 5, 1 - 1, 3 - 3, 3 - 5, 4 - 2, 4 - ]
+pos: 1, 1
+par: 1
+pos2: 1, 2
+psize: 11
+afegida
+psize: 10
+
+cont: 15
+ran cambra: 18
+cambra escollida: 3, 4
+ran paret: 3
+ran paret: 3
+cambra valida ok
+cambres que queden:
+[1, 4 - 1, 2 - 2, 5 - 4, 5 - 5, 1 - 1, 3 - 3, 3 - 5, 4 - 2, 4 - ]
+pos: 3, 4
+par: 3
+pos2: 3, 3
+psize: 10
+afegida
+psize: 9
+
+cont: 16
+ran cambra: 24
+cambra escollida: 2, 4
+ran paret: 2
+ran paret: 2
+cambra valida ok
+cambres que queden:
+[1, 2 - 2, 5 - 4, 5 - 5, 1 - 1, 3 - 3, 3 - 5, 4 - 1, 4 - ]
+pos: 2, 4
+par: 2
+pos2: 3, 4
+psize: 9
+afegida
+psize: 8
+
+cont: 17
+ran cambra: 17
+cambra escollida: 1, 2
+ran paret: 3
+ran paret: 3
+ran cambra: 18
+cambra escollida: 2, 5
+ran paret: 3
+ran paret: 3
+cambra valida ok
+cambres que queden:
+[1, 2 - 4, 5 - 5, 1 - 1, 3 - 3, 3 - 5, 4 - 1, 4 - ]
+pos: 2, 5
+par: 3
+pos2: 2, 4
+psize: 8
+afegida
+psize: 7
+
+cont: 18
+ran cambra: 24
+cambra escollida: 1, 4
+ran paret: 0
+ran paret: 0
+ran cambra: 20
+cambra escollida: 5, 1
+ran paret: 1
+ran paret: 1
+cambra valida ok
+cambres que queden:
+[4, 5 - 1, 2 - 1, 3 - 3, 3 - 5, 4 - 1, 4 - ]
+pos: 5, 1
+par: 1
+pos2: 5, 2
+psize: 7
+afegida
+psize: 6
+
+cont: 19
+ran cambra: 21
+cambra escollida: 1, 3
+ran paret: 0
+ran paret: 0
+ran cambra: 20
+cambra escollida: 1, 2
+ran paret: 0
+ran paret: 0
+ran cambra: 21
+cambra escollida: 1, 3
+ran paret: 2
+ran paret: 2
+ran cambra: 21
+cambra escollida: 1, 3
+ran paret: 2
+ran paret: 2
+ran cambra: 23
+cambra escollida: 5, 4
+ran paret: 1
+ran paret: 1
+ran cambra: 21
+cambra escollida: 1, 3
+ran paret: 0
+ran paret: 0
+ran cambra: 21
+cambra escollida: 1, 3
+ran paret: 1
+ran paret: 1
+cambra valida ok
+cambres que queden:
+[1, 2 - 4, 5 - 3, 3 - 5, 4 - 1, 4 - ]
+pos: 1, 3
+par: 1
+pos2: 1, 4
+psize: 6
+afegida
+psize: 5
+
+cont: 20
+ran cambra: 20
+cambra escollida: 1, 2
+ran paret: 2
+ran paret: 2
+cambra valida ok
+cambres que queden:
+[4, 5 - 3, 3 - 5, 4 - 1, 4 - ]
+pos: 1, 2
+par: 2
+pos2: 2, 2
+psize: 5
+afegida
+psize: 4
+
+cont: 21
+ran cambra: 22
+cambra escollida: 3, 3
+ran paret: 0
+ran paret: 0
+cambra valida ok
+cambres que queden:
+[4, 5 - 5, 4 - 1, 4 - ]
+pos: 3, 3
+par: 0
+pos2: 2, 3
+psize: 4
+afegida
+psize: 3
+
+cont: 22
+ran cambra: 24
+cambra escollida: 1, 4
+ran paret: 2
+ran paret: 2
+cambra valida ok
+cambres que queden:
+[5, 4 - 4, 5 - ]
+pos: 1, 4
+par: 2
+pos2: 2, 4
+cont: 23
+ran cambra: 24
+cambra escollida: 4, 5
+ran paret: 0
+ran paret: 0
+cambra valida ok
+cambres que queden:
+[5, 4 - ]
+pos: 4, 5
+par: 0
+pos2: 3, 5
+psize: 3
+afegida
+psize: 2
+
+cont: 24
+ran cambra: 24
+cambra escollida: 5, 4
+ran paret: 3
+ran paret: 3
+ran cambra: 24
+cambra escollida: 5, 4
+ran paret: 3
+ran paret: 3
+ran cambra: 24
+cambra escollida: 5, 4
+ran paret: 1
+ran paret: 1
+ran cambra: 24
+cambra escollida: 5, 4
+ran paret: 0
+ran paret: 0
+cambra valida ok
+cambres que queden:
+[]
+pos: 5, 4
+par: 0
+pos2: 4, 4
+psize: 2
+afegida
+psize: 1
+
+dedalus::construir OK
+##dedalus::construir OK
+#l5x5 comprova_perfecte
+false
+##true
+#l5x5 destroy
+###!
+###! Fi del joc de proves de dedalus
+###!

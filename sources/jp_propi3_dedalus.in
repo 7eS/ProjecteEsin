@@ -1,0 +1,9 @@
+init l5x5 laberint 5 5
+l5x5 construir
+#dedalus::construir OK
+l5x5 comprova_perfecte
+#true
+l5x5 destroy
+##!
+##! Fi del joc de proves de dedalus
+##!

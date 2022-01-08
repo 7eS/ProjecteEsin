@@ -1,0 +1,9 @@
+init l3x3 laberint 3 3
+l3x3 construir
+#dedalus::construir OK
+l3x3 comprova_perfecte
+#true
+l3x3 destroy
+##!
+##! Fi del joc de proves de dedalus
+##!

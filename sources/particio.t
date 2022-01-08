@@ -104,7 +104,6 @@ bool particio<T>::mateix_grup(const T &x, const T &y) const throw(error) {
 
     node *pRepreX = find_repre(posX);
     node *pRepreY = find_repre(posY);
-
     if (pRepreX->_clau == pRepreY->_clau)
         return true;
     else
