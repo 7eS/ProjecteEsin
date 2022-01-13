@@ -60,11 +60,10 @@ void successors(std::list<posicio> &L, posicio pos, const laberint & M);
     nat cols = M.num_columnes();
     nat totalVert = files*cols;
     bool mAdj[totalVert];
-    nat dist[cols];
+    nat dist[totalVert];
     posicio arrayPos[totalVert];
     nat inf = 999999;
 
-    //std::iterator it = L.begin();
     // Potser nomes hauriem d'aprofitar la part superior de la matriu. j = i
     nat k = 0;
     for(nat i = 1; i <= M.num_files(); i++){
@@ -73,18 +72,16 @@ void successors(std::list<posicio> &L, posicio pos, const laberint & M);
             mAdj[k] = false;
             dist[k] = inf;
             arrayPos[k] = pos;
+
         }
     }
+
     //Formula per accedir a la posicio de l'array a on es troba la nostra coordenda:
     // numCols*(pos.first-1)+1+(pos.second-1)
 
     // Posem a 0 la distancia del punt inicial cap a ell mateix
     dist[calculIndex(inici,cols)] = 0;
-
-
-    //posicio::iterator itCam = L.begin();
-
-    //list<posicio>::iterator it = L.begin();
+    mAdj[calculIndex(inici,cols)] = true;
 
     bool cami = false; 
     posicio aux = inici;
@@ -92,14 +89,12 @@ void successors(std::list<posicio> &L, posicio pos, const laberint & M);
     //bool nomPerDeterminar = false;
 
     // Obtenim el vertex més proper
-    L.push_back(inici);
     // Farem un recorregut per tots els nodes excepte per l'inicial.
     for(nat contVert = 0; contVert < totalVert and not cami; contVert++){
 
         if(aux == final){
             cami = true;
         }
-
         else{
             nat distMin = inf;
             posicio posMin;
@@ -107,27 +102,28 @@ void successors(std::list<posicio> &L, posicio pos, const laberint & M);
             for (nat i = 0; i < totalVert; i++) {
              
                 if (not mAdj[i] and dist[i] <= distMin) {
+
                     distMin = dist[i];
                     indexMin = i;
                     posMin = arrayPos[i];
                 }
             }
             
-
             // Marquem el vertex com a què ja hem passat per aquí.
             mAdj[indexMin] = true;
             posicio posNova;
             //Afegim els succesors de posMin a la llista L.
             std::list<posicio> lSucc;
             successors(lSucc, posMin, M);
+            //L.push_back(posMin);
+            //cout<<"posMinim: "<<posMin.first<<" ,"<<posMin.second<<endl;
 
-            cout<<"posMinim: "<<posMin.first<<" ,"<<posMin.second<<endl;
-
+/*
             for(std::list<posicio>::iterator i = lSucc.begin(); i != lSucc.end(); ++i) {
                 posicio p = *i;
-                cout<<"lSucc: "<<p.first<<", "<<p.second<<endl; 
+                //cout<<"lSucc: "<<p.first<<", "<<p.second<<endl; 
 
-            }
+            } */
             
             //Actualitzem les distàncies a les cambres adjacents
             //for (nat i2 = 1; i2 <= totalVert; i2++){
@@ -144,7 +140,7 @@ void successors(std::list<posicio> &L, posicio pos, const laberint & M);
             }
         }
     }
-    if(L.empty()) throw error(SenseSolucio);
+    if (L.empty()) throw error(SenseSolucio);
 }
 
 
@@ -198,16 +194,19 @@ void successors(std::list<posicio> &L, posicio pos, const laberint & M) {
         posicio posNovaN(pos.first-1, pos.second);
         L.push_back(posNovaN);
         }
+
     if (c.porta_oberta(paret::SUD)){
         posicio posNovaS(pos.first+1, pos.second);
         L.push_back(posNovaS);
         }
+
     if (c.porta_oberta(paret::EST)){
-        posicio posNovaE(pos.first, pos.second-1);
+        posicio posNovaE(pos.first, pos.second+1);
         L.push_back(posNovaE); 
     }
     if (c.porta_oberta(paret::OEST)){
-        posicio posNovaO(pos.first, pos.second+1);
+        posicio posNovaO(pos.first, pos.second-1);
+
         L.push_back(posNovaO);
     } 
 }

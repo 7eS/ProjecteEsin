@@ -15,7 +15,7 @@ laberint::laberint(nat num_fil, nat num_col) throw(error) {
         _nCol = num_col;  
 
         _lab = new cambra *[_nFil];
-        for (int i = 0; i < _nFil; i++) {
+        for (nat i = 0; i < _nFil; i++) {
             _lab[i] = new cambra[_nCol];  // Treballem amb memòria dinàmica.
                                           // Demanem memòria amb el new.
                                           // Posteriorment farem deletes.
@@ -31,7 +31,7 @@ laberint::laberint(nat num_fil, nat num_col) throw(error) {
 laberint::laberint(std::istream &is) throw(error) {
     string linia;
     bool primLinia = true;  // la primera linia correspon al numero de fils i cols.
-    int contLinia = 0;
+    nat contLinia = 0;
     util::vector<string> infoLaberint;
 
     posicio p;
@@ -46,7 +46,7 @@ laberint::laberint(std::istream &is) throw(error) {
 
             _lab = new cambra *[_nFil];
 
-            for (int i = 0; i < _nFil; i++) {
+            for (nat i = 0; i < _nFil; i++) {
                 _lab[i] = new cambra[_nCol];  // Treballem amb memòria dstinàmica.
                                         // Demanem memòria amb el new.
                                         // Posteriorment farem deletes.
@@ -61,8 +61,8 @@ laberint::laberint(std::istream &is) throw(error) {
             else
                 nord = false;
 
-            for (int j = 0; j < _nCol; j++) {
-                int jlin;
+            for (nat j = 0; j < _nCol; j++) {
+                nat jlin;
 
                 if (nord) {
                     jlin = j * 2 + 1;   // obtenim la pos de la porta quan mirem el nord.
@@ -72,7 +72,7 @@ laberint::laberint(std::istream &is) throw(error) {
 
                 // La funcio obre porta ja s'encarrega de restar una unitat a la
                 // coordenada
-                int i = (contLinia-1)/2;
+                nat i = (contLinia-1)/2;
                 p.first = i + 1;
                 p.second = j + 1;  // la primera cambra és la pos 1,1.
                 // if(contLinia < 5)
@@ -105,11 +105,11 @@ laberint::laberint(const laberint &l) throw(error) {
 
     _lab = new cambra *[_nFil];
 
-    for (int i = 0; i < _nFil; i++) {
+    for (nat i = 0; i < _nFil; i++) {
         _lab[i] = new cambra[_nCol];
     }
-    for (int i = 0; i < _nFil; i++) { 
-        for (int j = 0; j < _nCol; j++) {
+    for (nat i = 0; i < _nFil; i++) { 
+        for (nat j = 0; j < _nCol; j++) {
             _lab[i][j] = l._lab[i][j];
         }
     }
@@ -126,7 +126,7 @@ laberint &laberint::operator=(const laberint &l) throw(error) {
         */
         if (_nFil != l._nFil and _nCol != l._nCol) {
             // Si són de mides diferents els destruim.
-            for (int i = 0; i < _nFil; i++)
+            for (nat i = 0; i < _nFil; i++)
                 delete[] _lab[i];  // Eliminem les cel·les de la matriu
                                    // dinàmica.
             
@@ -136,12 +136,12 @@ laberint &laberint::operator=(const laberint &l) throw(error) {
             
             _lab = new cambra *[_nFil];
 
-            for (int i = 0; i < _nFil; i++) {
+            for (nat i = 0; i < _nFil; i++) {
                 _lab[i] = new cambra[_nCol];
             }
         }
-        for (int i = 0; i < _nFil; i++) { 
-            for (int j = 0; j < _nCol; j++) {
+        for (nat i = 0; i < _nFil; i++) { 
+            for (nat j = 0; j < _nCol; j++) {
                 _lab[i][j] = l._lab[i][j];
             }
         }
@@ -151,7 +151,7 @@ laberint &laberint::operator=(const laberint &l) throw(error) {
 
 // Destructora.
 laberint::~laberint() throw() {
-    for (int i = 0; i < _nFil; i++)
+    for (nat i = 0; i < _nFil; i++)
         delete[] _lab[i];  // Eliminem les cel·les de la matriu dinàmica.
 
     delete[] _lab;  // Eliminem el punter.
@@ -178,8 +178,8 @@ cambra laberint::operator()(const posicio &pos) const throw(error) {
         throw error(PosicioInexistent);
 
     } else {
-        int i = pos.first - 1;
-        int j = pos.second - 1;
+        nat i = pos.first - 1;
+        nat j = pos.second - 1;
 
         return _lab[i][j];
     }
@@ -198,8 +198,8 @@ void laberint::obre_porta(paret p, const posicio &pos) throw(error) {
         throw error(PortaExterior);  // comprova si la paret està al perímetre
                                      // del laberint.
     } else {
-        int i = pos.first - 1;
-        int j = pos.second - 1;
+        nat i = pos.first - 1;
+        nat j = pos.second - 1;
         _lab[i][j].obre_porta(p);
 
         if (p == paret::NORD)
@@ -221,8 +221,8 @@ void laberint::tanca_porta(paret p, const posicio &pos) throw(error) {
     if (pos.first > _nFil or pos.second > _nCol or pos.first < 1 or pos.second < 1) {  // Al començar des de 0 li hem de restar 1, per això es >=.
         throw error(PosicioInexistent);
     } else {
-        int i = pos.first - 1;
-        int j = pos.second - 1;
+        nat i = pos.first - 1;
+        nat j = pos.second - 1;
         _lab[i][j].tanca_porta(p);
 
         if (not portaExterior(p, pos)) {
