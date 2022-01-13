@@ -16,35 +16,14 @@ print_c
 #***
 #* *
 #***
-##!
-##!------------------------------------------------------------------
-##1.2 Constructora 1 orientacio
-##!------------------------------------------------------------------
-##!
-init cN cambra N
+init cN cambra N 
 print_c
-#* *
-#* *
-#***
 init cE cambra E
 print_c
-#***
-#*  
-#***
 init cO cambra O
 print_c
-#***
-#  *
-#***
 init cS cambra S
 print_c
-#***
-#* *
-#* *
-##!
-##!------------------------------------------------------------------
-##1.3 Constructora 2 orientacions
-##!------------------------------------------------------------------
 ##!
 init cNS cambra N S
 print_c
@@ -73,6 +52,11 @@ print_c
 #* *
 init cSO cambra S O
 print_c
+##!------------------------------------------------------------------
+##1.3 Constructora 2 orientacions
+##!------------------------------------------------------------------
+##!
+
 #***
 #  *
 #* *
@@ -342,6 +326,36 @@ cN < cNE
 #true
 cNE < cSO
 #false
+cN < cE
+#
+cE < cO
+#
+cO < cS
+#
+cS < cN
+#
+cS < cE
+#
+cNS < cSO
+#
+cSO < cES
+#
+cEO < cNO
+#
+cES < cNE
+#
+cNE < cNO
+#
+cNO < cES
+#
+cNES < cESO
+#
+cESO < cNEO
+#
+cSON < cNES
+#
+cNEO < cSON
+#
 ##!
 ##!
 ##!------------------------------------------------------------------

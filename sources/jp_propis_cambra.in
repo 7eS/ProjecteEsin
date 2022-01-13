@@ -1,0 +1,39 @@
+init cN cambra N 
+init cNS cambra N S
+init cNE cambra N E
+init cNESO cambra N E S O
+
+# comparacio cambres
+
+cN < cN
+# false
+cN < cNS
+# true
+cN < cNE
+# true
+cN < cNESO
+# true
+cNS < cN
+# false
+cNS < cNS
+# false
+cNS < cNE
+# true
+cNS < cNESO
+# true
+cNE < cN
+# false
+cNE < cNS
+# false
+cNE < cNE
+# false
+cNE < cNESO
+# true
+cNESO < cN
+# false
+cNESO < cNS
+# false
+cNESO < cNE
+# false
+cNESO < cNESO
+# false

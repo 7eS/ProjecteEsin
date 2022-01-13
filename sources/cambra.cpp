@@ -142,10 +142,13 @@ bool cambra::operator!=(const cambra & c) const throw() {
 
 bool cambra::operator<(const cambra & c) const throw() {
    
-    //bool mesGran = false;
 
-    if(_quantesPO < c._quantesPO) return true;
-    else if(_quantesPO > c._quantesPO) return false;
+    if(_quantesPO < c._quantesPO){
+        return true;
+        }
+    if(_quantesPO > c._quantesPO){
+        return false;
+        }
 
     else if((_quantesPO == 0 and c._quantesPO == 0)  or (_quantesPO == 4 and c._quantesPO == 4)) return false; 
     else if((_quantesPO > 0 and c._quantesPO > 0) and (_quantesPO == c._quantesPO)) { 
@@ -157,25 +160,46 @@ bool cambra::operator<(const cambra & c) const throw() {
         true - false -> pi > c
         true - true  -> pi == c
         */
-    
-        if (not _portaN and c._portaN) return true;     
+        bool mesPetita = false;
+        bool surt = false;
 
-        else if(_portaN and not c._portaN) return false; 
-        
-        else if ( _portaE and not c._portaE) return true;   
-
-        else if (not _portaE and c._portaE) return false;
-        
-        else if (_portaS and not c._portaS) return true;    
-
-        else if (not _portaS and c._portaS) return false;
-        
-        else if ( _portaO and not c._portaO) return true;   
-        
-        else if (not _portaO and c._portaO) return false;
-
-        else return false;
-             
+       if(not _portaN and c._portaN){
+           mesPetita = true;
+           surt = true;
+           }
+       else if(_portaN and not c._portaN){
+           surt = true;
+           mesPetita = false;
+       }
+       else{ //Ambdues portes Nord iguals
+            if((not _portaE and c._portaE) and not surt){
+                surt = true;
+                mesPetita = true;
+            }
+            else if(_portaE and not c._portaE){
+                surt = true;
+                mesPetita = false;
+            }
+            else { //Ambdues portes EST iguals
+                if((not _portaS and c._portaS) and not surt){
+                    mesPetita = true;
+                    surt = true;
+                }
+                else if(_portaS and not c._portaS){
+                    mesPetita = false;
+                    surt = true;
+                }
+                else{
+                    if((not _portaO and c._portaO) and not surt){
+                        mesPetita = true;
+                }
+                    else if(_portaO and not c._portaO){
+                        mesPetita = false;
+                }
+            }
+         }
+       }
+       return mesPetita;
     }
     return false;
 }
