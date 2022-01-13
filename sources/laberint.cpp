@@ -11,8 +11,8 @@ laberint::laberint(nat num_fil, nat num_col) throw(error) {
     if (num_fil == 0 or num_col == 0)
         throw error(FilsColsIncorrecte);
     else {
-        _nFil = num_fil;  // és correcte.
-        _nCol = num_col;  // és correcte.
+        _nFil = num_fil;  
+        _nCol = num_col;  
 
         _lab = new cambra *[_nFil];
         for (int i = 0; i < _nFil; i++) {

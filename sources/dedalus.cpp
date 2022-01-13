@@ -49,12 +49,14 @@ void dedalus::construir(laberint& M) throw(error) {
     cambra c, c2;
     paret par;
     nat cont = 0, repeticions;
+    //nat iteracions = 0;
     int ranCambra = 0, ranParet;
     bool cambraValida;
 
     while (p.size() > 1) {      // Mentre hi hagi més d'un conjunt.
         repeticions = 0;
         cambraValida = false;
+        //iteracions++;
         // Busquem una cambra aleatoria.
         while (not cambraValida and cont < quantesCambres) {
             
@@ -83,6 +85,7 @@ void dedalus::construir(laberint& M) throw(error) {
             p.unir(pos, pos2);
         }
   }
+  //std::cout<<"iteracions: "<<iteracions<<std::endl;
 }
 
 posicio cambraAdjunta(posicio pos, paret par) {

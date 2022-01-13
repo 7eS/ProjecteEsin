@@ -1,4 +1,4 @@
-init l3x3 laberint 3 3
+init l3x3 laberint 100 100
 l3x3 construir
 #dedalus::construir OK
 l3x3 comprova_perfecte

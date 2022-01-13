@@ -1,0 +1,21 @@
+
+pseudocodigo:
+
+1, Fer matriu adjacent, iniciada a false. Doncs encara no hem vist cap node.
+2, vector/matriu de distancies entre el node inicial i els altres.
+    si no ha sigut visitat, la distancia és infinit.
+    si ha sigut visitat, la distancia es la acumulada més fins al moment. (cada node es 1)
+
+3, Escollim un vertex no vistat i *calculem la seva distancia*.
+    si la nova distancia es menor a la que havia, es substitueix
+    altrament, s'ignora
+    Al acabar, el marquem com vist
+    l'afegim a la llista de distancia menor(?)
+
+4, Escollim una cambra, mirem quins camins te. Els explorem
+
+L'algorisme acaba quan tots els vertex estan vistos. 
+
+funcio distanciaMinima: pasem vector dist i llista/matriu adjancencia
+
+inicialitzem el valor infinit.

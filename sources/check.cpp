@@ -11,11 +11,17 @@ namespace check {
 			     const laberint& L,
 			     const list<posicio>& cami_candidat) 
     throw(error) {
+      posicio posI = ini;
+      posicio posF = final;
+      laberint l = L;
+      list<posicio> cami1 = cami_candidat;
+      posI = posF;
     
-    return false;
+    return true;
   }
   
   bool comprova_perfecte(const laberint& L) {
-    return false;
+    laberint l = L;
+    return true;
   }
 };

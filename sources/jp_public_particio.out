@@ -127,7 +127,6 @@ Error::particio<T>:40:L'element no pertany a la particio.
 Error::particio<T>:40:L'element no pertany a la particio.
 ##Error::particio<T>:40:L'element no pertany a la particio.
 #p1 unir 3 3
- clau: 3 altura: 1 elemConjunts: 1 repre: 3 _quantsGrups: 1
 ###!
 ###!
 #p2 unir 0 7
@@ -137,14 +136,8 @@ Error::particio<T>:40:L'element no pertany a la particio.
 Error::particio<T>:40:L'element no pertany a la particio.
 ##Error::particio<T>:40:L'element no pertany a la particio.
 #p2 unir 7 7
-    clau: 7 altura: 1 elemConjunts: 1 repre: 7 _quantsGrups: 2
- clau: 3 altura: 2 elemConjunts: 1 repre: 3 _quantsGrups: 2
 #p2 unir 7 3
-    clau: 7 altura: 1 elemConjunts: 1 repre: 3 _quantsGrups: 1
- clau: 3 altura: 2 elemConjunts: 2 repre: 3 _quantsGrups: 1
 #p2 unir 3 7
-    clau: 7 altura: 1 elemConjunts: 1 repre: 3 _quantsGrups: 1
- clau: 3 altura: 2 elemConjunts: 2 repre: 3 _quantsGrups: 1
 ###!
 ###!
 #p9 unir 0 5
@@ -154,35 +147,8 @@ Error::particio<T>:40:L'element no pertany a la particio.
 Error::particio<T>:40:L'element no pertany a la particio.
 ##Error::particio<T>:40:L'element no pertany a la particio.
 #p9 unir 12 3
-              clau: 79 altura: 1 elemConjunts: 1 repre: 79 _quantsGrups: 8
-         clau: 15 altura: 2 elemConjunts: 1 repre: 15 _quantsGrups: 8
-              clau: 12 altura: 1 elemConjunts: 1 repre: 3 _quantsGrups: 8
-    clau: 10 altura: 3 elemConjunts: 1 repre: 10 _quantsGrups: 8
-         clau: 9 altura: 1 elemConjunts: 1 repre: 9 _quantsGrups: 8
- clau: 5 altura: 4 elemConjunts: 1 repre: 5 _quantsGrups: 8
-         clau: 4 altura: 1 elemConjunts: 1 repre: 4 _quantsGrups: 8
-    clau: 3 altura: 2 elemConjunts: 2 repre: 3 _quantsGrups: 8
-         clau: 2 altura: 1 elemConjunts: 1 repre: 2 _quantsGrups: 8
 #p9 unir 5 9
-              clau: 79 altura: 1 elemConjunts: 1 repre: 79 _quantsGrups: 7
-         clau: 15 altura: 2 elemConjunts: 1 repre: 15 _quantsGrups: 7
-              clau: 12 altura: 1 elemConjunts: 1 repre: 3 _quantsGrups: 7
-    clau: 10 altura: 3 elemConjunts: 1 repre: 10 _quantsGrups: 7
-         clau: 9 altura: 1 elemConjunts: 2 repre: 9 _quantsGrups: 7
- clau: 5 altura: 4 elemConjunts: 1 repre: 9 _quantsGrups: 7
-         clau: 4 altura: 1 elemConjunts: 1 repre: 4 _quantsGrups: 7
-    clau: 3 altura: 2 elemConjunts: 2 repre: 3 _quantsGrups: 7
-         clau: 2 altura: 1 elemConjunts: 1 repre: 2 _quantsGrups: 7
 #p9 unir 15 5
-              clau: 79 altura: 1 elemConjunts: 1 repre: 79 _quantsGrups: 6
-         clau: 15 altura: 2 elemConjunts: 1 repre: 9 _quantsGrups: 6
-              clau: 12 altura: 1 elemConjunts: 1 repre: 3 _quantsGrups: 6
-    clau: 10 altura: 3 elemConjunts: 1 repre: 10 _quantsGrups: 6
-         clau: 9 altura: 1 elemConjunts: 3 repre: 9 _quantsGrups: 6
- clau: 5 altura: 4 elemConjunts: 1 repre: 9 _quantsGrups: 6
-         clau: 4 altura: 1 elemConjunts: 1 repre: 4 _quantsGrups: 6
-    clau: 3 altura: 2 elemConjunts: 2 repre: 3 _quantsGrups: 6
-         clau: 2 altura: 1 elemConjunts: 1 repre: 2 _quantsGrups: 6
 ###!
 ###!---------------------------------------------------------------------
 ###1.5 Elements pertanyen al mateix bloc
@@ -415,25 +381,7 @@ Error::particio<T>:40:L'element no pertany a la particio.
 Error::particio<T>:40:L'element no pertany a la particio.
 ##Error::particio<T>:40:L'element no pertany a la particio.
 #p9 unir 4 2
-              clau: 79 altura: 1 elemConjunts: 1 repre: 79 _quantsGrups: 5
-         clau: 15 altura: 2 elemConjunts: 1 repre: 9 _quantsGrups: 5
-              clau: 12 altura: 1 elemConjunts: 1 repre: 3 _quantsGrups: 5
-    clau: 10 altura: 3 elemConjunts: 1 repre: 10 _quantsGrups: 5
-         clau: 9 altura: 1 elemConjunts: 3 repre: 9 _quantsGrups: 5
- clau: 5 altura: 4 elemConjunts: 1 repre: 9 _quantsGrups: 5
-         clau: 4 altura: 1 elemConjunts: 1 repre: 2 _quantsGrups: 5
-    clau: 3 altura: 2 elemConjunts: 2 repre: 3 _quantsGrups: 5
-         clau: 2 altura: 1 elemConjunts: 2 repre: 2 _quantsGrups: 5
 #p9 unir 2 9
-              clau: 79 altura: 1 elemConjunts: 1 repre: 79 _quantsGrups: 4
-         clau: 15 altura: 2 elemConjunts: 1 repre: 9 _quantsGrups: 4
-              clau: 12 altura: 1 elemConjunts: 1 repre: 3 _quantsGrups: 4
-    clau: 10 altura: 3 elemConjunts: 1 repre: 10 _quantsGrups: 4
-         clau: 9 altura: 1 elemConjunts: 5 repre: 9 _quantsGrups: 4
- clau: 5 altura: 4 elemConjunts: 1 repre: 9 _quantsGrups: 4
-         clau: 4 altura: 1 elemConjunts: 1 repre: 9 _quantsGrups: 4
-    clau: 3 altura: 2 elemConjunts: 2 repre: 3 _quantsGrups: 4
-         clau: 2 altura: 1 elemConjunts: 2 repre: 9 _quantsGrups: 4
 ###!
 ###!---------------------------------------------------------------------
 ###2.5 Elements pertanyen al mateix bloc sobre copies de particio
