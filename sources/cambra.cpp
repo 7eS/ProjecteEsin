@@ -3,6 +3,7 @@
 // // IMPLEMENTACIÓ DE LA CLASSE CAMBRA. 
 
 // Construeix una cambra amb les portes als llocs indicats.
+// Cost en temps: Cost en espai:
 cambra::cambra(bool n, bool s, bool e, bool o) throw(error){	
                    
     _portaN = n;
@@ -18,6 +19,7 @@ cambra::cambra(bool n, bool s, bool e, bool o) throw(error){
 }
 
 // Constructora per còpia, assignació i destructora.
+// Cost en temps: Cost en espai:
 cambra::cambra(const cambra & c) throw(error){
     _portaN = c._portaN;
     _portaS = c._portaS;
@@ -27,6 +29,7 @@ cambra::cambra(const cambra & c) throw(error){
 
 }
 
+// Cost en temps: Cost en espai:
 cambra & cambra::operator=(const cambra & c) throw(error){
     _portaN = c._portaN;
     _portaS = c._portaS;
@@ -37,28 +40,26 @@ cambra & cambra::operator=(const cambra & c) throw(error){
     return *this;
 }
 
+// Cost en temps: Cost en espai:
 cambra::~cambra() throw(){}     //Utilitzem memòria estàtica. 
 
 
 // Retorna si l'habitació té una porta oberta a la paret indicada.
+// Cost en temps: Cost en espai:
 bool cambra::porta_oberta(paret p) const throw(){						
-
-    //Mirar si la paret es ==NORD, sud, etc. 
     
     bool oberta = false;
       
     if (p == paret::NORD) return _portaN; 		
     else if (p == paret::SUD) return _portaS;
     else if (p == paret::EST) return _portaE;
-    else if (p == paret::OEST) return _portaO; 		//enum de la classe paret. fa falta possar paret:: perque es a la classe paret a on esta definit. 
-    //else throw error (ParetInexistent); 			//ens pasen NODIR. No hem de posar error ja que a la capçalera no hi ha res al parentesi. 
+    else if (p == paret::OEST) return _portaO; 		 
     else return oberta;
     
-    //retorna _portaX el qual es un boolea, si es true està oberta, altrament està tancada.
 }
 
 // Obre una nova porta a la paret indicada. Si la porta ja està oberta no fa res. Es produeix un error si la paret és NO_DIR.
-
+// Cost en temps: Cost en espai:
 void cambra::obre_porta(paret p) throw(error){						
 
     if (p == paret::NO_DIR)throw error (ParetInexistent);
@@ -85,7 +86,7 @@ void cambra::obre_porta(paret p) throw(error){
 }
 
 // Tanca la porta a la paret indicada. Si la porta ja estava tancada no fa res. Es produeix un error si la paret és NO_DIR.
-
+// Cost en temps: Cost en espai:
 void cambra::tanca_porta(paret p) throw(error) {
 
     if (p == paret::NO_DIR) throw error (ParetInexistent);
@@ -112,7 +113,7 @@ void cambra::tanca_porta(paret p) throw(error) {
 }
 
 // Igualtat i desigualtat entre cambres. Dues cambres es consideren iguals si tenen les mateixes portes obertes a les mateixes parets.
-
+// Cost en temps: Cost en espai:
 bool cambra::operator==(const cambra & c) const throw() {
     bool iguals = true;
 
@@ -125,10 +126,10 @@ bool cambra::operator==(const cambra & c) const throw() {
         else if (_portaO != c._portaO) iguals = false;
     }
 
-    return iguals; // totes les portes estan igual.
+    return iguals;
 }
 
-
+// Cost en temps: Cost en espai:
 bool cambra::operator!=(const cambra & c) const throw() {
     return not (*this==c);
 }
@@ -139,7 +140,7 @@ bool cambra::operator!=(const cambra & c) const throw() {
 //   cambra c1, c2(true,true), c3(true, false, true); //nord, sud, est, oest.
 //   cout << (c1 < c2); // escriu 'true'
 //   cout << (c2 < c3); // escriu 'true'
-
+// Cost en temps: Cost en espai:
 bool cambra::operator<(const cambra & c) const throw() {
    
 
@@ -151,9 +152,7 @@ bool cambra::operator<(const cambra & c) const throw() {
         }
 
     else if((_quantesPO == 0 and c._quantesPO == 0)  or (_quantesPO == 4 and c._quantesPO == 4)) return false; 
-    else if((_quantesPO > 0 and c._quantesPO > 0) and (_quantesPO == c._quantesPO)) { 
-        // Per als casos on _quantesPO: 1-1, 2-2 i 3-3 (_quantesPO == 1 and c._quantesPO == 1 etc etc)
-        
+    else if((_quantesPO > 0 and c._quantesPO > 0) and (_quantesPO == c._quantesPO)) {         
         /*
         false - false -> pi == c 
         false - true -> pi < c
@@ -189,7 +188,7 @@ bool cambra::operator<(const cambra & c) const throw() {
                     mesPetita = false;
                     surt = true;
                 }
-                else{
+                else{ //Ambdues portes SUD iguals
                     if((not _portaO and c._portaO) and not surt){
                         mesPetita = true;
                 }

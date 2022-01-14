@@ -1,5 +1,16 @@
 //REPRESENTACIÓ DE LA CLASSE PARTICIÓ. 
 
+/*
+
+
+
+
+
+
+*/
+
+
+
 // Primera idea de la partició.
 struct node{
     T _clau;

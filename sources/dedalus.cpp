@@ -1,6 +1,48 @@
 #include "dedalus.hpp"
 
-posicio seleccionaCambra(posicio arrayCambres[], nat i, nat quantes,int r);
+/*
+
+Per a fer aquesta classe ens vam basar en l'algorisme indicat en l'enunciat del projecte.
+Fem servir la partició creada a la classe anterior per enmagatzemar totes les posicions del laberint.
+Alhora, guardem les posicions també en una array que ens servirà per evitar iteracions en el moment 
+d'escollir la possició aleatoria.
+
+Crearem un contador de cambres escollides i un contador de repeticions, ambdós inicialitzats a 0 i un
+objecte Random que farem servir per escollir la posició que, si és possible, obrirà la porta i quina
+orientació tindrà.
+
+Mentre que totes les cambres no formin part d'un sol conjunt, el Random ens generarà un numero aleatori
+d'entre contador i numeroTotalCambres - 1. Seguidament, s'escolllirà una orientació sobre la que obrir una
+porta, si aquesta no està oberta ni la cambra adjunta triada forma part del mateix conjunt, aquesta serà
+valida.
+
+Llavors, per cada vegada que la cambra escollida obri la porta, en l'ArrayPosicions la posició escollida 
+s'intercanviarà amb la posició que tingui el valor del contador. Seguidament, el contador s'incrementarà 
+en 1. Amb aquest mètode, aconseguim que el número aleatori no escolleixi dues vegades la mateixa cambra. 
+
+Ara bé, pot donar-se el cas que, per aleatorietat o haver-ne obert una prèviament, les darreres cambres
+que es troben en l'ArrayPosicions formin part del mateix conjunt. És en aquest moment quan el contador de 
+repeticions entra en joc. Per evitar entrar en un bucle infinit, a cada vegada que s'escolleix una cambra
+aquest s'incrementa en 1. Si la cambra escollida és vàlida i se li obre la porta, aquest es reinicia.
+Altrament, si aquest contador arriba a 10, l'interval de números aleatoris del Random pasa de ser d'entre
+( contador, numeroTotalCambres -1) a ( 0, numeroTotalCambres -1), eliminant d'aquesta manera el delimitador
+del contador de posicions. Això ens permet evitar bucles infinits i reduir el número d'iteracions innecesaries.
+
+Com a mètodes extra, hem afegit seleccionaParet(..), que com diu el nom, indica a quina paret obrir la porta
+segons el número aleatori, que va del 0 al 3. També hem afegit cambraAdjunta(..), que segons la posicio i la
+paret triades, retorna la cambra que també obrirà porta i comprovarà si formen part del mateix conjunt o no.
+Finalment, hem afegit també portaExt(..) que com diu el nom, indica si la paret escollida dona a l'exterior.
+
+Les raons per fer servir el vector en comptes de la total aleatorietat, han sigut simplement pel temps.
+Voliem evitar que fes iteracions innecesaries i, sobretot, voliem estalvia temps en les darreres 
+iteracions, on ja pràcticament totes les cambres formen part del mateix grup. Creiem que és una mesura
+útil i eficient i que compleix amb la seva finalitat.
+
+*/
+
+
+
+posicio seleccionaCambra(posicio arrayCambres[], nat i, nat quantes,nat r);
 //Pre: 
 //Post: 
 posicio cambraAdjunta(posicio pos, paret par);
@@ -10,7 +52,7 @@ posicio cambraAdjunta(posicio pos, paret par);
 bool portaExt(posicio pos, paret par, nat numFiles, nat numCol);
 //Pre:
 //Post: Retorna true si la porta és una porta exterior, altrament false. 
-paret seleccionaParet(int r);
+paret seleccionaParet(nat r);
 //Pre:
 //Post: Retorna la paret seleccionada. 
 
@@ -50,7 +92,7 @@ void dedalus::construir(laberint& M) throw(error) {
     paret par;
     nat cont = 0, repeticions;
     //nat iteracions = 0;
-    int ranCambra = 0, ranParet;
+    nat ranCambra = 0, ranParet;
     bool cambraValida;
 
     while (p.size() > 1) {      // Mentre hi hagi més d'un conjunt.
@@ -85,7 +127,6 @@ void dedalus::construir(laberint& M) throw(error) {
             p.unir(pos, pos2);
         }
   }
-  //std::cout<<"iteracions: "<<iteracions<<std::endl;
 }
 
 posicio cambraAdjunta(posicio pos, paret par) {
@@ -110,7 +151,7 @@ posicio cambraAdjunta(posicio pos, paret par) {
         return res;
 }
 
-paret seleccionaParet(int ran) {
+paret seleccionaParet(nat ran) {
     
     paret res; 
 
