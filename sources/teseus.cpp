@@ -13,7 +13,8 @@ nat calculIndex(posicio pos, nat cols);
 //Pre:
 //Post:
 
-void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]); 
+//void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]);
+void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPos[]); 
 //Pre:
 //Post:
 
@@ -80,9 +81,14 @@ void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]
 
         }
     }
-
+    
     // A cada posicio li posem els seus successors. 
     for (nat i = 0; i < totalVert; i++) {
+        successors(arrayPos[i].l,arrayPos[i],M, arrayPos);
+    }
+
+
+/*    for (nat i = 0; i < totalVert; i++) {
         std::list<info> lsucc;
         successors(lsucc,arrayPos[i],M, arrayPos);
 
@@ -90,7 +96,7 @@ void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]
             //std::cout<<"index: " << arrayPos[calculIndex((*it).pos, cols)].pos.first<<", "<<arrayPos[calculIndex((*it).pos, cols)].pos.second<<endl;
             arrayPos[i].l.push_back(arrayPos[calculIndex((*it).pos, cols)].pos);
         }
-    }
+    } */
     std::list<info> noVist;     // Lista dels nodes no explorats
 
     // Posem a 0 la distancia del punt inicial cap a ell mateix i el marquem com a visitat
@@ -131,13 +137,11 @@ void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]
                 // Si no es aixi augmentem la distancia i la marquem com a explorada
                 if (not (arrayPos[indexSuc].vis)) { 
                     arrayPos[indexSuc].vis = true;
-                    // Aquesta linea de distancia potser falla
                     //dist[indexSuc] = dist[indexActual]+1;
                     pred[indexSuc] = arrayPos[indexActual].pos;
                     // Afegim el node a la llista de pendents per explorar.
                     noVist.push_back(arrayPos[indexSuc]);
                     //rep++;
-                    // Parem el recorregut si ens trobem amb la posicio final
                     if (arrayPos[indexSuc].pos == final) {
                         cami =  true;
                     }
@@ -165,7 +169,8 @@ void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]
 }
 
 
-void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]) {
+//void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]) {
+void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPos[]) {
 
     cambra c = M(in.pos);
     if (c.porta_oberta(paret::NORD)) {
@@ -174,7 +179,8 @@ void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]
         info infoNovaN  = arrayPos[calculIndex(posNovaN, M.num_columnes())];
     
         if (not infoNovaN.vis) {
-            L.push_back(infoNovaN);
+            //L.push_back(infoNovaN);
+            L.push_back(posNovaN);
             }
         }
 
@@ -184,7 +190,8 @@ void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]
         info infoNovaS  = arrayPos[calculIndex(posNovaS, M.num_columnes())];
 
         if (not infoNovaS.vis) {
-         L.push_back(infoNovaS);
+         //L.push_back(infoNovaS);
+         L.push_back(posNovaS);
         }
     }
         
@@ -194,7 +201,8 @@ void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]
         info infoNovaE  = arrayPos[calculIndex(posNovaE, M.num_columnes())];
         
         if (not infoNovaE.vis) {
-            L.push_back(infoNovaE);
+            //L.push_back(infoNovaE);
+            L.push_back(posNovaE);
             }
         }        
 
@@ -204,7 +212,8 @@ void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]
         info infoNovaO  = arrayPos[calculIndex(posNovaO, M.num_columnes())];
 
         if (not infoNovaO.vis) {
-            L.push_back(infoNovaO);
+            //L.push_back(infoNovaO);
+            L.push_back(posNovaO);
         }   
     }
 }
