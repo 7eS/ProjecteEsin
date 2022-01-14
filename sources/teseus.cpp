@@ -8,7 +8,7 @@ using namespace std;
 struct info{
     posicio pos;
     bool vis;
-    std::list<posicio> l;
+    std::list<posicio> l; //successors 
 };
 
 //typedef vector<vector<int> > arestes; //Llista d'adjacencia de integers
@@ -61,13 +61,15 @@ void rec_amplada(info &in, const laberint & M, std::list<posicio> & L);
     
     // Mirem si les posicions donades són accesibles.
     
-    if (not cinici.porta_oberta(paret::NORD) and not cinici.porta_oberta(paret::SUD) and
-          not cinici.porta_oberta(paret::EST) and not cinici.porta_oberta(paret::OEST) )
-              throw error (SenseSolucio);
-    
-    if (not cfi.porta_oberta(paret::NORD) and not cfi.porta_oberta(paret::SUD) and
-          not cfi.porta_oberta(paret::EST) and not cfi.porta_oberta(paret::OEST) )
-              throw error (SenseSolucio);
+    if(inici != final){
+        if (not cinici.porta_oberta(paret::NORD) and not cinici.porta_oberta(paret::SUD) and
+            not cinici.porta_oberta(paret::EST) and not cinici.porta_oberta(paret::OEST) )
+                throw error (SenseSolucio);
+        
+        if (not cfi.porta_oberta(paret::NORD) and not cfi.porta_oberta(paret::SUD) and
+            not cfi.porta_oberta(paret::EST) and not cfi.porta_oberta(paret::OEST) )
+                throw error (SenseSolucio);
+    }
     
 
     //Creem la matriu d'adjacència.     
@@ -98,6 +100,7 @@ void rec_amplada(info &in, const laberint & M, std::list<posicio> & L);
         }
     }
 
+    // A cada posicio li posem els seus successors. 
     for( nat i = 0; i < totalVert; i++){
         std::list<info> lsucc;
         successors(lsucc,arrayPos[i],M, arrayPos);
@@ -106,18 +109,19 @@ void rec_amplada(info &in, const laberint & M, std::list<posicio> & L);
             //std::cout<<"index: " << arrayPos[calculIndex((*it).pos, cols)].pos.first<<", "<<arrayPos[calculIndex((*it).pos, cols)].pos.second<<endl;
             arrayPos[i].l.push_back(arrayPos[calculIndex((*it).pos, cols)].pos);
         }
-
     }
     std::list<info> noVist; //Lista dels nodes no explorats
 
-    info ini = arrayPos[calculIndex(inici, cols)];
-    dist[calculIndex(inici, cols)] = 0; // El node inicial està a distància zero
-    ini.vis = true;
-    noVist.push_back(ini);
+    nat in = calculIndex(inici, cols);
+    dist[in] = 0; // El node inicial està a distància zero
+    arrayPos[in].vis = true;
+    noVist.push_back(arrayPos[in]);
+    // Potse cal afegir el predecors del source.
+    //pre[]
 
 
     //funcio print per veure si funciona
-/*    info test;
+/*  info test;
     while(not noVist.empty()){
         test = noVist.front();
         noVist.pop_front();
@@ -126,88 +130,97 @@ void rec_amplada(info &in, const laberint & M, std::list<posicio> & L);
             cout<<(*it).first<<", "<<(*it).second<<" - ";
         }
         cout<<endl;
-    } */
+    } 
+*/
+    //funcio print per veure si funciona
 
-
-
-
-/*    //funcio print per veure si funciona
+/*    cout<<"test, arraypos0:abans canvi "<<arrayPos[0].pos.first<<" ,"<<arrayPos[0].pos.second<<" vist: "<<arrayPos[0].vis<<endl;
+    arrayPos[0].vis = true;
+    cout<<"test, arraypos0 despres canvi: "<<arrayPos[0].pos.first<<" ,"<<arrayPos[0].pos.second<<" vist: "<<arrayPos[0].vis<<endl;
+   //funcio print per veure si funciona
+    noVist.push_back(arrayPos[0]);
+    info test = noVist.front();
+    cout<<"test, arraypos0: "<<test.pos.first<<" ,"<<test.pos.second<<" vist: "<<test.vis<<endl;
+*/
+/*
     info test;
     for( nat i = 0; i < totalVert; i++){
         test = arrayPos[i];
-        //cout<<"pos: "<<test.pos.first<<", "<<test.pos.second<<" successor: ";
+        std::cout<<"pos: "<<test.pos.first<<", "<<test.pos.second<<" successor: ";
         for(list<posicio>::iterator it = test.l.begin(); it != test.l.end(); it++){
-            cout<<(*it).first<<", "<<(*it).second<<" - ";
+            std::cout<<(*it).first<<", "<<(*it).second<<" - ";
         }
-        cout<<endl;
-    }
-              } */
-
+        std::cout<<endl;
+    } 
+      */        
+               
     nat indexActual;
     nat indexSuc;
     bool cami = false; // booleà que ens indica si hem trobat la posicio final o no
+    //nat rep = 0;
 
-    // FALLO: LA informacion que obtenemos en no vist no es acorde con la que tenemos en la matriz!
-    // No accedemos correctamente a la posicion de memoria o similar. Marcar bien los vistos!
-    while(not noVist.empty() and not cami){
-        // Explotem el node
-        info actual = noVist.front();
-        noVist.pop_front();
-        indexActual = calculIndex(actual.pos,cols);
-        std::cout<<"indexActual:"<<indexActual<<std::endl;
-        // Recorrem els successors del node explotat.
+    if(inici == final){
+        posicio res(arrayPos[calculIndex(inici,cols)].pos);
+        L.push_back(res);   
+    }
+    else{
+        while (not noVist.empty() and not cami) {
+            // Explotem el node
+            info actual = noVist.front();
+            noVist.pop_front();
+            indexActual = calculIndex(actual.pos,cols);
+            //std::cout<<"indexActual:"<<indexActual<<std::endl;
+            // Recorrem els successors del node explotat.
 
-        info test;
+        /*    info test;
 
-            test = arrayPos[indexActual];
-            cout<<"pos: "<<actual.pos.first<<", "<<actual.pos.second<<" successor: ";
-            for(list<posicio>::iterator it = actual.l.begin(); it != actual.l.end(); it++){
-                cout<<(*it).first<<", "<<(*it).second<<" - ";
-            }
-            cout<<endl; 
+                test = arrayPos[indexActual];
+                cout<<"pos: "<<actual.pos.first<<", "<<actual.pos.second<<" successor: ";
+                for(list<posicio>::iterator it = actual.l.begin(); it != actual.l.end(); it++){
+                    cout<<(*it).first<<", "<<(*it).second<<" - ";
+                }
+                cout<<endl; */
 
 
-        for(list<posicio>::iterator it = actual.l.begin(); it != actual.l.end(); it++){
-            cout<<"hola2"<<endl;
-            indexSuc = calculIndex(*it, cols);
-            info explorat = arrayPos[indexSuc];
-            // Comprovem si ja haviem visitat aquesta posicio. 
-            // Si no es aixi augmentem la distancia i la marquem com a explorada
-            if(not explorat.vis){ 
-                cout<<"hola3"<<endl;
-                explorat.vis = true;
-                // Aquesta linea de distancia potser falla
-                dist[indexSuc] = dist[indexActual]+1;
-                pred[indexSuc] = actual.pos;
-                // Afegim el node a la llista de pendents per explorar.
-                noVist.push_back(explorat);
-
-                // Parem el recorregut si ens trobem amb la posicio final
-                if(explorat.pos == final){
-                    cout<<"hola4"<<endl;
-                    cami =  true;
+            for (list<posicio>::iterator it = actual.l.begin(); it != actual.l.end() and not cami; it++){
+                indexSuc = calculIndex(*it, cols);
+                // Comprovem si ja haviem visitat aquesta posicio. 
+                // Si no es aixi augmentem la distancia i la marquem com a explorada
+                if (not (arrayPos[indexSuc].vis)) { 
+                    arrayPos[indexSuc].vis = true;
+                    // Aquesta linea de distancia potser falla
+                    dist[indexSuc] = dist[indexActual]+1;
+                    pred[indexSuc] = arrayPos[indexActual].pos;
+                    // Afegim el node a la llista de pendents per explorar.
+                    noVist.push_back(arrayPos[indexSuc]);
+                    //rep++;
+                    // Parem el recorregut si ens trobem amb la posicio final
+                    if (arrayPos[indexSuc].pos == final) {
+                        cami =  true;
+                    }
                 }
             }
+        } 
+
+        //std::cout<<"explorats: "<<rep<<endl;
+        // Si no hem trovat camí previament, retornem un error.
+        if(not cami) throw error (SenseSolucio);
+
+        // Prenem el camí més curt del que hem explorat.
+        posicio previ = final;
+        nat indexPrevi = calculIndex(previ,cols);
+        L.push_back(previ);
+        // Mentre la posicio previa sigui diferent a la sentinella.
+        
+        while (pred[indexPrevi] != senti){
+            indexPrevi = calculIndex(previ,cols);
+            L.push_front(pred[indexPrevi]);
+            previ = pred[indexPrevi];
         }
-        cami = false;
-    } 
-    cout<<"hola5"<<endl;
-
-    // Si no hem trovat camí previament, retornem un error.
-    if(not cami) throw error (SenseSolucio);
-
-    // Prenem el camí més curt del que hem explorat.
-    posicio previ = final;
-    nat indexPrevi = calculIndex(previ,cols);
-    L.push_back(previ);
-    // Mentre la posicio previa sigui diferent a la sentinella.
-    
-    while (pred[indexPrevi] != senti){
-        indexPrevi = calculIndex(previ,cols);
-        L.push_back(pred[indexPrevi]);
-        previ = pred[indexPrevi];
-    }
-              }
+        //Eliminem la sentinella (0,0)
+        L.pop_front();
+    }              
+}
 
 
 
