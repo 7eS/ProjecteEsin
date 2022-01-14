@@ -8,6 +8,7 @@ using namespace std;
 struct info{
     posicio pos;
     bool vis;
+    std::list<posicio> l;
 };
 
 //typedef vector<vector<int> > arestes; //Llista d'adjacencia de integers
@@ -74,13 +75,15 @@ void rec_amplada(info &in, const laberint & M, std::list<posicio> & L);
     nat cols = M.num_columnes();
     nat totalVert = files*cols;
     //bool mAdj[totalVert];
-    //nat dist[totalVert];
+    nat dist[totalVert];
     //posicio arrayPos[totalVert];
     info arrayPos[totalVert];
-    //nat inf = 999999;
+    posicio pred[totalVert];
+    nat inf = 999999;
 
     // Potser nomes hauriem d'aprofitar la part superior de la matriu. j = i
     nat k = 0;
+    posicio senti(0,0); //sentinella 
     for (nat i = 1; i <= M.num_files(); i++) {
         for (nat j = 1; j <= M.num_columnes(); j++, k++) {
             info in;
@@ -88,25 +91,125 @@ void rec_amplada(info &in, const laberint & M, std::list<posicio> & L);
             in.vis = false;             // Indica si s'ha visitat o no. 
             in.pos = p;
             arrayPos[k] = in;
+            pred[k] = senti; 
             //mAdj[k] = false;
-            //dist[k] = inf;
+            dist[k] = inf;
             //arrayPos[k] = p;
-
         }
     }
- /*   info ini = arrayPos[calculIndex(inici, cols)];
-    std::list<info> noVist;
+
+    for( nat i = 0; i < totalVert; i++){
+        std::list<info> lsucc;
+        successors(lsucc,arrayPos[i],M, arrayPos);
+
+        for(list<info>::iterator it = lsucc.begin(); it != lsucc.end(); it++){
+            //std::cout<<"index: " << arrayPos[calculIndex((*it).pos, cols)].pos.first<<", "<<arrayPos[calculIndex((*it).pos, cols)].pos.second<<endl;
+            arrayPos[i].l.push_back(arrayPos[calculIndex((*it).pos, cols)].pos);
+        }
+
+    }
+    std::list<info> noVist; //Lista dels nodes no explorats
+
+    info ini = arrayPos[calculIndex(inici, cols)];
+    dist[calculIndex(inici, cols)] = 0; // El node inicial està a distància zero
     ini.vis = true;
     noVist.push_back(ini);
 
-    while(){
 
+    //funcio print per veure si funciona
+/*    info test;
+    while(not noVist.empty()){
+        test = noVist.front();
+        noVist.pop_front();
+        cout<<"pos: "<<test.pos.first<<", "<<test.pos.second<<" successor: ";
+        for(list<posicio>::iterator it = test.l.begin(); it != test.l.end(); it++){
+            cout<<(*it).first<<", "<<(*it).second<<" - ";
+        }
+        cout<<endl;
+    } */
+
+
+
+
+/*    //funcio print per veure si funciona
+    info test;
+    for( nat i = 0; i < totalVert; i++){
+        test = arrayPos[i];
+        //cout<<"pos: "<<test.pos.first<<", "<<test.pos.second<<" successor: ";
+        for(list<posicio>::iterator it = test.l.begin(); it != test.l.end(); it++){
+            cout<<(*it).first<<", "<<(*it).second<<" - ";
+        }
+        cout<<endl;
+    }
+              } */
+
+    nat indexActual;
+    nat indexSuc;
+    bool cami = false; // booleà que ens indica si hem trobat la posicio final o no
+
+    // FALLO: LA informacion que obtenemos en no vist no es acorde con la que tenemos en la matriz!
+    // No accedemos correctamente a la posicion de memoria o similar. Marcar bien los vistos!
+    while(not noVist.empty() and not cami){
+        // Explotem el node
         info actual = noVist.front();
         noVist.pop_front();
+        indexActual = calculIndex(actual.pos,cols);
+        std::cout<<"indexActual:"<<indexActual<<std::endl;
+        // Recorrem els successors del node explotat.
 
-        for(nat i = 0)
+        info test;
 
-    } */
+            test = arrayPos[indexActual];
+            cout<<"pos: "<<actual.pos.first<<", "<<actual.pos.second<<" successor: ";
+            for(list<posicio>::iterator it = actual.l.begin(); it != actual.l.end(); it++){
+                cout<<(*it).first<<", "<<(*it).second<<" - ";
+            }
+            cout<<endl; 
+
+
+        for(list<posicio>::iterator it = actual.l.begin(); it != actual.l.end(); it++){
+            cout<<"hola2"<<endl;
+            indexSuc = calculIndex(*it, cols);
+            info explorat = arrayPos[indexSuc];
+            // Comprovem si ja haviem visitat aquesta posicio. 
+            // Si no es aixi augmentem la distancia i la marquem com a explorada
+            if(not explorat.vis){ 
+                cout<<"hola3"<<endl;
+                explorat.vis = true;
+                // Aquesta linea de distancia potser falla
+                dist[indexSuc] = dist[indexActual]+1;
+                pred[indexSuc] = actual.pos;
+                // Afegim el node a la llista de pendents per explorar.
+                noVist.push_back(explorat);
+
+                // Parem el recorregut si ens trobem amb la posicio final
+                if(explorat.pos == final){
+                    cout<<"hola4"<<endl;
+                    cami =  true;
+                }
+            }
+        }
+        cami = false;
+    } 
+    cout<<"hola5"<<endl;
+
+    // Si no hem trovat camí previament, retornem un error.
+    if(not cami) throw error (SenseSolucio);
+
+    // Prenem el camí més curt del que hem explorat.
+    posicio previ = final;
+    nat indexPrevi = calculIndex(previ,cols);
+    L.push_back(previ);
+    // Mentre la posicio previa sigui diferent a la sentinella.
+    
+    while (pred[indexPrevi] != senti){
+        indexPrevi = calculIndex(previ,cols);
+        L.push_back(pred[indexPrevi]);
+        previ = pred[indexPrevi];
+    }
+              }
+
+
 
 
     //Formula per accedir a la posicio de l'array a on es troba la nostra coordenda:
@@ -115,6 +218,10 @@ void rec_amplada(info &in, const laberint & M, std::list<posicio> & L);
     //dist[calculIndex(inici,cols)] = 0;
     //mAdj[calculIndex(inici,cols)] = true;
 
+
+
+
+/*
     bool cami = false; 
     //posicio aux = inici;
     //nat indexMin;
@@ -163,8 +270,8 @@ void rec_amplada(info &in, const laberint & M, std::list<posicio> & L);
                // rec_amplada(arrayPos[i], M, L, arrayPos); 
             }      
         }
-    }
-}
+    } 
+}  */
 /*
 void rec_amplada(info &in, const laberint & M, std::list<posicio> & L){
 

@@ -1,4 +1,4 @@
-OPCIONS = -g -O0 -Wall -Wextra -Werror -std=c++11 -ansi -Wimplicit-fallthrough=0 
+OPCIONS = -g -O0 -Wall -Wextra  -std=c++11 -ansi -Wimplicit-fallthrough=0 
 
 program.exe: driver_maze.o cambra.o laberint.o teseus.o dedalus.o check.o
 	g++ -o program.exe driver_maze.o cambra.o laberint.o teseus.o dedalus.o check.o -lesin
