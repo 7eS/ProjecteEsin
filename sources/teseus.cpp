@@ -39,8 +39,7 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
           or final.second < 1 or final.second > M.num_columnes())
                throw error (IniciFinalNoValid);
                       
-    cambra cinici = M(inici);     // Cambra inicial. 
-    cambra cfi = M(final);        // Cambra destí. 
+    cambra cinici = M(inici),cfi = M(final);        
     
 
     // Si la posicio inicial i final son diferents, comprovarem si son accesibles.
@@ -55,9 +54,7 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
                 throw error (SenseSolucio);
     }
     
-    nat files = M.num_files();
-    nat cols = M.num_columnes();
-    nat totalVert = files*cols;
+    nat files = M.num_files(), cols = M.num_columnes(), totalVert = files*cols;
     //nat dist[totalVert];
     //Creem la matriu d'adjacència.     
     info arrayPos[totalVert];
@@ -81,33 +78,8 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
 
         }
     }
-    
-    // A cada posicio li posem els seus successors. 
-    for (nat i = 0; i < totalVert; i++) {
-        successors(arrayPos[i].l,arrayPos[i],M, arrayPos);
-    }
 
 
-/*    for (nat i = 0; i < totalVert; i++) {
-        std::list<info> lsucc;
-        successors(lsucc,arrayPos[i],M, arrayPos);
-
-        for (list<info>::iterator it = lsucc.begin(); it != lsucc.end(); it++) {
-            //std::cout<<"index: " << arrayPos[calculIndex((*it).pos, cols)].pos.first<<", "<<arrayPos[calculIndex((*it).pos, cols)].pos.second<<endl;
-            arrayPos[i].l.push_back(arrayPos[calculIndex((*it).pos, cols)].pos);
-        }
-    } */
-    std::list<info> noVist;     // Lista dels nodes no explorats
-
-    // Posem a 0 la distancia del punt inicial cap a ell mateix i el marquem com a visitat
-    nat in = calculIndex(inici, cols);
-    //dist[in] = 0;              
-    arrayPos[in].vis = true;
-    noVist.push_back(arrayPos[in]);
-               
-    nat indexActual;
-    nat indexSuc;
-    bool cami = false;          // Booleà que ens indica si hem trobat la posicio final o no.
     //nat rep = 0;
 
     if (inici == final) {
@@ -115,11 +87,33 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
         L.push_back(res);   
     }
     else{
+
+        // A cada posicio li posem els seus successors. 
+/*      for (nat i = 0; i < totalVert; i++) {
+            successors(arrayPos[i].l,arrayPos[i],M, arrayPos);
+        } */
+
+        std::list<info> noVist;     // Lista dels nodes no explorats
+
+        // Marquem com a visitat el punt inicial
+        nat in = calculIndex(inici, cols);
+        //Linia seguent nova. Comentar
+        //successors(arrayPos[in].l,arrayPos[in],M, arrayPos);
+        arrayPos[in].vis = true;
+        noVist.push_back(arrayPos[in]);
+                
+        nat indexActual, indexSuc;
+        bool cami = false;  // Booleà que ens indica si hem trobat la posicio final o no.
+        //bool primer = true;   
+
         while (not noVist.empty() and not cami) {
             // Explotem el node
-            info actual = noVist.front();
+            indexActual = calculIndex(noVist.front().pos,cols);
+            successors(noVist.front().l,noVist.front(),M, arrayPos);
+
+            info actual =  noVist.front();
             noVist.pop_front();
-            indexActual = calculIndex(actual.pos,cols);
+
 
         /*    info test;
 
@@ -130,12 +124,13 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
                 }
                 cout<<endl; */
 
-            // Recorrem els successors del node explotat.
+            // Recorrem els successors del node explotat. Seran com a màxim 4 iteracions.
             for (list<posicio>::iterator it = actual.l.begin(); it != actual.l.end() and not cami; it++){
                 indexSuc = calculIndex(*it, cols);
                 // Comprovem si ja haviem visitat aquesta posicio. 
                 // Si no es aixi augmentem la distancia i la marquem com a explorada
                 if (not (arrayPos[indexSuc].vis)) { 
+                    //indexActual = calculIndex(noVist.front().pos,cols);
                     arrayPos[indexSuc].vis = true;
                     //dist[indexSuc] = dist[indexActual]+1;
                     pred[indexSuc] = arrayPos[indexActual].pos;
