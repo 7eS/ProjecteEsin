@@ -7,9 +7,10 @@
 class paret {
 public:
   enum {NORD, EST, SUD, OEST, NO_DIR};
-
+  // Cost en temps: Θ(1) 
   paret(int p = NO_DIR) throw() : _p(p) {}
 
+  //Cost en temps: Θ(1)
   paret(const std::string& s) throw() {
     _p = NO_DIR;
     if (s == "nord" || s == "NORD" || s == "N") _p = NORD;
@@ -18,11 +19,13 @@ public:
     if (s == "oest" || s == "OEST" || s == "O") _p = OEST;
   }
 
+  //Cost en temps: Θ(1)
   paret& operator++() throw() {
     _p = (_p == NO_DIR) ? NO_DIR : _p + 1;
     return *this;
   }
 
+  //Cost en temps: Θ(1)
   operator int() const throw() {
     return _p;
   }

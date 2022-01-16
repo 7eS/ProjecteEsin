@@ -2,32 +2,41 @@
 using namespace std;
 
 //IMPLEMENTACIÓ DE LA CLASSE TESEUS. 
+/*
 
+to do. 
+
+
+*/
 struct info{
     posicio pos;
     bool vis;
-    std::list<posicio> l; //successors 
+    //std::list<posicio> l; //successors 
 };
 
+
 nat calculIndex(posicio pos, nat cols); 
-//Pre:
-//Post:
+//Pre: pos es una posició dintre de laberint, cols és el número de columnes del laberint. 
+//Post: Retorna l'index en què es troba la cambra de posició pos.
 
-//void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]);
-void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPos[]); 
-//Pre:
-//Post:
 
-  // Genera una llista de posicions que conté el camí mínim. El primer element
-  // d'aquesta llista serà la posició inici, i l'última la posició final.
-  // Una posició respecte a la seva anterior o posterior ha de ser consecutiva.
-  // Dues posicions són consecutives si i només si la diferència de les primeres
-  // components de les posicions és en valor absolut 1 i les segones components
-  // són iguals, o si la diferència de les segones components és en valor
-  // absolut 1 i les primeres components són iguals. Es produeix un error si no
-  // hi ha cap camí que vagi des de la cambra inicial del laberint a la final,
-  // o si la cambra inicial o final no són vàlides.
-  void teseus::buscar(const laberint & M, const posicio & inici, const posicio & final, 
+void successors(std::list<posicio> &l, info &in, const laberint & M, info arrayPos[]); 
+//void successors(info &in, const laberint & M, info arrayPos[]); 
+//Pre: in conté informació sobre la cambra escollida, M és el laberint, arrayPos[] és no buit. 
+//Post: Adjunta a in els seus corresponents successors.
+
+
+// Genera una llista de posicions que conté el camí mínim. El primer element
+// d'aquesta llista serà la posició inici, i l'última la posició final.
+// Una posició respecte a la seva anterior o posterior ha de ser consecutiva.
+// Dues posicions són consecutives si i només si la diferència de les primeres
+// components de les posicions és en valor absolut 1 i les segones components
+// són iguals, o si la diferència de les segones components és en valor
+// absolut 1 i les primeres components són iguals. Es produeix un error si no
+// hi ha cap camí que vagi des de la cambra inicial del laberint a la final,
+// o si la cambra inicial o final no són vàlides.
+// Cost en temps: Θ(1)  Cost en espai: -
+void teseus::buscar(const laberint & M, const posicio & inici, const posicio & final, 
               std::list<posicio> & L) throw(error) {
                 
     // Comprovem si la posició és vàlida
@@ -39,9 +48,8 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
           or final.second < 1 or final.second > M.num_columnes())
                throw error (IniciFinalNoValid);
                       
-    cambra cinici = M(inici),cfi = M(final);        
     
-
+    cambra cinici = M(inici),cfi = M(final);        
     // Si la posicio inicial i final son diferents, comprovarem si son accesibles.
     if (inici != final) {
 
@@ -55,11 +63,9 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
     }
     
     nat files = M.num_files(), cols = M.num_columnes(), totalVert = files*cols;
-    //nat dist[totalVert];
     //Creem la matriu d'adjacència.     
     info arrayPos[totalVert];
     posicio pred[totalVert];
-    //nat inf = 999999;
 
     nat k = 0;
     posicio senti(0,0);  // Sentinella 
@@ -69,35 +75,23 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
             info in;
             posicio p(i,j);
             // Afegim els valors a l'atribut de l'struct
-            in.vis = false;             // Indica si s'ha visitat o no. 
+            in.vis = false;             
             in.pos = p;
             // Afegim la informacio a l'array.
             arrayPos[k] = in;
             pred[k] = senti; 
-            //dist[k] = inf;
-
         }
     }
-
-
-    //nat rep = 0;
-
     if (inici == final) {
         posicio res(arrayPos[calculIndex(inici,cols)].pos);
         L.push_back(res);   
     }
     else{
 
-        // A cada posicio li posem els seus successors. 
-/*      for (nat i = 0; i < totalVert; i++) {
-            successors(arrayPos[i].l,arrayPos[i],M, arrayPos);
-        } */
-
         std::list<info> noVist;     // Lista dels nodes no explorats
 
         // Marquem com a visitat el punt inicial
         nat in = calculIndex(inici, cols);
-        //Linia seguent nova. Comentar
         //successors(arrayPos[in].l,arrayPos[in],M, arrayPos);
         arrayPos[in].vis = true;
         noVist.push_back(arrayPos[in]);
@@ -108,8 +102,11 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
 
         while (not noVist.empty() and not cami) {
             // Explotem el node
-            indexActual = calculIndex(noVist.front().pos,cols);
-            successors(noVist.front().l,noVist.front(),M, arrayPos);
+            //indexActual = calculIndex(noVist.front().pos,cols);
+
+            std::list<posicio> l; //successors 
+            successors(l,noVist.front(),M, arrayPos);
+            //successors(noVist.front(),M, arrayPos);
 
             info actual =  noVist.front();
             noVist.pop_front();
@@ -125,14 +122,14 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
                 cout<<endl; */
 
             // Recorrem els successors del node explotat. Seran com a màxim 4 iteracions.
-            for (list<posicio>::iterator it = actual.l.begin(); it != actual.l.end() and not cami; it++){
+            //for (list<posicio>::iterator it = actual.l.begin(); it != actual.l.end() and not cami; it++){
+            for (list<posicio>::iterator it = l.begin(); it != l.end() and not cami; it++){
                 indexSuc = calculIndex(*it, cols);
                 // Comprovem si ja haviem visitat aquesta posicio. 
                 // Si no es aixi augmentem la distancia i la marquem com a explorada
                 if (not (arrayPos[indexSuc].vis)) { 
-                    //indexActual = calculIndex(noVist.front().pos,cols);
+                    indexActual = calculIndex(actual.pos,cols);
                     arrayPos[indexSuc].vis = true;
-                    //dist[indexSuc] = dist[indexActual]+1;
                     pred[indexSuc] = arrayPos[indexActual].pos;
                     // Afegim el node a la llista de pendents per explorar.
                     noVist.push_back(arrayPos[indexSuc]);
@@ -144,14 +141,12 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
             }
         } 
 
-        // Si no hem trovat camí previament, retornem un error.
         if (not cami) throw error (SenseSolucio);
 
         // Prenem el camí més curt del que hem explorat.
         posicio previ = final;
         nat indexPrevi = calculIndex(previ,cols);
         L.push_back(previ);
-        // Mentre la posicio previa sigui diferent a la sentinella.
         
         while (pred[indexPrevi] != senti) {
             indexPrevi = calculIndex(previ,cols);
@@ -164,8 +159,10 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
 }
 
 
-//void successors(std::list<info> &L, info in, const laberint & M, info arrayPos[]) {
-void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPos[]) {
+
+// Cost en temps: Θ()  Cost en espai:
+//void successors( info & in, const laberint & M, info arrayPos[]) {
+void successors(std::list<posicio> &L, info &in, const laberint & M, info arrayPos[]) {
 
     cambra c = M(in.pos);
     if (c.porta_oberta(paret::NORD)) {
@@ -174,8 +171,8 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
         info infoNovaN  = arrayPos[calculIndex(posNovaN, M.num_columnes())];
     
         if (not infoNovaN.vis) {
-            //L.push_back(infoNovaN);
             L.push_back(posNovaN);
+            //in.l.push_back(posNovaN);
             }
         }
 
@@ -185,8 +182,8 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
         info infoNovaS  = arrayPos[calculIndex(posNovaS, M.num_columnes())];
 
         if (not infoNovaS.vis) {
-         //L.push_back(infoNovaS);
          L.push_back(posNovaS);
+         //in.l.push_back(posNovaS);
         }
     }
         
@@ -196,8 +193,8 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
         info infoNovaE  = arrayPos[calculIndex(posNovaE, M.num_columnes())];
         
         if (not infoNovaE.vis) {
-            //L.push_back(infoNovaE);
             L.push_back(posNovaE);
+            //in.l.push_back(posNovaE);
             }
         }        
 
@@ -207,14 +204,13 @@ void successors(std::list<posicio> &L, info in, const laberint & M, info arrayPo
         info infoNovaO  = arrayPos[calculIndex(posNovaO, M.num_columnes())];
 
         if (not infoNovaO.vis) {
-            //L.push_back(infoNovaO);
             L.push_back(posNovaO);
+            //in.l.push_back(posNovaO);
         }   
     }
 }
 
-//Formula per accedir a la posicio de l'array a on es troba la nostra coordenda:
-// numCols*(pos.first-1)+1+(pos.second-1)
+// Cost en temps: Θ(1)  Cost en espai: -
  nat calculIndex(posicio pos, nat cols) {
 
      nat index = cols*(pos.first-1)+(pos.second-1);

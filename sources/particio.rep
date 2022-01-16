@@ -2,75 +2,98 @@
 
 /*
 
+Per a fer la partició, després de pensar diferentes alternatives, vam implementar un diccionari en 
+forma d'AVL. Per com enteníem la partició, va ser el que al final ens va semblar més natural.
+Primerament, vam considerar la idea d'un array al qual cada posició tingués els representants, però
+la vam descartar ràpid, perquè tot i que la implementació a primer cop d'ull semblés senzilla, els
+costos de les operacions eren tots molt elevats, la majoria de Θ(n) i molt probablement a la llarga 
+una mica més. Després vam considerar la idea de fer servir el BST, que va acabar evolucionant a AVL per
+tal d'evitar un cost lineal en cas que l'ordre d'inserció ens quedés en una mena de llista. 
+La darrera idea que vam tenir però que no vam implementar va ser la d'una taula de dispersió. Ens semblava
+una idea interessant, però no acabàvem de veure clara la implementació de certs mètodes com el d'unió de 
+dos grups i la seva cerca del representant. A més, teníem dubtes sobre si a l'hora de la veritat ens
+podríem trobar amb algun element al qual no li poguèssim aplicar el hash correctament. Per tant, vam
+descartar implementar una taula de hash perquè no acabava d'encaixar amb la idea que teníem nosaltres
+de la partició.
 
+Aquestes van ser principalment les raons per les quals vam decidir fer servir un AVL. El cost màxim que
+ens trobaríem seria un Θ(log(n)) a l'hora d'insertar, de cercar i de fer les unions. 
 
-
-
+Per facilitar-nos la implementació, hem afegit una sèrie de mètodes privats que ens serviran per estalviar
+linies de codi, fer-lo molt més clar a la lectura i també més eficient. Aquest complementen la decisió
+de disseny de l'AVL, per exemple les que mesuren l'altura de l'arbre, les que fan la rotació dels nodes 
+a la dreta o esquerra i la que cerca el representants de cada node. 
 
 */
 
 
-
-// Primera idea de la partició.
 struct node{
     T _clau;
     node *_fesq;
     node *_fdret;
-    node *_repre;       // Aquest pot estar lligat al pare o més endavant als avis.
-    nat _numElemConjunt; // Indica el numero d'elementes que té un conjunt
+    node *_repre;
+    nat _numElemConjunt;
     nat _altura;
 };
 
-node *_arrel;           // Farà de punter arrel.
+node *_arrel;
 nat _lim;               // Comptador dels elements que pot tenir com a maxim la partició. 
 nat _quantsGrups;
 nat _quantsElements;   // Total elements de la partició
 
 
 node* find_repre(const node *p)const; 
-//Pre: x és un element que pertany a un grup de la partició. 
-//Post: retorna l'element representant del grup al qual pertany x.  
+//Pre: p és un punter a un element que pertany a un grup de la partició. 
+//Post: Retorna l'element representant del grup al qual pertany p.  
 
 node* afegir(node *p, const T &x) throw(error);
-//Pre: x és l'element a afegir a la partició, pn és el punter de node que recorre la partició.
-//Post: Si l'element x no es trobava a la particó llavors s'afegeix. Altrament, no fa res.
+//Pre: x és l'element a afegir a la partició, p és el punter de node que recorre la partició.
+//Post: Si l'element x no es trobava a la partició, llavors s'afegeix. Altrament, no fa res.
 
 static node* copia_nodes(node *m);
-//Pre: Cert.
-//Post: Retorna una particio amb els nodes copiats de m.
+//Pre: m és un node que pertany a la partició a copiar.  
+//Post: Retorna una partició amb tots els nodes copiats de m.
 
 static void esborra_nodes(node *pd);
-//Pre: Cert.
-//Post: Elimina tots els nodes de la partició.
+//Pre: pd és un node que pertany a la partició a esborrar. 
+//Post: Elimina tots els nodes de la partició a la qual pertany pd.
 
 node* hi_es(const T &x)const throw(error);
-//Pre: x és l'element a cercar a la partició, p és el punter de node que recorre la partició. 
-//Post: Retorna true si l'element x es troba a la partició, altrament false. 
+//Pre: x és la clau de l'element a cercar a la partició.
+//Post: Retorna el node amb clau si x es troba a la partició, altrament retorna null. 
 
-// Por eliminar
+// Funció útil per a comprovar la forma de la partició.
 void print(node *p, int prof);
+//Pre: p és un node que pertany a la partició, prof és un enter que indica la profunditat 
+//actual a la que s'està baixant. 
+//Post: Imprimeix per pantalla la partició. 
 
 node* rotaDreta(node *pdreta);
-//Pre:  p és un punter node ___
-//Post: Gira a la dreta el subarbre arrelat amb pdreta. Retorna el nou node arrel després d'haver fet la rotació. 
+//Pre: pdreta és un node arrel del subarbre que es vol rotar. 
+//Post: Gira a la dreta el subarbre arrelat amb pdreta. 
+// Retorna el nou node arrel després d'haver fet la rotació. 
 
 node* rotaEsquerra(node *pesq);
-//Pre: x és un node ___
-//Post: Gira a l'esquerra el subarbre arrelat amb pesq. Retorna el nou node arrel després d'haver fet la rotació. 
+//Pre: pesq és un node arrel del subarbre que es vol rotar. 
+//Post: Gira a l'esquerra el subarbre arrelat amb pesq. 
+// Retorna el nou node arrel després d'haver fet la rotació. 
 
 int obteEquilibri(node *p);
-//Pre: N és un node ___
-//Post: retorna el factor de balanç del node N. 
+//Pre: p és un node que pertany a la partició. 
+//Post: Retorna el factor de balanç del node p. 
 
 nat altura(node *p);
-//Pre: p es un node del conjunt
-//Post: retorna l'altura del node p
+//Pre: p és un node que pertany a la partició. 
+//Post: Retorna l'altura del node p.
 
 nat maxim(nat a, nat b);
-//Pre: rep dos naturals
-//Post: retorna el maxim d'ambdos naturals
+//Pre: a i b són dos naturals.
+//Post: Retorna el màxim d'ambdós naturals.
 
-static node* nouNode( const T &clau);
+static node* nouNode(const T &x); 
+//Pre: x és la clau del node. 
+//Post: Retorna un nou node amb clau x. 
 
 void copia_repres(node *p, node *p2);
-
+//Pre: p i p2 són nodes que pertanyen a la partició. 
+//Post: p té el mateix representant que p2. 

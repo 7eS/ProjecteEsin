@@ -2,18 +2,19 @@
 
 /* 
 
-Per a la represetnació de cambra hem decidit fer servir 4 booleans.
+Per a la representació de cambra, hem decidit fer servir quatre booleans.
 Cada bool representa una porta. Quan la porta està oberta aquest és true, altrament serà false.
 
-A més, hem afegit un contador de quantes portes obertes té una cambra. D'aquesta manera, podem
+A més, hem afegit un comptador de quantes portes obertes té una cambra. D'aquesta manera, podem
 fer un triatge ràpid entre dues cambres i dir quina és major que l'altre.
 
 Ens hem decidit per aquesta opció en comptes de fer servir una array, struct o similars per la senzillesa.
 Senzillesa perquè a la implementació només hem de posar l'orientació de la porta i canviar a true o false,
-segons el cas. Fent-ho així, ens estalviem haver de recorrer constanment una array o complicant-nos amb la
+segons el cas. Fent-ho així, ens estalviem haver de recórrer constantment un array o complicant-nos amb la
 sintaxi d'un struct.
 
 */
+
 bool _portaN, _portaS, _portaE, _portaO;
 
 int _quantesPO; 

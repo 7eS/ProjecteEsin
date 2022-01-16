@@ -2,31 +2,31 @@
 //REPRESENTACIÓ DE LA CLASSE LABERINT. 
 /*
 
-Un laberint és un conjunt de cambres. Que té un número de files i un número de columnes,
-ambdues xifres evidentment positives. Ara bé, més enllà d'aquesta dada no sabem res més. Per tant,
-per fer el laberint, vam fer-lo amb una matriu dinàmica o un vector de punters a punters on cada
-una de les cel·les serà una cambra diferent.
+Un laberint és un conjunt de cambres que té un número de files i un número de columnes,
+ambdues xifres positives. Per tant, és una matriu on cada cel·la és una cambra.  
+El nombre de cambres és igual a nºfiles * nºcolumnes. 
 
-No s'ens van acudir gaires més alternatives, doncs a totes elles requeriem de saber el tamany del
+Ara bé, més enllà d'aquesta dada, no sabem res més. Per tant, per fer el laberint, 
+vam fer servir amb una matriu dinàmica o un array de punters a punters, on cadascuna de les
+cel·les serà una cambra diferent.
+
+No se'ns van acudir gaires més alternatives, doncs totes elles requerien saber el tamany del
 laberint amb anterioritat.
 
-Es per això, que tenim com a atributs dos natural que representen el numero de files i el de columes, 
-respectivament i una matriu de punters que enmagatzemarà cambres.
+És per això que tenim com a atributs dos naturals que representen el número de files i columes, 
+respectivament, i una matriu de punters que emmagatzemarà cambres.
 
 Seguidament, també tenim un mètode privat que ens retornarà si la paret escollida dona a l'exterior o no.
-Amb aquest mètode ens estalviem repetir linies de codi i, fem les implementacions dels altres mètodes una 
+Amb aquest mètode ens estalviem repetir linies de codi, i fem les implementacions dels altres mètodes una 
 mica més llegibles.
 
-
 */
+
 nat _nFil, _nCol; 
 
-// El nombre de cambres és el nombre de cel·les que té la matriu. Per tant, nº de cambres = fil*col. 
-
-cambra **_lab; 		// matriu de cambres. Punter a punter. Punter a una matriu. 
-
-//Un laberint és una matriu on cada cel·la és una cambra.  
+// Matriu de cambres.
+cambra **_lab;  
 
 bool portaExterior(paret p, posicio pos); 
-// Pre: p és una paret d'una cambra del laberint i pos es una posicio existent del laberint.
+// Pre: p és una paret d'una cambra del laberint i pos és una posició existent del laberint.
 // Post: Retorna true si p és una porta exterior, altrament false. 

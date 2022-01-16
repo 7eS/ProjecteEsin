@@ -2,59 +2,55 @@
 
 /*
 
-Per a fer aquesta classe ens vam basar en l'algorisme indicat en l'enunciat del projecte.
-Fem servir la partició creada a la classe anterior per enmagatzemar totes les posicions del laberint.
-Alhora, guardem les posicions també en una array que ens servirà per evitar iteracions en el moment 
-d'escollir la possició aleatoria.
+Per fer aquesta classe ens vam basar en l'algorisme indicat a l'enunciat del projecte.
+Fem servir la partició creada a la classe anterior per emmagatzemar totes les posicions del laberint.
+Alhora, guardem les posicions també en un array que ens servirà per evitar iteracions en el moment 
+d'escollir la posició aleatòria.
 
-Crearem un contador de cambres escollides i un contador de repeticions, ambdós inicialitzats a 0 i un
-objecte Random que farem servir per escollir la posició que, si és possible, obrirà la porta i quina
-orientació tindrà.
+Crearem un comptador de cambres escollides i un comptador de repeticions, ambdós inicialitzats a 0 i un
+objecte Random que farem servir per escollir la posició que, si és possible, obrirà la porta i la seva
+orientació. És a dir, sempre que totes les cambres no formin part d'un sol conjunt, el Random ens generarà 
+un número aleatori d'entre comptador i numeroTotalCambres-1. Seguidament, s'escollirà una orientació sobre 
+la que obrir una porta, si aquesta no està oberta ni la cambra adjunta triada forma part del mateix conjunt, 
+aquesta serà vàlida.
 
-Mentre que totes les cambres no formin part d'un sol conjunt, el Random ens generarà un numero aleatori
-d'entre contador i numeroTotalCambres - 1. Seguidament, s'escolllirà una orientació sobre la que obrir una
-porta, si aquesta no està oberta ni la cambra adjunta triada forma part del mateix conjunt, aquesta serà
-valida.
-
-Llavors, per cada vegada que la cambra escollida obri la porta, en l'ArrayPosicions la posició escollida 
-s'intercanviarà amb la posició que tingui el valor del contador. Seguidament, el contador s'incrementarà 
-en 1. Amb aquest mètode, aconseguim que el número aleatori no escolleixi dues vegades la mateixa cambra. 
+Llavors, per cada vegada que la cambra escollida obri la porta, a l'ArrayPosicions la posició escollida 
+s'intercanviarà amb la posició que tingui el valor del comptador. Seguidament, el comptador s'incrementarà 
+en 1. Amb aquest mètode, aconseguim que el número aleatori no esculli dues vegades la mateixa cambra. 
 
 Ara bé, pot donar-se el cas que, per aleatorietat o haver-ne obert una prèviament, les darreres cambres
-que es troben en l'ArrayPosicions formin part del mateix conjunt. És en aquest moment quan el contador de 
-repeticions entra en joc. Per evitar entrar en un bucle infinit, a cada vegada que s'escolleix una cambra
+que es troben a l'ArrayPosicions formin part del mateix conjunt. És en aquest moment quan el comptador de 
+repeticions entra en joc. Per evitar entrar en un bucle infinit, cada vegada que s'escolleix una cambra
 aquest s'incrementa en 1. Si la cambra escollida és vàlida i se li obre la porta, aquest es reinicia.
-Altrament, si aquest contador arriba a 10, l'interval de números aleatoris del Random pasa de ser d'entre
-( contador, numeroTotalCambres -1) a ( 0, numeroTotalCambres -1), eliminant d'aquesta manera el delimitador
-del contador de posicions. Això ens permet evitar bucles infinits i reduir el número d'iteracions innecesaries.
+Altrament, si aquest comptador arriba a 10, l'interval de números aleatoris del Random passa de ser d'entre
+(comptador, numeroTotalCambres-1) a (0, numeroTotalCambres-1), eliminant d'aquesta manera el delimitador
+del comptador de posicions. Això ens permet evitar bucles infinits i reduïr el número d'iteracions innecessàries.
 
-Com a mètodes extra, hem afegit seleccionaParet(..), que com diu el nom, indica a quina paret obrir la porta
-segons el número aleatori, que va del 0 al 3. També hem afegit cambraAdjunta(..), que segons la posicio i la
+Com a mètodes extra, hem afegit seleccionaParet(..), que indica a quina paret obrir la porta segons el 
+número aleatori, que va del 0 al 3. També hem afegit cambraAdjunta(..), que segons la posició i la
 paret triades, retorna la cambra que també obrirà porta i comprovarà si formen part del mateix conjunt o no.
-Finalment, hem afegit també portaExt(..) que com diu el nom, indica si la paret escollida dona a l'exterior.
+Finalment, hem afegit també portaExt(..) que indica si la paret escollida dona a l'exterior o no.
 
-Les raons per fer servir el vector en comptes de la total aleatorietat, han sigut simplement pel temps.
-Voliem evitar que fes iteracions innecesaries i, sobretot, voliem estalvia temps en les darreres 
+Les raons per fer servir el vector en comptes de la total aleatorietat han sigut simplement pel temps.
+Volíem evitar que fes iteracions innecessàries i, sobretot, volíem estalviar temps en les darreres 
 iteracions, on ja pràcticament totes les cambres formen part del mateix grup. Creiem que és una mesura
 útil i eficient i que compleix amb la seva finalitat.
 
 */
 
-
-
-posicio seleccionaCambra(posicio arrayCambres[], nat i, nat quantes,nat r);
-//Pre: 
-//Post: 
 posicio cambraAdjunta(posicio pos, paret par);
-//Pre:
-//Post:
+//Pre: pos és la posició de la cambra a comprovar, par és la paret escollida.
+//Post: Retorna la posició de la cambra adjunta a la paret par. 
 
 bool portaExt(posicio pos, paret par, nat numFiles, nat numCol);
-//Pre:
+//Pre: pos és una posició de la cambra a comprovar, par és la paret, 
+// numFiles i numCol són les mides del laberint.  
 //Post: Retorna true si la porta és una porta exterior, altrament false. 
+
 paret seleccionaParet(nat r);
-//Pre:
+//Pre: r és un natural entre 0 i 3. 
 //Post: Retorna la paret seleccionada. 
+
 
 
 // IMPLEMENTACIÓ DE LA CLASSE DEDALUS.
@@ -62,19 +58,24 @@ paret seleccionaParet(nat r);
 // Excava el laberint, fent un laberint perfecte. Un laberint està excavat
 // si i només si alguna de les seves cambres té alguna porta oberta.
 // Es produeix un error si el laberint ja està excavat.
+
+// Cost en temps: Ω(numFiles*numColumnes). Cost en espai: Θ(numFiles*numColumnes).
+// El cost temporal és Ω(numFiles*numColumnes) ja que a l'estar basada en gran part en 
+// la tria de números aleatoris, no podem aproximar un cost exacte ni màxim. Però sí que
+// podem saber que el número mínim d'iteracions serà n*m, doncs en el millor dels casos,
+// mai escollirà una cambra dues vegades i, per tant, només es farà un recorregut lineal al
+// laberint.
 void dedalus::construir(laberint& M) throw(error) {
 
-    nat quantesCambres = (M.num_files() * M.num_columnes());    // Comprovem si es -1 o no.
+    nat quantesCambres = (M.num_files() * M.num_columnes());
     particio<posicio> p(quantesCambres);
 
-    // Comprovem si hi ha alguna porta oberta a alguna de les cambres del
-    // laberint M i afegim les cambres a la partició. 
     nat k = 0;
     posicio arrayCambres [quantesCambres];
 
     for (nat i = 1; i <= M.num_files(); i++) {
         for (nat j = 1; j <= M.num_columnes(); j++,k++) {
-            posicio pos(i, j);
+            posicio pos(i, j); 
             cambra c = M(pos);
             if (c.porta_oberta(paret::NORD) or c.porta_oberta(paret::SUD) or
                 c.porta_oberta(paret::EST) or c.porta_oberta(paret::OEST))
@@ -85,30 +86,25 @@ void dedalus::construir(laberint& M) throw(error) {
         }
     }
 
-    util::Random r;     // Utilitzem la classe Random.
-
+    util::Random r;
     posicio pos, pos2;
     cambra c, c2;
     paret par;
-    nat cont = 0, repeticions;
-    //nat iteracions = 0;
-    nat ranCambra = 0, ranParet;
+    nat cont = 0, repeticions, ranCambra = 0, ranParet;
     bool cambraValida;
 
-    while (p.size() > 1) {      // Mentre hi hagi més d'un conjunt.
+    // Mentre hi hagi més d'un conjunt.
+    while (p.size() > 1) { 
         repeticions = 0;
         cambraValida = false;
-        //iteracions++;
-        // Busquem una cambra aleatoria.
+
         while (not cambraValida and cont < quantesCambres) {
             
-            // Evitem que es quedi en un bucle infinit.
             if (repeticions < 10) ranCambra = r(cont, quantesCambres-1);
             else ranCambra = r(0, quantesCambres-1);
 
             pos = arrayCambres[ranCambra];
             c = M(pos);
-
             ranParet = r(4);
 
             par = seleccionaParet(ranParet);
@@ -129,6 +125,7 @@ void dedalus::construir(laberint& M) throw(error) {
   }
 }
 
+// Cost en temps: Θ(1)  Cost en espai: -
 posicio cambraAdjunta(posicio pos, paret par) {
 
         posicio res;
@@ -151,10 +148,10 @@ posicio cambraAdjunta(posicio pos, paret par) {
         return res;
 }
 
+// Cost en temps: Θ(1). Cost en espai: -
 paret seleccionaParet(nat ran) {
     
     paret res; 
-
 
         if (ran == 0) {             // Nord.
             res= paret::NORD;
@@ -171,6 +168,7 @@ paret seleccionaParet(nat ran) {
     return res;
 }
 
+// Cost en temps: Θ(1). Cost en espai: -
 bool portaExt(posicio pos, paret par, nat numFiles, nat numCol ) {
 
     if (pos.first - 1 == 0 and par == paret::NORD)

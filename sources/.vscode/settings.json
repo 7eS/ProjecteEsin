@@ -50,6 +50,7 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "*.rep": "cpp",
-        "error": "cpp"
+        "error": "cpp",
+        "*.t": "cpp"
     }
 }

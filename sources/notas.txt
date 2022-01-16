@@ -1,0 +1,3 @@
+ omega grande: Ω(), para indicar el coste mínimo (dedalus)
+ theta grande: Θ (),  para indicar el coste exacto (la mas usada)
+ O grande: O() para indicar el coste máximo
