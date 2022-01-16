@@ -4,14 +4,38 @@ using namespace std;
 //IMPLEMENTACIÓ DE LA CLASSE TESEUS. 
 /*
 
-to do. 
+Per implementar la classe Teseus, ens hem basat en l'algorisme de recorregut d'amplada d'un graf (BFS).
+Per fer-ho, hem creat un struct que té com a atributs una posició pos i un booleà vis. El primer indica
+la posició de la cambra que estem tractant; el segon si ja ha sigut visitada prèviament. Aquest struct
+és un dels eixos principals de la classe, doncs ens permet mantenir gran part de la informació recollida 
+en un mateix array. Aquest array és el que anomenem arrayPos[] i on juntament amb l'array pred[], 
+de predecessors, desenvoluparem l'algorisme. A més, cada vegada que volguem obtenir les cambres successores
+d'una altra cambra, crearem una llista local que les emmagatzemarà, serà recorreguda i posteriorment destruïda.
+Aquesta llista de successors tindrà sempre una mida màxima de 4, una per paret. Cada vegada que una cambra
+sigui explorada, aquesta serà marcada com a visitada, i posarem el seu booleà de info a true. Un cop
+trobada la posició destí, si és que és accessible, només haurem de recórrer l'array pred[] cap a enrrere,
+fins arribar a la posició sentinella, la (0,0).
 
+Vam decidir fer servir un struct perquè és una estructura que ens permetria accedir a la informació amb 
+un cost molt petit, doncs tenint la posició guardada podríem calcular la seva ubicació dins de l'arrayPos[]
+amb un senzill càlcul, implementat al mètode calculIndex(posicio pos, nat cols). D'aquesta manera,
+obtenir la ubicació de cada cambra tindria un cost constant, només requerim d'accedir a l'atribut pos.
+A més, la creació de la llista de successors dintre del while ens permet estalviar costos en memòria que 
+d'una altra manera tindriem si l'haguèssim afegit dins de l'struct info, tenint una llista per cada cambra
+del laberint, com teníem inicialment. Aquesta optimització ens ha permés reduïr notablement els temps en 
+els diferents jocs de prova tant públics com propis. 
+
+L'ús de les dues arrays, arrayPos[] i pred[], fan de matriu d'adjacència, per tant, ens fa tenir un cost
+Θ(n²) on n és el número de posicions o total de cambres que tenim. Sent una mica més pesat que una simple
+llista d'adjacència, que seria Θ(n+a). Ens vam decidir a fer servir la matriu per raons de senzillesa
+en el codi i per temps, doncs implementar la llista ens portava a fer servir cues de prioritat i no 
+estàvem segurs de si ens donaria temps a fer-les bé en el temps que quedava.
 
 */
+
 struct info{
     posicio pos;
     bool vis;
-    //std::list<posicio> l; //successors 
 };
 
 
@@ -20,8 +44,7 @@ nat calculIndex(posicio pos, nat cols);
 //Post: Retorna l'index en què es troba la cambra de posició pos.
 
 
-void successors(std::list<posicio> &l, info &in, const laberint & M, info arrayPos[]); 
-//void successors(info &in, const laberint & M, info arrayPos[]); 
+void successors(std::list<posicio> &lsucc, info &in, const laberint & M, info arrayPos[]); 
 //Pre: in conté informació sobre la cambra escollida, M és el laberint, arrayPos[] és no buit. 
 //Post: Adjunta a in els seus corresponents successors.
 
@@ -33,13 +56,13 @@ void successors(std::list<posicio> &l, info &in, const laberint & M, info arrayP
 // components de les posicions és en valor absolut 1 i les segones components
 // són iguals, o si la diferència de les segones components és en valor
 // absolut 1 i les primeres components són iguals. Es produeix un error si no
-// hi ha cap camí que vagi des de la cambra inicial del laberint a la final,
-// o si la cambra inicial o final no són vàlides.
-// Cost en temps: Θ(1)  Cost en espai: -
+// hi ha cap camí que vagi des de la cambra inicial del laberint a la final, 
+// o si la cambra inicial o final no són vàlides. 
+// Cost en temps: Θ((numFiles*numColumes)²).  Cost en espai: Θ((numFiles*numColumes)²)
 void teseus::buscar(const laberint & M, const posicio & inici, const posicio & final, 
               std::list<posicio> & L) throw(error) {
                 
-    // Comprovem si la posició és vàlida
+    // Comprovem si la posició és vàlida.
     if (inici.first < 1 or inici.first > M.num_files()
           or inici.second < 1 or inici.second > M.num_columnes())  
               throw error (IniciFinalNoValid); 
@@ -50,7 +73,6 @@ void teseus::buscar(const laberint & M, const posicio & inici, const posicio & f
                       
     
     cambra cinici = M(inici),cfi = M(final);        
-    // Si la posicio inicial i final son diferents, comprovarem si son accesibles.
     if (inici != final) {
 
         if (not cinici.porta_oberta(paret::NORD) and not cinici.porta_oberta(paret::SUD) and
@@ -74,10 +96,9 @@ void teseus::buscar(const laberint & M, const posicio & inici, const posicio & f
             
             info in;
             posicio p(i,j);
-            // Afegim els valors a l'atribut de l'struct
             in.vis = false;             
             in.pos = p;
-            // Afegim la informacio a l'array.
+
             arrayPos[k] = in;
             pred[k] = senti; 
         }
@@ -88,52 +109,35 @@ void teseus::buscar(const laberint & M, const posicio & inici, const posicio & f
     }
     else{
 
-        std::list<info> noVist;     // Lista dels nodes no explorats
+        std::list<info> noVist;     // Lista dels nodes no explorats.
 
-        // Marquem com a visitat el punt inicial
+        // Marquem com a visitat el punt inicial.
         nat in = calculIndex(inici, cols);
-        //successors(arrayPos[in].l,arrayPos[in],M, arrayPos);
         arrayPos[in].vis = true;
         noVist.push_back(arrayPos[in]);
                 
         nat indexActual, indexSuc;
-        bool cami = false;  // Booleà que ens indica si hem trobat la posicio final o no.
-        //bool primer = true;   
+        bool cami = false;     
 
         while (not noVist.empty() and not cami) {
-            // Explotem el node
-            //indexActual = calculIndex(noVist.front().pos,cols);
+            // Explotem el node.
 
-            std::list<posicio> l; //successors 
-            successors(l,noVist.front(),M, arrayPos);
-            //successors(noVist.front(),M, arrayPos);
+            std::list<posicio> lsucc; //successors.
+            successors(lsucc,noVist.front(),M, arrayPos);
 
             info actual =  noVist.front();
             noVist.pop_front();
 
-
-        /*    info test;
-
-                test = arrayPos[indexActual];
-                cout<<"pos: "<<actual.pos.first<<", "<<actual.pos.second<<" successor: ";
-                for(list<posicio>::iterator it = actual.l.begin(); it != actual.l.end(); it++){
-                    cout<<(*it).first<<", "<<(*it).second<<" - ";
-                }
-                cout<<endl; */
-
             // Recorrem els successors del node explotat. Seran com a màxim 4 iteracions.
-            //for (list<posicio>::iterator it = actual.l.begin(); it != actual.l.end() and not cami; it++){
-            for (list<posicio>::iterator it = l.begin(); it != l.end() and not cami; it++){
+            for (list<posicio>::iterator it = lsucc.begin(); it != lsucc.end() and not cami; it++){
                 indexSuc = calculIndex(*it, cols);
-                // Comprovem si ja haviem visitat aquesta posicio. 
-                // Si no es aixi augmentem la distancia i la marquem com a explorada
+
                 if (not (arrayPos[indexSuc].vis)) { 
                     indexActual = calculIndex(actual.pos,cols);
                     arrayPos[indexSuc].vis = true;
                     pred[indexSuc] = arrayPos[indexActual].pos;
-                    // Afegim el node a la llista de pendents per explorar.
                     noVist.push_back(arrayPos[indexSuc]);
-                    //rep++;
+                    
                     if (arrayPos[indexSuc].pos == final) {
                         cami =  true;
                     }
@@ -159,10 +163,11 @@ void teseus::buscar(const laberint & M, const posicio & inici, const posicio & f
 }
 
 
-
-// Cost en temps: Θ()  Cost en espai:
-//void successors( info & in, const laberint & M, info arrayPos[]) {
-void successors(std::list<posicio> &L, info &in, const laberint & M, info arrayPos[]) {
+// Cost en temps: Θ(1).  Cost en espai: Θ(1)
+// El cost temporal és Θ(1) ja que només es faran quatre consultes, en el millor dels casos, i no 
+// afegim cap node. En el pitjor dels casos, només afegim quatre posicions a la llista de 
+// successors. 
+void successors(std::list<posicio> &lsucc, info &in, const laberint & M, info arrayPos[]) {
 
     cambra c = M(in.pos);
     if (c.porta_oberta(paret::NORD)) {
@@ -171,10 +176,9 @@ void successors(std::list<posicio> &L, info &in, const laberint & M, info arrayP
         info infoNovaN  = arrayPos[calculIndex(posNovaN, M.num_columnes())];
     
         if (not infoNovaN.vis) {
-            L.push_back(posNovaN);
-            //in.l.push_back(posNovaN);
-            }
+            lsucc.push_back(posNovaN);
         }
+    }
 
     if (c.porta_oberta(paret::SUD)) {
 
@@ -182,8 +186,7 @@ void successors(std::list<posicio> &L, info &in, const laberint & M, info arrayP
         info infoNovaS  = arrayPos[calculIndex(posNovaS, M.num_columnes())];
 
         if (not infoNovaS.vis) {
-         L.push_back(posNovaS);
-         //in.l.push_back(posNovaS);
+            lsucc.push_back(posNovaS);
         }
     }
         
@@ -193,10 +196,9 @@ void successors(std::list<posicio> &L, info &in, const laberint & M, info arrayP
         info infoNovaE  = arrayPos[calculIndex(posNovaE, M.num_columnes())];
         
         if (not infoNovaE.vis) {
-            L.push_back(posNovaE);
-            //in.l.push_back(posNovaE);
-            }
-        }        
+            lsucc.push_back(posNovaE);
+        }
+    }        
 
     if (c.porta_oberta(paret::OEST)) {
         
@@ -204,13 +206,12 @@ void successors(std::list<posicio> &L, info &in, const laberint & M, info arrayP
         info infoNovaO  = arrayPos[calculIndex(posNovaO, M.num_columnes())];
 
         if (not infoNovaO.vis) {
-            L.push_back(posNovaO);
-            //in.l.push_back(posNovaO);
+            lsucc.push_back(posNovaO);
         }   
     }
 }
 
-// Cost en temps: Θ(1)  Cost en espai: -
+// Cost en temps: Θ(1). Cost en espai: -
  nat calculIndex(posicio pos, nat cols) {
 
      nat index = cols*(pos.first-1)+(pos.second-1);

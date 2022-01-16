@@ -158,13 +158,7 @@ bool cambra::operator<(const cambra& c) const throw() {
              (_quantesPO == 4 and c._quantesPO == 4)) return false;
              
     else if ((_quantesPO > 0 and c._quantesPO > 0) and (_quantesPO == c._quantesPO)) {
-        /*
-        Possibles cassos de les portes:
-        false - false -> pi == c
-        false - true -> pi < c
-        true - false -> pi > c
-        true - true  -> pi == c
-        */
+        
         bool mesPetita = false;
         bool surt = false;
 
